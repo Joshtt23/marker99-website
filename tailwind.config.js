@@ -18,6 +18,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        customDark: '#101012',
+        customGreen: '#61CE70',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -70,6 +72,10 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+      boxShadow: {
+        customGreenGlow:
+          '0 10px 15px -3px rgba(97, 206, 112, 0.5), 0 4px 6px -2px rgba(97, 206, 112, 0.3)',
       },
     },
   },

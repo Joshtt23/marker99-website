@@ -19,27 +19,36 @@ const Events = () => {
   }, []);
 
   return (
-    <section className="bg-gray-100 p-8 text-center" id="events">
-      <h3 className="text-2xl font-bold mb-4">Live Music & Events</h3>
-      <div
-        className="fb-page"
-        data-href="https://www.facebook.com/marker99restaurant"
-        data-tabs="events"
-        data-width="500"
-        data-height=""
-        data-small-header="false"
-        data-adapt-container-width="true"
-        data-hide-cover="false"
-        data-show-facepile="true"
-      >
-        <blockquote
-          cite="https://www.facebook.com/marker99restaurant"
-          className="fb-xfbml-parse-ignore"
-        >
-          <a href="https://www.facebook.com/marker99restaurant">
-            Marker 99 Restaurant & Lounge
-          </a>
-        </blockquote>
+    <section
+      className="bg-customDark/80 text-white py-12 text-center m-20 rounded-3xl"
+      id="events"
+    >
+      <div className="container mx-auto px-4">
+        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
+          Live Music & Events
+        </h3>
+        <div className="flex justify-center">
+          <div
+            className="fb-page"
+            data-href="https://www.facebook.com/marker99restaurant"
+            data-tabs="events"
+            data-width="500"
+            data-height=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true"
+          >
+            <blockquote
+              cite="https://www.facebook.com/marker99restaurant"
+              className="fb-xfbml-parse-ignore"
+            >
+              <a href="https://www.facebook.com/marker99restaurant">
+                Marker 99 Restaurant & Lounge
+              </a>
+            </blockquote>
+          </div>
+        </div>
       </div>
     </section>
   );

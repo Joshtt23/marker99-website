@@ -28,26 +28,37 @@ const JobApplication = () => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: '.pdf,.doc,.docx',
+    accept: {
+      'application/pdf': ['.pdf'],
+      'application/msword': ['.doc'],
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        ['.docx'],
+    },
   });
 
   return (
-    <section className="bg-gray-200 p-8 text-center">
-      <h1 className="text-3xl font-bold">
+    <section
+      className="bg-customDark text-white p-8 text-center"
+      id="job-application"
+    >
+      <h1 className="text-4xl font-bold mb-4">
         Have Experience in Food Service?
         <br />
         We&apos;re Hiring!
       </h1>
       <Button
         onClick={handleFormToggle}
-        className="bg-blue-500 text-white py-2 px-4 rounded"
+        className="bg-customGreen text-white py-2 px-4 rounded-lg shadow-md hover:bg-customGreen transition duration-300"
       >
         APPLY TODAY!
       </Button>
       {formVisible && (
-        <form id="jobform" className="mt-4">
+        <form
+          id="jobform"
+          className="mt-8 bg-white text-gray-800 p-8 rounded-lg shadow-md"
+        >
           <div className="mb-4">
-            <Label className="block text-left">
+            <Label className="block text-left text-lg">
               Name<span className="text-red-500">*</span>
             </Label>
             <Input
@@ -58,7 +69,7 @@ const JobApplication = () => {
             />
           </div>
           <div className="mb-4">
-            <Label className="block text-left">
+            <Label className="block text-left text-lg">
               Email Address<span className="text-red-500">*</span>
             </Label>
             <Input
@@ -69,7 +80,7 @@ const JobApplication = () => {
             />
           </div>
           <div className="mb-4">
-            <Label className="block text-left">Phone Number</Label>
+            <Label className="block text-left text-lg">Phone Number</Label>
             <Input
               type="text"
               name="phone"
@@ -77,7 +88,7 @@ const JobApplication = () => {
             />
           </div>
           <div className="mb-4">
-            <Label className="block text-left">
+            <Label className="block text-left text-lg">
               Job Positions<span className="text-red-500">*</span>
             </Label>
             <Select
@@ -95,7 +106,9 @@ const JobApplication = () => {
             </Select>
           </div>
           <div className="mb-4">
-            <Label className="block text-left">Years of Experience</Label>
+            <Label className="block text-left text-lg">
+              Years of Experience
+            </Label>
             <Input
               type="number"
               name="experience"
@@ -105,7 +118,7 @@ const JobApplication = () => {
             />
           </div>
           <div className="mb-4">
-            <Label className="block text-left">
+            <Label className="block text-left text-lg">
               Availability<span className="text-red-500">*</span>
             </Label>
             <Select
@@ -119,7 +132,7 @@ const JobApplication = () => {
             </Select>
           </div>
           <div className="mb-4">
-            <Label className="block text-left">Message</Label>
+            <Label className="block text-left text-lg">Message</Label>
             <Textarea
               name="message"
               className="w-full border rounded p-2"
@@ -128,7 +141,7 @@ const JobApplication = () => {
             />
           </div>
           <div className="mb-4">
-            <Label className="block text-left">Upload Resume/CV</Label>
+            <Label className="block text-left text-lg">Upload Resume/CV</Label>
             <div
               {...getRootProps({
                 className: 'w-full border rounded p-2 cursor-pointer',
@@ -145,7 +158,7 @@ const JobApplication = () => {
           </div>
           <Button
             type="submit"
-            className="bg-green-500 text-white py-2 px-4 rounded"
+            className="bg-customGreen text-white py-2 px-4 rounded-lg shadow-md hover:bg-customGreen transition duration-300"
           >
             Submit
           </Button>
