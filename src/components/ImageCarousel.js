@@ -18,16 +18,14 @@ const images = [
 ];
 
 const ImageCarousel = () => (
-  <div className="relative container mx-auto px-4">
+  <div className="">
     <Carousel
       className="swiper-container"
       opts={{
         slidesPerView: 'auto',
         spaceBetween: 10,
         loop: true,
-        autoplay: {
-          delay: 5000,
-        },
+        autoplay: true,
         navigation: {
           nextEl: '.carousel-next',
           prevEl: '.carousel-prev',

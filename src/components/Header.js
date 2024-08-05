@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Menu as MenuIcon, X as XIcon } from 'lucide-react';
+import {
+  FaFacebook,
+  FaGoogle,
+  FaInstagram,
+  FaPhone,
+  FaTripadvisor,
+  FaYelp,
+} from 'react-icons/fa';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,28 +64,34 @@ const Header = () => {
                 passHref
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-3xl hover:opacity-75"
               >
-                <Image
-                  src="https://marker99restaurant.com/wp-content/uploads/2022/08/solid-facebook-blue-white-f-2.png"
-                  alt="Facebook"
-                  width={32}
-                  height={32}
-                  className="hover:opacity-75"
-                />
+                <FaFacebook size={30} />
               </Link>
               <Link
                 href="https://www.instagram.com/marker99_restaurantlounge/"
                 passHref
                 target="_blank"
                 rel="noopener noreferrer"
+                className="text-3xl hover:opacity-75"
               >
-                <Image
-                  src="https://marker99restaurant.com/wp-content/uploads/2022/08/solid-instagram-purple-white-icon-2.png"
-                  alt="Instagram"
-                  width={32}
-                  height={32}
-                  className="hover:opacity-75"
-                />
+                <FaInstagram size={30} />
+              </Link>
+              <Link
+                href="https://g.page/marker99restaurant?share"
+                passHref
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-3xl hover:opacity-75"
+              >
+                <FaGoogle size={30} />
+              </Link>
+              <Link
+                href="tel:3212531369"
+                passHref
+                className="text-3xl hover:opacity-75"
+              >
+                <FaPhone size={30} />
               </Link>
             </div>
           </>
@@ -93,7 +107,7 @@ const Header = () => {
         </div>
       </div>
       {isMenuOpen && (
-        <nav className="lg:hidden bg-customDark text-white p-4">
+        <nav className="lg:hidden bg-customDark text-white p-4 text-center">
           <Link href="#home" className="block py-2 hover:text-green-500">
             HOME
           </Link>
@@ -106,34 +120,58 @@ const Header = () => {
           <Link href="#contact" className="block py-2 hover:text-green-500">
             CONTACT MARKER 99
           </Link>
-          <div className="flex space-x-4 mt-4">
+          <div className="flex justify-center space-x-4 mt-4 items-center">
             <Link
               href="https://www.facebook.com/marker99restaurant"
               passHref
               target="_blank"
               rel="noopener noreferrer"
+              className="text-3xl hover:opacity-75"
             >
-              <Image
-                src="https://marker99restaurant.com/wp-content/uploads/2022/08/solid-facebook-blue-white-f-2.png"
-                alt="Facebook"
-                width={32}
-                height={32}
-                className="hover:opacity-75"
-              />
+              <FaFacebook size={30} />
             </Link>
             <Link
               href="https://www.instagram.com/marker99_restaurantlounge/"
               passHref
               target="_blank"
               rel="noopener noreferrer"
+              className="text-3xl hover:opacity-75"
             >
-              <Image
-                src="https://marker99restaurant.com/wp-content/uploads/2022/08/solid-instagram-purple-white-icon-2.png"
-                alt="Instagram"
-                width={32}
-                height={32}
-                className="hover:opacity-75"
-              />
+              <FaInstagram size={30} />
+            </Link>
+            <Link
+              href="https://www.yelp.com/biz/marker-99-restaurant-and-lounge-melbourne"
+              passHref
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-3xl hover:opacity-75"
+            >
+              <FaYelp size={30} />
+            </Link>
+            <Link
+              href="https://www.tripadvisor.com/Restaurant_Review-g34433-d15521460-Reviews-Marker_99_Restaurant_Lounge-Melbourne_Brevard_County_Florida.html"
+              passHref
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-3xl hover:opacity-75"
+            >
+              <FaTripadvisor size={30} />
+            </Link>
+            <Link
+              href="https://g.page/marker99restaurant?share"
+              passHref
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-3xl hover:opacity-75"
+            >
+              <FaGoogle size={30} />
+            </Link>
+            <Link
+              href="tel:3212531369"
+              passHref
+              className="text-3xl hover:opacity-75"
+            >
+              <FaPhone size={30} />
             </Link>
           </div>
         </nav>

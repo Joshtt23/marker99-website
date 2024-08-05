@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto text-center">
         <div className="mb-4">
           <Image
-            src="https://marker99restaurant.com/wp-content/uploads/2022/05/MARKER-99-LOGO.png"
+            src="/copyright/MARKER-99-LOGO.png"
             alt="Marker 99 Logo"
             width={100}
             height={100}

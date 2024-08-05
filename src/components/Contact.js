@@ -12,10 +12,7 @@ import {
 
 const Contact = () => {
   return (
-    <section
-      className="bg-customDark text-white py-12 px-4 md:px-8"
-      id="contact"
-    >
+    <section className="bg-customDark text-white  p-28" id="contact">
       <div className="flex flex-col md:flex-row md:space-x-8">
         {/* Left Column */}
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
