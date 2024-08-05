@@ -1,7 +1,25 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "es2017"
+    ],
+    "allowJs": true,
+    "jsx": "preserve",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "src/**/*"
+  ]
 }
