@@ -118,7 +118,7 @@ const Header = () => {
             EVENTS
           </Link>
           <Link href="#contact" className="block py-2 hover:text-green-500">
-            CONTACT MARKER 99
+            CONTACT
           </Link>
           <div className="flex justify-center space-x-4 mt-4 items-center">
             <Link

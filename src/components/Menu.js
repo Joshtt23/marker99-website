@@ -43,7 +43,7 @@ const Menu = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {MenuItems[category].map((item, index) => (
                   <div key={index} className="flex">
-                    {item.image ? (
+                    {item.image !== '' ? (
                       <div className="w-1/3">
                         <Image
                           src={item.image}
@@ -53,17 +53,7 @@ const Menu = () => {
                           className="w-full h-auto rounded-lg"
                         />
                       </div>
-                    ) : (
-                      <div className="w-1/3">
-                        <Image
-                          src="/images/placeholder.png"
-                          alt={item.name}
-                          width={500}
-                          height={500}
-                          className="w-full h-auto rounded-lg"
-                        />
-                      </div>
-                    )}
+                    ) : null}
                     <div className="w-2/3 pl-4 flex flex-col justify-between">
                       <div>
                         <h3 className="text-xl font-semibold">{item.name}</h3>
