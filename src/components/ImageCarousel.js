@@ -1,42 +1,25 @@
 import React from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '../components/ui/carousel';
 
 const images = [
   { src: '/menu/TunaSteakSalad.jpg', alt: 'Tuna Steak Salad' },
-  { src: '/menu/CeaserSalad.jpg', alt: 'Ceaser Salad' },
+  { src: '/menu/CaesarSalad.jpg', alt: 'Caesar Salad' },
   { src: '/menu/IslandChowder.jpg', alt: 'Island Seafood Chowder' },
   { src: '/menu/FishSandwich.jpg', alt: 'Spicy Cripsy Fish Sandwich' },
   { src: '/menu/MargFlatbread.jpg', alt: 'Margherita Flatbread' },
 ];
 
-const ImageCarousel = () => (
-  <div className="">
-    <Carousel
-      className="swiper-container"
-      opts={{
-        slidesPerView: 'auto',
-        spaceBetween: 10,
-        loop: true,
-        autoplay: true,
-        navigation: {
-          nextEl: '.carousel-next',
-          prevEl: '.carousel-prev',
-        },
-      }}
-    >
-      <CarouselContent className="swiper-wrapper flex">
-        {images.map((image, index) => (
-          <CarouselItem
+const ImageCarousel = () => {
+  // Duplicate the images array to create a seamless loop.
+  const duplicatedImages = [...images, ...images];
+
+  return (
+    <div className="relative overflow-hidden">
+      <div className="flex animate-scroll">
+        {duplicatedImages.map((image, index) => (
+          <div
             key={index}
-            className="swiper-slide flex-shrink-0 w-full md:basis-1/3 lg:basis-1/4 px-2"
+            className="flex-shrink-0 w-full md:basis-1/3 lg:basis-1/4 px-2"
           >
             <div className="relative w-full h-60">
               <Image
@@ -47,17 +30,26 @@ const ImageCarousel = () => (
                 className="rounded-lg shadow-lg"
               />
             </div>
-          </CarouselItem>
+          </div>
         ))}
-      </CarouselContent>
-      <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-lg">
-        <ChevronLeft className="text-black h-6 w-6" />
-      </CarouselPrevious>
-      <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-lg">
-        <ChevronRight className="text-black h-6 w-6" />
-      </CarouselNext>
-    </Carousel>
-  </div>
-);
+      </div>
+
+      {/* Inline styles for the scrolling animation */}
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-scroll {
+          animation: scroll 20s linear infinite;
+        }
+      `}</style>
+    </div>
+  );
+};
 
 export default ImageCarousel;

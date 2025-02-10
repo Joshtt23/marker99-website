@@ -5,7 +5,7 @@ import OnlineOrder from './OnlineOrder';
 import MenuItems from './data/MenuItems';
 import Image from 'next/image';
 
-const Menu = () => {
+const Menu = ({ onlineOrder }) => {
   const [activeCategory, setActiveCategory] = useState('starters');
 
   const handleToggleCategory = (category) => {
@@ -63,7 +63,7 @@ const Menu = () => {
                         <div className="text-xl font-bold text-customGreen">
                           {item.price}
                         </div>
-                        <OnlineOrder item={item} />
+                        {onlineOrder && <OnlineOrder item={item} />}
                       </div>
                     </div>
                   </div>

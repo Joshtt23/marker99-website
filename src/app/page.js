@@ -30,8 +30,10 @@ const GoogleReviewWidget = dynamic(
 );
 
 export default function Home() {
-  const [isHiring, setIsHiring] = useState(true);
   const [showTopButton, setShowTopButton] = useState(false);
+  const onlineReservation = false;
+  const onlineOrder = false;
+  const isHiring = false;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +68,7 @@ export default function Home() {
         <AboutUs />
         <ImageCarousel />
       </section>
-      <Reservation />
+      <Reservation onlineReservation={onlineReservation} />
       <section className="relative bg-customDark text-white py-12">
         <div className="absolute inset-0">
           <Image
@@ -79,7 +81,7 @@ export default function Home() {
         </div>
         <div className="relative">
           <Events />
-          <Menu />
+          <Menu onlineOrder={onlineOrder} />
         </div>
       </section>
 

@@ -233,7 +233,7 @@ const MenuItems = {
   ],
   entrées: [
     {
-      name: 'Grilled SKirt Steak',
+      name: 'Grilled Skirt Steak',
       image: '',
       description: '',
       price: '$30',
