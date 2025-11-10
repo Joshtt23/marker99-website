@@ -39,10 +39,13 @@ Feature defaults are defined in `src/lib/siteConfig.js`. Keep production secrets
 - Validate Lighthouse scores ≥ 90 (Performance, Accessibility, SEO) in both mobile and desktop modes before releasing.
 - Re-run Google Rich Results tests after metadata or structured data changes.
 - Update `plans/001_Implementation_Plan.md` as milestones are completed or scope shifts.
+- Use the built-in mobile action bar, responsive hero, and horizontal menu categories as reference patterns when adding new sections.
 
 ## Testing
 
-Use Lighthouse, axe, or similar accessibility tools to verify regressions. Automated testing setup can be expanded as needed; see `.cursor/rules/testing.mdc` for expectations.
+- Local dev now runs `@axe-core/react` automatically (see browser console) to flag accessibility issues. Resolve or document console warnings before merging.
+- Use Lighthouse or WebPageTest for performance/SEO audits; target scores ≥ 90 in mobile and desktop modes.
+- Automated testing setup can be expanded as needed; see `.cursor/rules/testing.mdc` for expectations.
 
 ## Deployment
 

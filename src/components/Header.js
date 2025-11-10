@@ -4,104 +4,125 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Menu as MenuIcon, X as XIcon } from 'lucide-react';
-import {
-  FaFacebook,
-  FaGoogle,
-  FaInstagram,
-  FaPhone,
-  FaTripadvisor,
-  FaYelp,
-} from 'react-icons/fa';
+
+const sections = ['home', 'about', 'menu', 'events', 'reserve', 'contact'];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (!isMounted) return;
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+      let currentSection = sections[0];
+
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const offsetTop = el.offsetTop;
+          const offsetBottom = offsetTop + el.offsetHeight;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            currentSection = id;
+            break;
+          }
+        }
+      }
+
+      setActiveSection(currentSection);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMounted]);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   const handleMenuToggle = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  const handleNavClick = () => {
+    setIsMenuOpen(false);
+  };
+
+  const getNavClass = (id) =>
+    `relative transition-colors duration-200 ${
+      activeSection === id
+        ? 'text-customGreen after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-customGreen'
+        : 'text-foreground/70 hover:text-foreground'
+    }`;
+
   return (
-    <header className="bg-customDark text-white py-4 shadow-customGreenGlow z-50">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="flex items-center" aria-label="Marker 99 home">
+    <header className="sticky top-0 z-50 border-b border-foreground/10 bg-background/90 backdrop-blur">
+      <div className="max-w-6xl mx-auto px-6 flex justify-between items-center h-20">
+        <Link href="/" className="flex items-center gap-3" aria-label="Marker 99 home">
           <Image
             src="/copyright/MARKER-99-LOGO.png"
             alt="Marker 99 Logo"
-            width={80}
-            height={80}
-            className="mr-3"
+            width={56}
+            height={56}
+            className="h-14 w-14"
             priority
           />
+          <span className="hidden sm:block text-sm font-semibold tracking-[0.3em] uppercase text-foreground">
+            Marker 99
+          </span>
         </Link>
         {isMounted && (
           <>
             <nav
-              className="hidden lg:flex space-x-6 text-lg"
+              className="hidden lg:flex items-center gap-8 text-sm uppercase tracking-[0.2em]"
               aria-label="Primary navigation"
             >
-              <Link href="#home" className="hover:text-green-500">
-                HOME
+              <Link href="#home" className={getNavClass('home')}>
+                Home
               </Link>
-              <Link href="#about" className="hover:text-green-500">
-                ABOUT
+              <Link href="#about" className={getNavClass('about')}>
+                About
               </Link>
-              <Link href="#reserve" className="hover:text-green-500">
-                RESERVATIONS
+              <Link href="#menu" className={getNavClass('menu')}>
+                Menu
               </Link>
-              <Link href="#events" className="hover:text-green-500">
-                EVENTS
+              <Link href="#events" className={getNavClass('events')}>
+                Events
               </Link>
-              <Link href="#menu" className="hover:text-green-500">
-                MENU
+              <Link href="#reserve" className={getNavClass('reserve')}>
+                Reserve
               </Link>
-              <Link href="#contact" className="hover:text-green-500">
-                CONTACT
+              <Link href="#contact" className={getNavClass('contact')}>
+                Contact
               </Link>
             </nav>
-            <div className="hidden lg:flex space-x-4">
-              <Link
-                href="https://www.facebook.com/marker99restaurant"
-                passHref
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Marker 99 on Facebook"
-              >
-                <FaFacebook size={30} />
-              </Link>
-              <Link
-                href="https://www.instagram.com/marker99_restaurantlounge/"
-                passHref
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Marker 99 on Instagram"
-              >
-                <FaInstagram size={30} />
-              </Link>
-              <Link
-                href="https://g.page/marker99restaurant?share"
-                passHref
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Marker 99 on Google"
-              >
-                <FaGoogle size={30} />
-              </Link>
-              <Link
+            <div className="hidden lg:flex items-center gap-4">
+              <a
                 href="tel:3212531369"
-                passHref
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Call Marker 99"
+                className="text-sm font-semibold text-foreground/70 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
               >
-                <FaPhone size={30} />
-              </Link>
+                (321) 253-1369
+              </a>
+              <a
+                href="#reserve"
+                className="inline-flex items-center justify-center rounded-full bg-customGreen px-6 py-2 text-sm font-semibold text-brand-primary-foreground shadow-sm transition hover:bg-customGreen/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen active:scale-95"
+              >
+                Book a Table
+              </a>
             </div>
           </>
         )}
@@ -114,9 +135,9 @@ const Header = () => {
             aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           >
             {isMenuOpen ? (
-              <XIcon className="h-8 w-8 text-white" />
+              <XIcon className="h-8 w-8 text-foreground" />
             ) : (
-              <MenuIcon className="h-8 w-8 text-white" />
+              <MenuIcon className="h-8 w-8 text-foreground" />
             )}
           </button>
         </div>
@@ -124,80 +145,61 @@ const Header = () => {
       {isMenuOpen && (
         <nav
           id="mobile-menu"
-          className="lg:hidden bg-customDark text-white p-4 text-center"
+          className="lg:hidden bg-background text-foreground p-6 text-center space-y-2 border-t border-foreground/10"
           aria-label="Mobile navigation"
         >
-          <Link href="#home" className="block py-2 hover:text-green-500">
+          <Link
+            href="#home"
+            className="block py-3 rounded-lg hover:bg-white/5 transition-colors"
+            onClick={handleNavClick}
+          >
             HOME
           </Link>
-          <Link href="#reserve" className="block py-2 hover:text-green-500">
+          <Link
+            href="#about"
+            className="block py-3 rounded-lg hover:bg-white/5 transition-colors"
+            onClick={handleNavClick}
+          >
+            ABOUT
+          </Link>
+          <Link
+            href="#reserve"
+            className="block py-3 rounded-lg hover:bg-white/5 transition-colors"
+            onClick={handleNavClick}
+          >
             RESERVATIONS
           </Link>
-          <Link href="#events" className="block py-2 hover:text-green-500">
+          <Link
+            href="#events"
+            className="block py-3 rounded-lg hover:bg-white/5 transition-colors"
+            onClick={handleNavClick}
+          >
             EVENTS
           </Link>
-          <Link href="#contact" className="block py-2 hover:text-green-500">
+          <Link
+            href="#menu"
+            className="block py-3 rounded-lg hover:bg-white/5 transition-colors"
+            onClick={handleNavClick}
+          >
+            MENU
+          </Link>
+          <Link
+            href="#contact"
+            className="block py-3 rounded-lg hover:bg-white/5 transition-colors"
+            onClick={handleNavClick}
+          >
             CONTACT
           </Link>
-          <div className="flex justify-center space-x-4 mt-4 items-center">
-            <Link
-              href="https://www.facebook.com/marker99restaurant"
-              passHref
-              target="_blank"
-              rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Marker 99 on Facebook"
+          <div className="pt-4 space-y-3 text-foreground/70">
+            <a href="tel:3212531369" className="block text-sm font-semibold">
+              (321) 253-1369
+            </a>
+            <a
+              href="#reserve"
+              className="inline-flex items-center justify-center rounded-full bg-customGreen px-6 py-2 text-sm font-semibold text-brand-primary-foreground shadow-sm transition hover:bg-customGreen/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen active:scale-95"
             >
-              <FaFacebook size={30} />
-            </Link>
-            <Link
-              href="https://www.instagram.com/marker99_restaurantlounge/"
-              passHref
-              target="_blank"
-              rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Marker 99 on Instagram"
-            >
-              <FaInstagram size={30} />
-            </Link>
-            <Link
-              href="https://www.yelp.com/biz/marker-99-restaurant-and-lounge-melbourne"
-              passHref
-              target="_blank"
-              rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Marker 99 on Yelp"
-            >
-              <FaYelp size={30} />
-            </Link>
-            <Link
-              href="https://www.tripadvisor.com/Restaurant_Review-g34433-d15521460-Reviews-Marker_99_Restaurant_Lounge-Melbourne_Brevard_County_Florida.html"
-              passHref
-              target="_blank"
-              rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Marker 99 on Tripadvisor"
-            >
-              <FaTripadvisor size={30} />
-            </Link>
-            <Link
-              href="https://g.page/marker99restaurant?share"
-              passHref
-              target="_blank"
-              rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Marker 99 on Google"
-            >
-              <FaGoogle size={30} />
-            </Link>
-            <Link
-              href="tel:3212531369"
-              passHref
-                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                aria-label="Call Marker 99"
-            >
-              <FaPhone size={30} />
-            </Link>
+              Book a Table
+            </a>
           </div>
         </nav>
       )}

@@ -2,28 +2,46 @@ import { Inter } from 'next/font/google';
 import '../styles/globals.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ThemeProvider from '../components/ThemeProvider';
+import AxeDevtools from '../components/AxeDevtools';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   metadataBase: new URL('https://marker99restaurant.com'),
   title: {
-    default: 'Marker 99 Restaurant & Lounge',
+    default: 'Marker 99 Restaurant & Lounge | Waterfront Seafood Restaurant in Melbourne, FL',
     template: '%s | Marker 99 Restaurant & Lounge',
   },
   description:
-    'Waterfront dining, craft cocktails, and live music in Melbourne, Florida.',
+    'Marker 99 Restaurant & Lounge is Melbourne, Florida’s riverfront seafood restaurant for dockside dining, fresh local fish, raw bar favorites, and live music on the Indian River.',
+  keywords: [
+    'Melbourne FL waterfront restaurant',
+    'riverfront seafood restaurant',
+    'fresh local fish Melbourne Florida',
+    'waterfront dining Melbourne FL',
+    'Indian River restaurant Melbourne',
+    'casual fine dining Melbourne Florida',
+    'seafood restaurant near Eau Gallie',
+    'best restaurants on US-1 Melbourne',
+  ],
   alternates: {
     canonical: '/',
+  },
+  category: 'Seafood Restaurant',
+  other: {
+    'geo.position': '28.17695;-80.648076',
+    'geo.placename': 'Melbourne, Florida',
+    'geo.region': 'US-FL',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://marker99restaurant.com',
     siteName: 'Marker 99 Restaurant & Lounge',
-    title: 'Marker 99 Restaurant & Lounge',
+    title: 'Marker 99 Restaurant & Lounge | Waterfront Seafood Restaurant in Melbourne, FL',
     description:
-      'Marker 99 brings chef-driven seafood, cocktails, and live music to the Indian River in Melbourne, FL.',
+      'Experience Marker 99 Restaurant & Lounge – Melbourne, Florida’s waterfront seafood restaurant for riverfront dining, coastal cocktails, and nightly live music on the Indian River.',
     images: [
       {
         url: 'https://marker99restaurant.com/copyright/night-deck.webp',
@@ -35,9 +53,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Marker 99 Restaurant & Lounge',
+    title: 'Marker 99 Restaurant & Lounge | Waterfront Seafood Restaurant in Melbourne, FL',
     description:
-      'Waterfront dining, craft cocktails, and live music in Melbourne, Florida.',
+      'Waterfront seafood restaurant in Melbourne, Florida with fresh local fish, dockside dining, and live music on the Indian River.',
     creator: '@marker99restaurant',
   },
   icons: {
@@ -57,11 +75,14 @@ export default function RootLayout({ children }) {
         >
           Skip to main content
         </a>
-        <Header />
-        <main id="main-content" className="flex-grow">
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider>
+          <AxeDevtools />
+          <Header />
+          <main id="main-content" className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

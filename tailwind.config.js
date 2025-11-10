@@ -18,8 +18,8 @@ module.exports = {
     },
     extend: {
       colors: {
-        customDark: '#101012',
-        customGreen: '#61CE70',
+        customDark: '#131010',
+        customGreen: '#6fcf97',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -53,6 +53,12 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        surface: 'hsl(var(--surface))',
+        'surface-alt': 'hsl(var(--surface-alt))',
+        'brand-primary': 'hsl(var(--brand-primary))',
+        'brand-primary-foreground': 'hsl(var(--brand-primary-foreground))',
+        'brand-accent': 'hsl(var(--brand-accent))',
+        'text-muted': 'hsl(var(--text-muted))',
       },
       borderRadius: {
         lg: 'var(--radius)',
