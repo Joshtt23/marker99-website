@@ -81,9 +81,6 @@ const Header = () => {
             className="h-14 w-14"
             priority
           />
-          <span className="hidden sm:block text-sm font-semibold tracking-[0.3em] uppercase text-foreground">
-            Marker 99
-          </span>
         </Link>
         {isMounted && (
           <>
