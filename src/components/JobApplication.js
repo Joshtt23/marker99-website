@@ -1,14 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
+
 import { Inter } from 'next/font/google';
-import '../styles/globals.css';
-import { Button } from './ui/button';
-import { Label } from './ui/label';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
 import { useDropzone } from 'react-dropzone';
-// Import the custom Radix UI Select components
+
+import '../styles/globals.css';
+
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
 import {
   Select,
   SelectTrigger,
@@ -16,6 +17,8 @@ import {
   SelectItem,
   SelectValue,
 } from './ui/select';
+import { Textarea } from './ui/textarea';
+// Import the custom Radix UI Select components
 
 const inter = Inter({ subsets: ['latin'] });
 

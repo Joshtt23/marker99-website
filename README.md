@@ -22,14 +22,14 @@ Marker 99 is a Next.js site that highlights waterfront dining, live music, and c
 
 Set the following optional variables to enable future integrations:
 
-| Variable | Purpose |
-| --- | --- |
-| `NEXT_PUBLIC_ONLINE_ORDERING_ENABLED` (`true`/`false`) | Toggles Toast online ordering UI |
-| `NEXT_PUBLIC_ONLINE_RESERVATION_ENABLED` (`true`/`false`) | Enables reservation iframe embed |
-| `NEXT_PUBLIC_TOAST_LOCATION_ALIAS` | Toast location alias (`marker99-restaurant-...`) |
-| `NEXT_PUBLIC_TOAST_MENU_ID` | Toast menu identifier used for order links |
-| `NEXT_PUBLIC_RESERVATION_PROVIDER` | `toast`, `opentable`, etc. for analytics labelling |
-| `NEXT_PUBLIC_RESERVATION_EMBED_URL` | Reservation widget URL when provider is active |
+| Variable                                                  | Purpose                                            |
+| --------------------------------------------------------- | -------------------------------------------------- |
+| `NEXT_PUBLIC_ONLINE_ORDERING_ENABLED` (`true`/`false`)    | Toggles Toast online ordering UI                   |
+| `NEXT_PUBLIC_ONLINE_RESERVATION_ENABLED` (`true`/`false`) | Enables reservation iframe embed                   |
+| `NEXT_PUBLIC_TOAST_LOCATION_ALIAS`                        | Toast location alias (`marker99-restaurant-...`)   |
+| `NEXT_PUBLIC_TOAST_MENU_ID`                               | Toast menu identifier used for order links         |
+| `NEXT_PUBLIC_RESERVATION_PROVIDER`                        | `toast`, `opentable`, etc. for analytics labelling |
+| `NEXT_PUBLIC_RESERVATION_EMBED_URL`                       | Reservation widget URL when provider is active     |
 
 Feature defaults are defined in `src/lib/siteConfig.js`. Keep production secrets out of version control; manage them through the chosen deployment platform.
 

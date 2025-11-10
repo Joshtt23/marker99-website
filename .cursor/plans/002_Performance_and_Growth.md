@@ -37,5 +37,3 @@
 
 - Review structured data after menu/hours/event updates and rerun Google Rich Results tests as needed.
 - Log accessibility issues surfaced by the in-dev `@axe-core/react` checks; capture waivers in QA notes when applicable.
-
-

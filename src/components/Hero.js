@@ -36,13 +36,18 @@ const Hero = () => (
         </div>
       </div>
       <div className="mt-16 grid gap-6 md:grid-cols-3 text-center text-foreground/90">
-        <div className="rounded-2xl border border-foreground/10 bg-black/20 p-6 backdrop-blur space-y-2">
-          <p className="text-xs sm:text-sm uppercase tracking-wide text-customGreen">
+        <div className="rounded-2xl border border-foreground/10 bg-black/20 p-6 backdrop-blur text-center space-y-4">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.35em] text-customGreen">
             Visit Us
           </p>
-          <p className="text-sm sm:text-base text-pretty">
+          <a
+            href="https://maps.google.com/?q=Marker+99+Restaurant+%26+Lounge"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-base sm:text-lg text-customGreen hover:text-customGreen/80 underline underline-offset-4"
+          >
             4263 US-1, Melbourne, FL 32935
-          </p>
+          </a>
         </div>
         <div className="rounded-2xl border border-foreground/10 bg-black/20 p-6 backdrop-blur space-y-2">
           <p className="text-xs sm:text-sm uppercase tracking-wide text-customGreen">
@@ -68,15 +73,15 @@ const Hero = () => (
                 (321) 253-1369
               </a>
             </div>
-            <div>
-              Email{' '}
+            <p className="text-xs sm:text-sm text-foreground/70">
+              Event inquiries:{' '}
               <a
-                href="mailto:info@marker99restaurant.com"
+                href="#reserve"
                 className="underline hover:text-customGreen break-words"
               >
-                info@marker99restaurant.com
+                View details below
               </a>
-            </div>
+            </p>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import { toastConfig } from '../lib/siteConfig';
 
 function OnlineOrder({ item }) {
@@ -9,12 +10,14 @@ function OnlineOrder({ item }) {
 
   const handleOrderNow = () => {
     if (!toastOrderingUrl) {
-      console.warn('Toast ordering configuration missing.');
       return;
     }
 
     const normalizedItem = encodeURIComponent(item.name);
-    window.open(`${toastOrderingUrl}/order?menuItem=${normalizedItem}`, '_blank');
+    window.open(
+      `${toastOrderingUrl}/order?menuItem=${normalizedItem}`,
+      '_blank',
+    );
   };
 
   return (

@@ -33,4 +33,3 @@ const StatsBand = () => (
 );
 
 export default StatsBand;
-

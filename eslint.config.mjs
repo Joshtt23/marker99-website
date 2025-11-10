@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import globals from 'globals';
 import pluginImport from 'eslint-plugin-import';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
@@ -9,19 +10,21 @@ export default [
   js.configs.recommended,
   prettier,
   {
-    ignores: ['node_modules/*'],
+    ignores: ['node_modules/*', '.next/*'],
   },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
-      parser: '@babel/eslint-parser',
       parserOptions: {
-        requireConfigFile: false,
-        babelOptions: {
-          presets: ['@babel/preset-react'],
+        ecmaFeatures: {
+          jsx: true,
         },
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
       },
     },
     plugins: {
@@ -36,10 +39,18 @@ export default [
       curly: ['error', 'all'],
       eqeqeq: ['error', 'always'],
       'no-multi-spaces': 'error',
-      'no-unused-vars': 'warn',
+      'no-unused-vars': [
+        'warn',
+        {
+          args: 'after-used',
+          ignoreRestSiblings: true,
+          varsIgnorePattern: '^React$',
+        },
+      ],
       'no-var': 'error',
       'prefer-const': 'error',
       'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-vars': 'error',
       'react/prop-types': 'off',
       'import/order': [
         'error',
@@ -60,7 +71,7 @@ export default [
           },
         },
       ],
-      'import/newline-after-import': 'error',
+      'import/newline-after-import': 'off',
       'import/no-named-as-default': 'off',
       'jsx-a11y/anchor-is-valid': [
         'error',

@@ -19,4 +19,3 @@ export const reservationConfig = {
   phone: '+1-321-253-1369',
   email: 'irmarker99@gmail.com',
 };
-

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+
+import { getUpcomingEvents } from './data/events';
 import { siteFeatureFlags } from '../lib/siteConfig';
-import { fallbackEvents } from './data/events';
 
 const Events = () => {
   const { facebookEventsWidgetEnabled } = siteFeatureFlags;
@@ -11,10 +12,14 @@ const Events = () => {
   const widgetContainerRef = useRef(null);
 
   useEffect(() => {
-    if (!facebookEventsWidgetEnabled) return;
+    if (!facebookEventsWidgetEnabled) {
+      return;
+    }
 
     const updateWidth = () => {
-      if (!widgetContainerRef.current) return;
+      if (!widgetContainerRef.current) {
+        return;
+      }
       setWidgetWidth((prev) => {
         const measured =
           Math.min(
@@ -40,7 +45,8 @@ const Events = () => {
     }
 
     const script = document.createElement('script');
-    script.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0';
+    script.src =
+      'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0';
     script.async = true;
     script.defer = true;
     script.crossOrigin = 'anonymous';
@@ -56,13 +62,20 @@ const Events = () => {
   }, [facebookEventsWidgetEnabled]);
 
   useEffect(() => {
-    if (!facebookEventsWidgetEnabled || !sdkLoaded) return;
-    if (typeof window === 'undefined') return;
+    if (!facebookEventsWidgetEnabled || !sdkLoaded) {
+      return;
+    }
+    if (typeof window === 'undefined') {
+      return;
+    }
     const FB = window.FB;
     if (FB?.XFBML?.parse && widgetContainerRef.current) {
       FB.XFBML.parse(widgetContainerRef.current);
     }
   }, [facebookEventsWidgetEnabled, sdkLoaded, widgetWidth]);
+
+  const upcomingEvents = useMemo(() => getUpcomingEvents(3), []);
+  const hasUpcomingEvents = upcomingEvents.length > 0;
 
   return (
     <section
@@ -79,9 +92,9 @@ const Events = () => {
             Live Music & Events
           </h3>
           <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-12">
-            Catch nightly entertainment, chef pop-ups, and seasonal celebrations.
-            Follow our Facebook page for the latest waterfront happenings at
-            Marker 99.
+            Catch nightly entertainment, chef pop-ups, and seasonal
+            celebrations. Follow our Facebook page for the latest waterfront
+            happenings at Marker 99.
           </p>
           {facebookEventsWidgetEnabled && (
             <div
@@ -113,34 +126,41 @@ const Events = () => {
             </div>
           )}
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 text-left">
-            {fallbackEvents.map((event) => (
-              <article
-                key={event.title}
-                className="rounded-3xl border border-foreground/10 bg-black/25 p-6 flex flex-col justify-between text-left"
-                aria-label={`Event: ${event.title}`}
-              >
-                <div>
-                  <h4 className="text-xl font-semibold mb-2 text-foreground">
-                    {event.title}
-                  </h4>
-                  <p className="text-sm uppercase tracking-wide text-customGreen mb-4">
-                    {event.date}
-                  </p>
-                  <p className="text-foreground/75">{event.description}</p>
-                </div>
-                <a
-                  href={event.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center text-customGreen hover:text-customGreen/80 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                  aria-label={`View details for ${event.title} on Facebook`}
+          {hasUpcomingEvents ? (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 text-left">
+              {upcomingEvents.map((event) => (
+                <article
+                  key={`${event.title}-${event.startDate}`}
+                  className="rounded-3xl border border-foreground/10 bg-black/25 p-6 flex flex-col justify-between text-left"
+                  aria-label={`Event: ${event.title}`}
                 >
-                  View on Facebook
-                </a>
-              </article>
-            ))}
-          </div>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-2 text-foreground">
+                      {event.title}
+                    </h4>
+                    <p className="text-sm uppercase tracking-wide text-customGreen mb-4">
+                      {event.formattedDate}
+                    </p>
+                    <p className="text-foreground/75">{event.description}</p>
+                  </div>
+                  <a
+                    href={event.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 inline-flex items-center text-customGreen hover:text-customGreen/80 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                    aria-label={`View details for ${event.title} on Facebook`}
+                  >
+                    View on Facebook
+                  </a>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-foreground/60">
+              New events are being planned. Check back soon or follow us on
+              Facebook for the latest schedule.
+            </p>
+          )}
           {!sdkLoaded && facebookEventsWidgetEnabled && (
             <p className="mt-8 text-sm text-foreground/60">
               Trouble loading Facebook? Use the event cards above or{' '}

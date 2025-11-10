@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { reservationConfig } from '../lib/siteConfig';
 
 const Reservation = ({ onlineReservation }) => {
@@ -27,7 +28,7 @@ const Reservation = ({ onlineReservation }) => {
             perfect table.
           </p>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2">
+          <div className="mt-12 grid gap-8 md:grid-cols-2 items-stretch max-w-5xl mx-auto">
             {canRenderEmbed ? (
               <div className="rounded-3xl overflow-hidden border border-foreground/10 shadow-lg shadow-black/30 bg-white text-black">
                 <iframe
@@ -41,26 +42,28 @@ const Reservation = ({ onlineReservation }) => {
                 ></iframe>
               </div>
             ) : (
-              <div className="rounded-3xl border border-foreground/10 bg-black/20 p-10 text-left space-y-4">
+              <div className="rounded-3xl border border-foreground/10 bg-black/20 p-10 text-left space-y-5">
                 <h3 className="text-xl font-semibold text-foreground">
-                  Book by Phone or Email
+                  Reserve by Phone
                 </h3>
                 <p className="text-foreground/75">
-                  Online reservations are coming soon. In the meantime, please
-                  call or email our reservations team for availability.
+                  Online reservations are coming soon. Until then, our hosts are
+                  available daily to help you secure a waterfront table, answer
+                  menu questions, and coordinate celebrations.
                 </p>
-                <div className="space-y-3">
+                <ul className="text-sm text-foreground/70 space-y-2 leading-relaxed">
+                  <li>• Same-day seating updates and waitlist management</li>
+                  <li>
+                    • Preferred timing for sunsets, happy hour, and live music
+                  </li>
+                  <li>• Recommendations for dietary needs or special toasts</li>
+                </ul>
+                <div className="space-y-3 text-lg font-semibold pt-2">
                   <a
                     href={`tel:${phoneHref}`}
-                    className="block text-lg font-semibold text-customGreen hover:text-customGreen/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                    className="block text-customGreen hover:text-customGreen/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
                   >
                     Call: {displayPhone}
-                  </a>
-                  <a
-                    href={`mailto:${email}`}
-                    className="block text-lg font-semibold text-customGreen hover:text-customGreen/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                  >
-                    Email: {email}
                   </a>
                 </div>
               </div>

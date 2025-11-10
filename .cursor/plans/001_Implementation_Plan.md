@@ -9,7 +9,7 @@
 - [x] Publish initial `Restaurant` JSON-LD (business info, hours, geolocation) and ship `robots.txt` + `sitemap.xml`.
 - [x] Replace placeholder menu descriptions with SEO-friendly copy surfaced in the DOM even when accordion panels are collapsed.
 - [x] Expand default metadata with local long-tail keywords for waterfront seafood dining, rich Open Graph/Twitter cards, and geo meta tags.
-- [x] Validate changes with Lighthouse (desktop/mobile), PageSpeed Insights, and Google Rich Results; document scores in PR notes. *(2025-11-10 mobile Lighthouse: Performance 62, Accessibility 100, Best Practices 75, SEO 100 — optimization follow-up captured in Plan 002.)*
+- [x] Validate changes with Lighthouse (desktop/mobile), PageSpeed Insights, and Google Rich Results; document scores in PR notes. _(2025-11-10 mobile Lighthouse: Performance 62, Accessibility 100, Best Practices 75, SEO 100 — optimization follow-up captured in Plan 002.)_
 
 ## Phase 2 — Mobile & Accessibility Hardening
 
@@ -19,8 +19,8 @@
 - [x] Ensure mobile nav trap/focus handling and add skip link + visible focus states across interactive elements.
 - [x] Improve carousel controls with pause/play and keyboard navigation; ensure marquee animations respect user `prefers-reduced-motion`.
 - [x] Compress hero and menu imagery, generate WebP/AVIF variants, and lazy load all below-the-fold assets.
-- [x] Audit sticky mobile action bar overlap/accessibility on real devices and gather analytics requirements. *(Manual QA logged; future analytics integration deferred to Plan 002.)*
-- [x] Run axe or Storybook accessibility scans, logging any waivers in the repo’s QA notes. *(Added in-dev axe-core instrumentation to surface issues during local runs; document any waivers before launch.)*
+- [x] Audit sticky mobile action bar overlap/accessibility on real devices and gather analytics requirements. _(Manual QA logged; future analytics integration deferred to Plan 002.)_
+- [x] Run axe or Storybook accessibility scans, logging any waivers in the repo’s QA notes. _(Added in-dev axe-core instrumentation to surface issues during local runs; document any waivers before launch.)_
 
 ## Phase 3 — Social & Event Integrations
 
@@ -28,24 +28,24 @@
 
 - [x] Refine Facebook Events widget: lazy load SDK once, cache recent events in a lightweight JSON file for server-rendered fallback; mobile fallback now uses snap carousel.
 - [x] Expand Google Reviews widget with server-rendered testimonial excerpts and ARIA labelling for the drawer controls.
-- [x] Evaluate embeddable calendar options (Google Calendar vs. custom CMS) for music schedule; prototype a static JSON-driven schedule section. *(Deferred for execution in Plan 002.)*
-- [x] Draft content strategy for weekly event updates; define team workflow (owner, update cadence, review checklist). *(Captured as follow-up tasks in Plan 002.)*
+- [x] Evaluate embeddable calendar options (Google Calendar vs. custom CMS) for music schedule; prototype a static JSON-driven schedule section. _(Deferred for execution in Plan 002.)_
+- [x] Draft content strategy for weekly event updates; define team workflow (owner, update cadence, review checklist). _(Captured as follow-up tasks in Plan 002.)_
 
 ## Phase 4 — Toast & Reservations Enablement
 
-**Status:** Completed · 2025-11-10 *(scope postponed to future plan)*
+**Status:** Completed · 2025-11-10 _(scope postponed to future plan)_
 
-- [x] Coordinate with client to collect Toast credentials (location/menu IDs) and reservation platform preferences (Toast Tables vs. OpenTable). *(Ownership and next steps tracked in Plan 002.)*
+- [x] Coordinate with client to collect Toast credentials (location/menu IDs) and reservation platform preferences (Toast Tables vs. OpenTable). _(Ownership and next steps tracked in Plan 002.)_
 - [x] Build shared helpers to construct Toast ordering URLs; keep UI toggled off behind `onlineOrderEnabled` until credentials verified.
 - [x] Implement reservation iframe component with feature flag, tel/email fallback, and analytics tracking.
-- [x] Prepare environment variable documentation and staging secrets management before enabling in production. *(Documentation staged; enablement will occur when credentials received.)*
+- [x] Prepare environment variable documentation and staging secrets management before enabling in production. _(Documentation staged; enablement will occur when credentials received.)_
 
 ## Ongoing QA & Monitoring
 
-- Schedule quarterly Lighthouse + WebPageTest runs; investigate regressions >5% immediately. *(Rolled into Plan 002.)*
-- Track Core Web Vitals in Google Search Console once production changes ship. *(Rolled into Plan 002.)*
-- Review structured data validation after any menu, hours, or event updates. *(Continuing operational task.)*
-- Revisit this plan as phases complete; append completion dates and lessons learned. *(Plan closed 2025-11-10; superseded by Plan 002.)*
+- Schedule quarterly Lighthouse + WebPageTest runs; investigate regressions >5% immediately. _(Rolled into Plan 002.)_
+- Track Core Web Vitals in Google Search Console once production changes ship. _(Rolled into Plan 002.)_
+- Review structured data validation after any menu, hours, or event updates. _(Continuing operational task.)_
+- Revisit this plan as phases complete; append completion dates and lessons learned. _(Plan closed 2025-11-10; superseded by Plan 002.)_
 
 ## Status
 

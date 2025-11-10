@@ -1,15 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
+
 import { ArrowUp } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
 import MobileActionBar from './MobileActionBar';
 
 const Hero = dynamic(() => import('./Hero'), { ssr: true });
 const AboutUs = dynamic(() => import('./AboutUs'), { ssr: true });
 const Contact = dynamic(() => import('./Contact'), { ssr: true });
 const Events = dynamic(() => import('./Events'), { ssr: false });
-const JobApplication = dynamic(() => import('./JobApplication'), { ssr: false });
+const JobApplication = dynamic(() => import('./JobApplication'), {
+  ssr: false,
+});
 const Reservation = dynamic(() => import('./Reservation'), { ssr: true });
 const Menu = dynamic(() => import('./Menu'), { ssr: false });
 const GoogleReviewWidget = dynamic(() => import('./GoogleReviewWidget'), {
@@ -71,4 +75,3 @@ export default function HomePageClient({ featureFlags }) {
     </>
   );
 }
-

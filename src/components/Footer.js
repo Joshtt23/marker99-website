@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -19,8 +20,8 @@ const Footer = () => {
             Marker 99 Restaurant & Lounge
           </p>
           <p className="max-w-xl text-sm text-foreground/70">
-            Casual waterfront dining in Melbourne, Florida — chef-crafted seafood, craft cocktails,
-            and live music on the Indian River.
+            Casual waterfront dining in Melbourne, Florida — chef-crafted
+            seafood, craft cocktails, and live music on the Indian River.
           </p>
         </div>
 
@@ -50,13 +51,17 @@ const Footer = () => {
           <a href="tel:3212531369" className="block hover:text-customGreen">
             (321) 253-1369
           </a>
-          <a href="mailto:info@marker99restaurant.com" className="block hover:text-customGreen">
+          <a
+            href="mailto:info@marker99restaurant.com"
+            className="block hover:text-customGreen"
+          >
             info@marker99restaurant.com
           </a>
         </div>
 
         <div className="text-xs text-foreground/50">
-          © {new Date().getFullYear()} Marker 99 Hospitality · Designed by Joshua Traver
+          © {new Date().getFullYear()} Marker 99 Hospitality · Designed by
+          Joshua Traver
         </div>
       </div>
     </footer>

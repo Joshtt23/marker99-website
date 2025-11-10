@@ -16,10 +16,7 @@ const nextConfig = {
     locales: ['en'],
     defaultLocale: 'en',
   },
-  webpack: (config, { isServer }) => {
-    // Further custom configuration
-    return config;
-  },
+  webpack: (config) => config,
   async headers() {
     return [
       {

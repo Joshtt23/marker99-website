@@ -1,18 +1,53 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import Image from 'next/image';
+
 import ImageCarousel from './ImageCarousel';
 import OnlineOrder from './OnlineOrder';
-import MenuItems from './data/MenuItems';
+import brunchMenu from '../data/menu-brunch.json';
+import lunchDinnerMenu from '../data/menu-lunch-dinner.json';
+
+const MENU_CONFIG = {
+  main: lunchDinnerMenu,
+  brunch: brunchMenu,
+};
+
+const MENU_OPTIONS = [
+  {
+    id: 'main',
+    label: lunchDinnerMenu.label,
+    availability: lunchDinnerMenu.availability,
+  },
+  {
+    id: 'brunch',
+    label: brunchMenu.label,
+    availability: brunchMenu.availability,
+    note: brunchMenu.note ?? null,
+  },
+];
 
 const Menu = ({ onlineOrder }) => {
-  const categories = Object.keys(MenuItems);
-  const [activeCategory, setActiveCategory] = useState(categories[0]);
+  const [activeMenuId, setActiveMenuId] = useState('main');
+  const [activeCategoryId, setActiveCategoryId] = useState(
+    MENU_CONFIG.main.sections[0]?.id ?? '',
+  );
+
+  useEffect(() => {
+    const firstSection = MENU_CONFIG[activeMenuId].sections[0];
+    setActiveCategoryId(firstSection?.id ?? '');
+  }, [activeMenuId]);
+
+  const activeMenu = MENU_CONFIG[activeMenuId];
+  const sections = activeMenu.sections;
 
   return (
     <section className="scroll-mt-8 md:scroll-mt-16">
-      <div className="bg-background py-20 md:py-24 text-foreground" aria-label="Signature dishes">
+      <div
+        className="bg-background py-20 md:py-24 text-foreground"
+        aria-label="Signature dishes"
+      >
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <p className="uppercase tracking-[0.3em] text-sm text-customGreen">
@@ -36,35 +71,67 @@ const Menu = ({ onlineOrder }) => {
           <div className="rounded-3xl border border-foreground/10 bg-black/20 backdrop-blur p-10 md:p-14 shadow-[0_25px_45px_-20px_rgba(0,0,0,0.6)]">
             <h2
               id="menu-heading"
-              className="text-3xl md:text-4xl font-semibold text-center mb-8"
+              className="text-3xl md:md:text-4xl font-semibold text-center mb-8"
             >
               Explore the Marker 99 Menu
             </h2>
+
+            <div className="flex flex-wrap justify-center gap-3 mb-8">
+              {MENU_OPTIONS.map(({ id, label }) => {
+                const isActive = id === activeMenuId;
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => setActiveMenuId(id)}
+                    className={`inline-flex items-center justify-center rounded-full border px-6 py-2 text-sm font-semibold transition ${
+                      isActive
+                        ? 'border-customGreen bg-customGreen/10 text-customGreen'
+                        : 'border-foreground/20 text-foreground/70 hover:text-foreground'
+                    } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="text-center space-y-2 mb-10">
+              <p className="text-sm uppercase tracking-[0.3em] text-customGreen">
+                {activeMenu.label}
+              </p>
+              <p className="text-base text-foreground/80">
+                {activeMenu.availability}
+              </p>
+              {activeMenu.note ? (
+                <p className="text-sm text-customGreen/80">{activeMenu.note}</p>
+              ) : null}
+            </div>
 
             <div className="flex flex-col gap-4 mb-10">
               <div
                 className="flex md:flex-wrap md:justify-center gap-3 overflow-x-auto no-scrollbar pb-2 snap-x snap-mandatory"
                 role="tablist"
-                aria-label="Menu categories"
+                aria-label={`${activeMenu.label} menu categories`}
               >
-                {categories.map((category) => {
-                  const isActive = activeCategory === category;
+                {sections.map((section) => {
+                  const isActive = activeCategoryId === section.id;
                   return (
                     <button
-                      key={category}
+                      key={section.id}
                       type="button"
                       role="tab"
-                      id={`${category}-tab`}
+                      id={`${section.id}-tab`}
                       aria-selected={isActive}
-                      aria-controls={`${category}-panel`}
-                      onClick={() => setActiveCategory(category)}
+                      aria-controls={`${section.id}-panel`}
+                      onClick={() => setActiveCategoryId(section.id)}
                       className={`snap-start shrink-0 text-base md:text-xl font-semibold capitalize px-4 py-2 rounded-full border transition-colors ${
                         isActive
                           ? 'border-customGreen text-customGreen bg-black/10'
                           : 'border-foreground/15 text-foreground/60 hover:text-foreground'
                       } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen`}
                     >
-                      {category.replace(/([A-Z])/g, ' $1').trim()}
+                      {section.title}
                     </button>
                   );
                 })}
@@ -72,32 +139,32 @@ const Menu = ({ onlineOrder }) => {
             </div>
 
             <div className="space-y-12">
-              {categories.map((category) => {
-                const isActive = activeCategory === category;
+              {sections.map((section) => {
+                const isActive = activeCategoryId === section.id;
                 return (
                   <div
-                    key={category}
+                    key={section.id}
                     role="tabpanel"
-                    id={`${category}-panel`}
-                    aria-labelledby={`${category}-tab`}
+                    id={`${section.id}-panel`}
+                    aria-labelledby={`${section.id}-tab`}
                     aria-hidden={!isActive}
                     className={isActive ? 'block' : 'hidden'}
                   >
                     <header className="flex items-baseline justify-between mb-6">
-                      <h3 className="text-2xl font-semibold capitalize text-foreground">
-                        {category.replace(/([A-Z])/g, ' $1').trim()}
+                      <h3 className="text-2xl font-semibold text-foreground">
+                        {section.title}
                       </h3>
                       <span className="hidden md:inline text-sm uppercase tracking-widest text-customGreen">
-                        {MenuItems[category].length} items
+                        {section.items.length} items
                       </span>
                     </header>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {MenuItems[category].map((item, index) => (
+                      {section.items.map((item, index) => (
                         <div
-                          key={index}
+                          key={`${section.id}-${index}`}
                           className="flex bg-black/20 border border-foreground/10 rounded-2xl overflow-hidden backdrop-blur"
                         >
-                          {item.image !== '' ? (
+                          {item.image ? (
                             <div className="w-1/3">
                               <Image
                                 src={item.image}
@@ -123,7 +190,9 @@ const Menu = ({ onlineOrder }) => {
                               <div className="text-lg font-bold text-customGreen">
                                 {item.price}
                               </div>
-                              {onlineOrder && <OnlineOrder item={item} />}
+                              {onlineOrder && activeMenuId === 'main' && (
+                                <OnlineOrder item={item} />
+                              )}
                             </div>
                           </div>
                         </div>

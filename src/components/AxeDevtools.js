@@ -15,7 +15,9 @@ export default function AxeDevtools() {
       const ReactDOM = ReactDOMModule.default ?? ReactDOMModule;
       const { default: axe } = await import('@axe-core/react');
 
-      if (isCancelled) return;
+      if (isCancelled) {
+        return;
+      }
 
       axe(React, ReactDOM, 1000);
     }
@@ -29,4 +31,3 @@ export default function AxeDevtools() {
 
   return null;
 }
-

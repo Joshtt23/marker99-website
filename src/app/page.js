@@ -1,5 +1,5 @@
-import RestaurantJsonLd from '../components/seo/RestaurantJsonLd';
 import HomePageClient from '../components/HomePageClient';
+import RestaurantJsonLd from '../components/seo/RestaurantJsonLd';
 import { siteFeatureFlags } from '../lib/siteConfig';
 
 export const metadata = {

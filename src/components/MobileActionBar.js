@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { Phone, MapPin, Calendar, Utensils } from 'lucide-react';
+import Link from 'next/link';
 
 const actions = [
   {
@@ -51,4 +51,3 @@ export default function MobileActionBar() {
     </nav>
   );
 }
-
