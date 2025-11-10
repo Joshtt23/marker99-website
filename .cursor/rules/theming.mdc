@@ -1,0 +1,309 @@
+# Theming Standards
+
+## Theme Architecture
+
+### **Core Theme System**
+
+#### **Theme Provider Stack**
+- **next-themes**: Theme switching and persistence
+- **CSS Variables**: OKLCH color space for better color management
+- **Tailwind CSS**: Utility classes with theme integration
+- **Framer Motion**: Smooth theme transitions
+
+#### **Color System**
+- **Primary Space**: OKLCH (better than HSL/RGB for consistency)
+- **Semantic Tokens**: background, foreground, primary, secondary, etc.
+- **Status Colors**: success, warning, error, info
+- **Chart Colors**: Themed color palettes for data visualization
+
+### **Theme Structure**
+
+#### **File Organization**
+```
+src/
+├── lib/
+│   ├── theme/
+│   │   ├── index.ts              # Main theme exports
+│   │   ├── theme-provider.tsx    # React context provider
+│   │   ├── theme-config.ts       # Theme definitions
+│   │   ├── color-palette.ts      # Color system
+│   │   ├── chart-theme.ts        # Chart-specific theming
+│   │   └── theme-utils.ts        # Utility functions
+├── components/
+│   ├── ui/
+│   │   ├── theme-switcher.tsx    # Theme toggle component
+│   │   └── chart-container.tsx   # Themed chart wrapper
+│   └── providers/
+│       └── ThemeProvider.tsx     # App-level provider
+├── hooks/
+│   └── use-theme.ts             # Theme hook
+└── styles/
+    ├── globals.css              # Global styles
+    └── themes.css               # Theme-specific styles
+```
+
+### **Theme Variants**
+
+#### **Supported Themes**
+1. **Light Mode** (default)
+2. **Dark Mode** 
+3. **System** (follows OS preference)
+4. **High Contrast** (accessibility)
+5. **Colorblind Friendly** (accessibility)
+
+#### **Theme Switching**
+- **System Detection**: Automatically detect OS theme preference
+- **Persistence**: Remember user's theme choice in localStorage
+- **Smooth Transitions**: Use Framer Motion for theme changes
+- **SSR Support**: Prevent hydration mismatches
+
+### **Color Palette Standards**
+
+#### **Base Colors (OKLCH)**
+```typescript
+const baseColors = {
+  // Light theme
+  light: {
+    background: 'oklch(1 0 0)',           // Pure white
+    foreground: 'oklch(0.145 0 0)',       // Near black
+    card: 'oklch(1 0 0)',                 // White
+    cardForeground: 'oklch(0.145 0 0)',   // Near black
+    popover: 'oklch(1 0 0)',              // White
+    popoverForeground: 'oklch(0.145 0 0)', // Near black
+  },
+  // Dark theme
+  dark: {
+    background: 'oklch(0.145 0 0)',       // Near black
+    foreground: 'oklch(0.985 0 0)',       // Near white
+    card: 'oklch(0.205 0 0)',             // Dark gray
+    cardForeground: 'oklch(0.985 0 0)',   // Near white
+    popover: 'oklch(0.205 0 0)',          // Dark gray
+    popoverForeground: 'oklch(0.985 0 0)', // Near white
+  }
+}
+```
+
+#### **Semantic Colors**
+```typescript
+const semanticColors = {
+  primary: {
+    light: 'oklch(0.205 0 0)',           // Dark gray
+    dark: 'oklch(0.922 0 0)',            // Light gray
+  },
+  secondary: {
+    light: 'oklch(0.97 0 0)',            // Very light gray
+    dark: 'oklch(0.269 0 0)',            // Dark gray
+  },
+  success: {
+    light: 'oklch(0.6 0.15 142)',        // Green
+    dark: 'oklch(0.7 0.12 142)',         // Lighter green
+  },
+  warning: {
+    light: 'oklch(0.7 0.12 85)',         // Yellow
+    dark: 'oklch(0.8 0.15 85)',          // Lighter yellow
+  },
+  error: {
+    light: 'oklch(0.577 0.245 27)',      // Red
+    dark: 'oklch(0.704 0.191 22)',       // Lighter red
+  }
+}
+```
+
+#### **Chart Colors**
+```typescript
+const chartColors = {
+  light: [
+    'oklch(0.646 0.222 41.116)',   // Blue
+    'oklch(0.6 0.118 184.704)',    // Cyan
+    'oklch(0.398 0.07 227.392)',   // Purple
+    'oklch(0.828 0.189 84.429)',   // Green
+    'oklch(0.769 0.188 70.08)',    // Yellow
+  ],
+  dark: [
+    'oklch(0.488 0.243 264.376)',  // Blue
+    'oklch(0.696 0.17 162.48)',    // Cyan
+    'oklch(0.769 0.188 70.08)',    // Yellow
+    'oklch(0.627 0.265 303.9)',    // Purple
+    'oklch(0.645 0.246 16.439)',   // Orange
+  ]
+}
+```
+
+### **Component Theming Standards**
+
+#### **shadcn/ui Integration**
+- **CSS Variables**: Use CSS custom properties for theming
+- **Variant Props**: Use class-variance-authority for component variants
+- **Dark Mode**: All components must support dark mode
+- **Accessibility**: Maintain proper contrast ratios
+
+#### **Component Structure**
+```typescript
+// Example themed component
+const Button = ({ variant, size, className, ...props }) => {
+  return (
+    <button
+      className={cn(
+        "inline-flex items-center justify-center",
+        "bg-primary text-primary-foreground",
+        "hover:bg-primary/90",
+        "dark:bg-primary dark:text-primary-foreground",
+        "dark:hover:bg-primary/90",
+        buttonVariants({ variant, size }),
+        className
+      )}
+      {...props}
+    />
+  );
+};
+```
+
+### **Chart Theming Standards**
+
+#### **Recharts Integration**
+- **Theme-aware colors**: Use CSS variables for chart colors
+- **Responsive design**: Charts must be responsive
+- **Accessibility**: Proper color contrast and labels
+- **Animation**: Smooth transitions with Framer Motion
+
+#### **Chart Color Usage**
+```typescript
+// Theme-aware chart configuration
+const useChartTheme = () => {
+  const { theme } = useTheme();
+  return {
+    colors: theme === 'dark' ? chartColors.dark : chartColors.light,
+    background: theme === 'dark' ? 'oklch(0.145 0 0)' : 'oklch(1 0 0)',
+    text: theme === 'dark' ? 'oklch(0.985 0 0)' : 'oklch(0.145 0 0)',
+  };
+};
+```
+
+#### **Nivo Integration**
+- **Theme prop**: Pass theme configuration to Nivo components
+- **Responsive**: Use ResponsiveContainer for all charts
+- **Customization**: Override default styles with theme colors
+
+### **Animation Standards**
+
+#### **Framer Motion Integration**
+- **Theme transitions**: Smooth color transitions (300ms)
+- **Page transitions**: Subtle page change animations
+- **Chart animations**: Staggered chart element animations
+- **Micro-interactions**: Hover and focus animations
+
+#### **Animation Guidelines**
+```typescript
+// Theme transition animation
+const themeTransition = {
+  duration: 0.3,
+  ease: "easeInOut"
+};
+
+// Chart animation
+const chartAnimation = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, staggerChildren: 0.1 }
+};
+```
+
+### **Accessibility Standards**
+
+#### **Color Contrast**
+- **WCAG AA**: Minimum 4.5:1 contrast ratio
+- **WCAG AAA**: Preferred 7:1 contrast ratio
+- **Colorblind Support**: Use patterns and shapes, not just color
+- **High Contrast Mode**: Special theme for accessibility
+
+#### **Theme Switching**
+- **Keyboard Navigation**: Tab-accessible theme switcher
+- **Screen Reader**: Proper ARIA labels
+- **Focus Indicators**: Visible focus states
+- **Reduced Motion**: Respect prefers-reduced-motion
+
+### **Performance Standards**
+
+#### **Theme Loading**
+- **No Flash**: Prevent theme flash on page load
+- **SSR Support**: Proper hydration handling
+- **Bundle Size**: Minimal impact on bundle size
+- **Runtime Performance**: Efficient theme switching
+
+#### **CSS Optimization**
+- **CSS Variables**: Use CSS custom properties for theming
+- **Tailwind Purging**: Remove unused theme classes
+- **Critical CSS**: Inline critical theme styles
+
+### **Development Standards**
+
+#### **Theme Testing**
+- **Storybook**: Test all components in all themes
+- **Visual Regression**: Screenshot testing for themes
+- **Accessibility Testing**: Test with screen readers
+- **Color Testing**: Verify contrast ratios
+
+#### **Theme Development**
+- **Design Tokens**: Use consistent design tokens
+- **Component Variants**: Test all component variants
+- **Chart Testing**: Test all chart types in all themes
+- **Animation Testing**: Test animations in all themes
+
+### **Theme Configuration**
+
+#### **Theme Provider Setup**
+```typescript
+// Theme provider configuration
+const themeConfig = {
+  defaultTheme: 'system',
+  enableSystem: true,
+  disableTransitionOnChange: false,
+  themes: ['light', 'dark', 'high-contrast', 'colorblind-friendly'],
+  storageKey: 'finatic-theme'
+};
+```
+
+#### **CSS Variables Setup**
+```css
+/* Theme variables in globals.css */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  /* ... other variables */
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  /* ... other variables */
+}
+```
+
+### **Migration Standards**
+
+#### **Adding New Themes**
+1. **Define colors**: Add new color palette
+2. **Update CSS**: Add CSS variables for new theme
+3. **Test components**: Verify all components work
+4. **Update charts**: Test all chart types
+5. **Documentation**: Update theme documentation
+
+#### **Updating Existing Themes**
+1. **Backward compatibility**: Ensure existing themes still work
+2. **Gradual migration**: Update components incrementally
+3. **Testing**: Test all theme combinations
+4. **Documentation**: Update theme documentation
+
+### **Troubleshooting**
+
+#### **Common Issues**
+- **Hydration mismatch**: Use suppressHydrationWarning for theme
+- **Color not updating**: Check CSS variable usage
+- **Animation jank**: Use transform instead of layout properties
+- **Chart colors**: Ensure chart components use theme colors
+
+#### **Debug Tools**
+- **Theme inspector**: Browser extension for CSS variables
+- **Color contrast checker**: Verify accessibility
+- **Animation inspector**: Debug Framer Motion animations
+- **Performance profiler**: Check theme switching performance

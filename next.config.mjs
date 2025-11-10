@@ -4,7 +4,12 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['marker99restaurant.com'], // Add domains for any external images
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'marker99restaurant.com',
+      },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   i18n: {

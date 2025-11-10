@@ -1,0 +1,204 @@
+---
+description: Implementing toast notifiactions to the user
+alwaysApply: false
+---
+# Notification Standards
+
+## Package
+
+`sonner` - Toast notification system
+
+## Setup
+
+Add Toaster component to root layout:
+
+```typescript
+import { Toaster } from 'sonner';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  );
+}
+```
+
+## Usage
+
+### Basic Toasts
+
+```typescript
+import { toast } from "sonner";
+
+// Success
+toast.success("Time entry saved successfully");
+
+// Error
+toast.error("Failed to save entry");
+
+// Info
+toast.info("Data is refreshing");
+
+// Warning
+toast.warning("Rate limit approaching");
+```
+
+### Toast with Actions
+
+```typescript
+toast.success("Entry saved", {
+  action: {
+    label: "Undo",
+    onClick: () => undoSave(),
+  },
+});
+```
+
+### Toast with Duration
+
+```typescript
+toast.error("Error occurred", {
+  duration: 5000, // 5 seconds
+});
+```
+
+## When to Use Toasts
+
+✅ Use for:
+
+- Success confirmations
+- Error messages
+- Info notifications
+- Non-blocking alerts
+
+❌ Don't use for:
+
+- Critical confirmations (use dialog)
+- Blocking operations (use loading states)
+- Form validation errors (show inline)
+
+## Replacing Alert
+
+**Before:**
+
+```typescript
+❌ alert('Error occurred');
+```
+
+**After:**
+
+```typescript
+✅ toast.error('Error occurred');
+```
+
+## Best Practices
+
+1. **Be Specific**: Clear, actionable messages
+2. **Success Feedback**: Always confirm successful operations
+3. **Error Context**: Include enough info for user to act
+4. **Non-Intrusive**: Don't spam users with notifications
+5. **Accessible**: Messages should be screen-reader friendly
+# Notification Standards
+
+## Package
+
+`sonner` - Toast notification system
+
+## Setup
+
+Add Toaster component to root layout:
+
+```typescript
+import { Toaster } from 'sonner';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  );
+}
+```
+
+## Usage
+
+### Basic Toasts
+
+```typescript
+import { toast } from "sonner";
+
+// Success
+toast.success("Time entry saved successfully");
+
+// Error
+toast.error("Failed to save entry");
+
+// Info
+toast.info("Data is refreshing");
+
+// Warning
+toast.warning("Rate limit approaching");
+```
+
+### Toast with Actions
+
+```typescript
+toast.success("Entry saved", {
+  action: {
+    label: "Undo",
+    onClick: () => undoSave(),
+  },
+});
+```
+
+### Toast with Duration
+
+```typescript
+toast.error("Error occurred", {
+  duration: 5000, // 5 seconds
+});
+```
+
+## When to Use Toasts
+
+✅ Use for:
+
+- Success confirmations
+- Error messages
+- Info notifications
+- Non-blocking alerts
+
+❌ Don't use for:
+
+- Critical confirmations (use dialog)
+- Blocking operations (use loading states)
+- Form validation errors (show inline)
+
+## Replacing Alert
+
+**Before:**
+
+```typescript
+❌ alert('Error occurred');
+```
+
+**After:**
+
+```typescript
+✅ toast.error('Error occurred');
+```
+
+## Best Practices
+
+1. **Be Specific**: Clear, actionable messages
+2. **Success Feedback**: Always confirm successful operations
+3. **Error Context**: Include enough info for user to act
+4. **Non-Intrusive**: Don't spam users with notifications
+5. **Accessible**: Messages should be screen-reader friendly

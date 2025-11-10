@@ -1,0 +1,190 @@
+---
+description: Creating types
+alwaysApply: false
+---
+# TypeScript Standards
+
+## Configuration
+
+- **strict mode**: Always enabled (`strict: true` in tsconfig.json)
+- **No implicit any**: All types must be explicit
+- **Path aliases**: Use `@/` prefix for internal imports
+
+## Type Definitions
+
+### Location
+
+All types should be defined in `src/types/index.ts` unless they're:
+
+- Component-specific (define near the component)
+- Utility-specific (define near the utility)
+
+### Naming Conventions
+
+- **Interfaces**: PascalCase (e.g., `UserProfile`)
+- **Types**: PascalCase (e.g., `ApiResponse<T>`)
+- **Enums**: PascalCase (e.g., `UserRole`)
+- **Constants**: UPPER_SNAKE_CASE
+
+## Type Usage Rules
+
+### Interfaces vs Types
+
+- **Interfaces**: For object shapes that may be extended
+- **Types**: For unions, intersections, or computed types
+- **Prefer interfaces** for object shapes
+
+### Example
+
+```typescript
+// Interface for object shape
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+// Type for union
+type Status = "active" | "inactive" | "pending";
+
+// Type for computed/utility
+type UserKeys = keyof User;
+```
+
+### Avoiding `any`
+
+- Never use `any` without justification
+- Use `unknown` when type is truly unknown, then narrow
+- Use generics for reusable types
+
+### Type Guards
+
+```typescript
+function isUser(obj: unknown): obj is User {
+  return typeof obj === "object" && obj !== null && "id" in obj && "name" in obj;
+}
+```
+
+## Import Types
+
+Use `import type` for type-only imports:
+
+```typescript
+import { format } from "date-fns";
+
+import type { ApiResponse, User } from "@/types";
+
+// value import
+```
+
+## Generic Types
+
+Use generics for reusable types:
+
+```typescript
+interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+}
+```
+
+## Null/Undefined Handling
+
+- Always consider null/undefined
+- Use optional chaining: `user?.profile?.name`
+- Use nullish coalescing: `name ?? 'Unknown'`
+- Use type guards for narrowing
+# TypeScript Standards
+
+## Configuration
+
+- **strict mode**: Always enabled (`strict: true` in tsconfig.json)
+- **No implicit any**: All types must be explicit
+- **Path aliases**: Use `@/` prefix for internal imports
+
+## Type Definitions
+
+### Location
+
+All types should be defined in `src/types/index.ts` unless they're:
+
+- Component-specific (define near the component)
+- Utility-specific (define near the utility)
+
+### Naming Conventions
+
+- **Interfaces**: PascalCase (e.g., `UserProfile`)
+- **Types**: PascalCase (e.g., `ApiResponse<T>`)
+- **Enums**: PascalCase (e.g., `UserRole`)
+- **Constants**: UPPER_SNAKE_CASE
+
+## Type Usage Rules
+
+### Interfaces vs Types
+
+- **Interfaces**: For object shapes that may be extended
+- **Types**: For unions, intersections, or computed types
+- **Prefer interfaces** for object shapes
+
+### Example
+
+```typescript
+// Interface for object shape
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+// Type for union
+type Status = "active" | "inactive" | "pending";
+
+// Type for computed/utility
+type UserKeys = keyof User;
+```
+
+### Avoiding `any`
+
+- Never use `any` without justification
+- Use `unknown` when type is truly unknown, then narrow
+- Use generics for reusable types
+
+### Type Guards
+
+```typescript
+function isUser(obj: unknown): obj is User {
+  return typeof obj === "object" && obj !== null && "id" in obj && "name" in obj;
+}
+```
+
+## Import Types
+
+Use `import type` for type-only imports:
+
+```typescript
+import { format } from "date-fns";
+
+import type { ApiResponse, User } from "@/types";
+
+// value import
+```
+
+## Generic Types
+
+Use generics for reusable types:
+
+```typescript
+interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+}
+```
+
+## Null/Undefined Handling
+
+- Always consider null/undefined
+- Use optional chaining: `user?.profile?.name`
+- Use nullish coalescing: `name ?? 'Unknown'`
+- Use type guards for narrowing

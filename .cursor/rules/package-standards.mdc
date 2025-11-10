@@ -1,0 +1,141 @@
+# Package Standards
+
+## Required Packages
+
+### Core Dependencies
+
+#### State Management
+
+- **@tanstack/react-query**: Server state management, API caching, data fetching
+- **zustand**: Lightweight client state (use when React state becomes complex)
+
+#### Forms
+
+- **react-hook-form**: Form state management
+- **zod**: Schema validation
+- **@hookform/resolvers**: Integration between react-hook-form and zod
+
+#### UI/UX
+
+- **sonner**: Toast notifications (replaces `alert()`)
+- **shadcn/ui**: Component library (already using)
+- **lucide-react**: Icons (already using)
+
+#### Utilities
+
+- **date-fns**: Date manipulation (already using)
+- **clsx**: Class name utilities (already using)
+- **tailwind-merge**: Merge Tailwind classes (already using)
+
+### When to Use Each Package
+
+#### React Query (`@tanstack/react-query`)
+
+Use for:
+
+- API data fetching
+- Server state caching
+- Background data synchronization
+- Optimistic updates
+
+Don't use for:
+
+- Simple local component state
+- UI-only state
+
+#### Zustand
+
+Use for:
+
+- Global client state that's shared across components
+- Simple state management (alternative to Context API for complex state)
+
+Don't use for:
+
+- Server state (use React Query)
+- Simple component state (use useState)
+
+#### React Hook Form + Zod
+
+Use for:
+
+- All form inputs
+- Input validation
+- Form state management
+
+Don't use for:
+
+- One-off simple inputs (use controlled inputs)
+- Non-form data (use regular state)
+
+#### Sonner (Toast Notifications)
+
+Use for:
+
+- Success messages
+- Error notifications
+- Info alerts
+- Replaces all `alert()` calls
+
+## Package Installation Checklist
+
+✅ Installed:
+
+- `sonner` - Toast notifications
+- `@tanstack/react-query` - Server state
+- `react-hook-form` - Form handling
+- `zod` - Validation
+- `@hookform/resolvers` - Form + Zod integration
+- `zustand` - State management
+
+## Usage Examples
+
+### React Query Example
+
+```typescript
+import { useQuery } from "@tanstack/react-query";
+
+function useAnalysisData(dateRange: DateRange) {
+  return useQuery({
+    queryKey: ["analysis", dateRange.from, dateRange.to],
+    queryFn: () => fetchAnalysis(dateRange),
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+}
+```
+
+### React Hook Form + Zod Example
+
+```typescript
+import { useForm } from "react-hook-form";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+function LoginForm() {
+  const form = useForm({
+    resolver: zodResolver(schema),
+  });
+  // ...
+}
+```
+
+### Sonner Example
+
+```typescript
+import { toast } from "sonner";
+
+// Success
+toast.success("Time entry saved");
+
+// Error
+toast.error("Failed to save entry");
+
+// Info
+toast.info("Data refreshing");
+```

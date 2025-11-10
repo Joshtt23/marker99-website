@@ -1,0 +1,60 @@
+# Testing Standards
+
+## Scope and Goals
+- Cover utilities, hooks, components, pages, and API routes with the right test type.
+- Centralize helpers/mocks for consistent, maintainable tests.
+- Enforce coverage and testing conventions.
+
+## Test Types
+- Unit (utilities, pure functions)
+- Integration (hooks, API handlers with inputs/outputs)
+- Component (React Testing Library; behavior-first)
+- E2E (Playwright; critical user flows)
+
+## Conventions
+- Naming: `*.test.ts(x)` only.
+- RTL: Prefer queries by role/text over test-ids.
+- Mocks: Use MSW for HTTP. Avoid manual `fetch` mocks.
+- Logging: No `console.*`. Logger is silent in tests.
+- Accessibility: Provide optional `axe` helper for critical screens.
+
+## Coverage Thresholds (Jest)
+```
+statements: 80
+branches: 70
+functions: 80
+lines: 80
+```
+
+## Writing Rules
+- Utilities: test happy path, edge cases, error branches.
+- Hooks: test observable behavior via providers; avoid implementation details.
+- Components: assert visible output/interactions; avoid class/style assertions.
+- Pages: test navigation and key elements via router helpers.
+- API Routes: assert `ApiResponse<T>` shape and correct status codes.
+- New feature PRs must include appropriate tests.
+
+## Building/Running Rules
+- Local quick run: `yarn test:watch`.
+- Full gate: `yarn check && yarn test`.
+- CI: `yarn test:ci` (coverage enforced).
+- E2E: `yarn test:e2e` (headless) or `yarn test:e2e:headed` (debug).
+- Snapshots: update only via `yarn test:update` with justification.
+
+## Linting
+- Use `eslint-plugin-jest` and `eslint-plugin-testing-library`.
+- Disallow committed `.only`/`.skip`.
+- Prefer `findBy*` for async UI.
+
+## Structure
+```
+src/test/
+  setup/jest.setup.ts
+  mocks/{handlers.ts, server.ts}
+  utils/{render.tsx, next.ts, auth.ts}
+tests/e2e/** (Playwright)
+```
+
+## Examples
+- API handler test imports the handler, builds `NextRequest`, asserts `ApiResponse`.
+- Component test uses shared `render` with providers and `userEvent`.

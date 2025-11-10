@@ -25,6 +25,8 @@ const GoogleReviewWidget = () => {
       style={{
         transform: isOpen ? 'translateX(0)' : 'translateX(calc(-100% + 40px))',
       }}
+      role="complementary"
+      aria-label="Guest reviews from Google"
     >
       <div className="relative w-80 h-64 bg-white shadow-lg rounded-r-lg overflow-hidden">
         {/* 
@@ -39,8 +41,9 @@ const GoogleReviewWidget = () => {
           // Collapse Button – placed along the left edge inside the widget
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 text-black border-2 border-white rounded-full p-3 shadow-xl focus:outline-none z-50"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 text-black border-2 border-white rounded-full p-3 shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 z-50"
             aria-label="Collapse reviews widget"
+            aria-expanded={isOpen}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,8 +67,9 @@ const GoogleReviewWidget = () => {
           // Expand Button – fills the visible 40px tab when collapsed
           <button
             onClick={() => setIsOpen(true)}
-            className="absolute top-0 right-0 h-full w-75 flex flex-col items-center justify-center bg-blue-600 text-white border-2 border-white rounded-r-lg shadow-xl hover:bg-blue-700 focus:outline-none z-50"
+            className="absolute top-0 right-0 h-full w-[75px] flex flex-col items-center justify-center bg-blue-600 text-white border-2 border-white rounded-r-lg shadow-xl hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 z-50"
             aria-label="Expand reviews widget"
+            aria-expanded={isOpen}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

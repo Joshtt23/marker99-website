@@ -1,0 +1,124 @@
+---
+description: Adding logging
+alwaysApply: false
+---
+# Logging Standards
+
+## Overview
+
+All logging in the Finatic Control Panel should use the standardized logger utility. Never use `console.log()`, `console.error()`, etc. directly.
+
+## Logger Utility Location
+
+`src/lib/logger.ts`
+
+## Usage
+
+### Client-Side Logging
+
+```typescript
+import { logger } from "@/lib/logger";
+
+// Info logs (development only)
+logger.info("User action", { userId: user.id, action: "click" });
+
+// Warnings
+logger.warn("Deprecated API call", { endpoint: "/api/old" });
+
+// Errors (always logged)
+logger.error("Operation failed", { error, context: "ComponentName" });
+```
+
+### Server-Side Logging
+
+```typescript
+import { logger } from "@/lib/logger";
+
+// In API routes
+logger.info("API request", { method, path, userId });
+logger.error("API error", { error, endpoint: "/api/endpoint" });
+```
+
+## Log Levels
+
+- **info**: General information, debug messages (development only)
+- **warn**: Warnings about deprecated features or issues
+- **error**: Errors that need attention (always logged)
+
+## Best Practices
+
+1. Always include context in log messages
+2. Use structured logging (objects) for metadata
+3. Don't log sensitive information (passwords, tokens)
+4. Include enough context to debug issues
+5. Client-side logs are silent in production
+6. Server-side logs persist for debugging
+
+## Implementation
+
+The logger automatically:
+
+- Filters out logs in production (client-side)
+- Formats logs with timestamps
+- Includes error stack traces for errors
+- Can be extended for structured logging services
+# Logging Standards
+
+## Overview
+
+All logging in the Finatic Control Panel should use the standardized logger utility. Never use `console.log()`, `console.error()`, etc. directly.
+
+## Logger Utility Location
+
+`src/lib/logger.ts`
+
+## Usage
+
+### Client-Side Logging
+
+```typescript
+import { logger } from "@/lib/logger";
+
+// Info logs (development only)
+logger.info("User action", { userId: user.id, action: "click" });
+
+// Warnings
+logger.warn("Deprecated API call", { endpoint: "/api/old" });
+
+// Errors (always logged)
+logger.error("Operation failed", { error, context: "ComponentName" });
+```
+
+### Server-Side Logging
+
+```typescript
+import { logger } from "@/lib/logger";
+
+// In API routes
+logger.info("API request", { method, path, userId });
+logger.error("API error", { error, endpoint: "/api/endpoint" });
+```
+
+## Log Levels
+
+- **info**: General information, debug messages (development only)
+- **warn**: Warnings about deprecated features or issues
+- **error**: Errors that need attention (always logged)
+
+## Best Practices
+
+1. Always include context in log messages
+2. Use structured logging (objects) for metadata
+3. Don't log sensitive information (passwords, tokens)
+4. Include enough context to debug issues
+5. Client-side logs are silent in production
+6. Server-side logs persist for debugging
+
+## Implementation
+
+The logger automatically:
+
+- Filters out logs in production (client-side)
+- Formats logs with timestamps
+- Includes error stack traces for errors
+- Can be extended for structured logging services

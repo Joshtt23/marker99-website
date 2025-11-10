@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -26,7 +28,7 @@ const Header = () => {
   return (
     <header className="bg-customDark text-white py-4 shadow-customGreenGlow z-50">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center" aria-label="Marker 99 home">
           <Image
             src="/copyright/MARKER-99-LOGO.png"
             alt="Marker 99 Logo"
@@ -38,7 +40,10 @@ const Header = () => {
         </Link>
         {isMounted && (
           <>
-            <nav className="hidden lg:flex space-x-6 text-lg">
+            <nav
+              className="hidden lg:flex space-x-6 text-lg"
+              aria-label="Primary navigation"
+            >
               <Link href="#home" className="hover:text-green-500">
                 HOME
               </Link>
@@ -64,7 +69,8 @@ const Header = () => {
                 passHref
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Marker 99 on Facebook"
               >
                 <FaFacebook size={30} />
               </Link>
@@ -73,7 +79,8 @@ const Header = () => {
                 passHref
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Marker 99 on Instagram"
               >
                 <FaInstagram size={30} />
               </Link>
@@ -82,14 +89,16 @@ const Header = () => {
                 passHref
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Marker 99 on Google"
               >
                 <FaGoogle size={30} />
               </Link>
               <Link
                 href="tel:3212531369"
                 passHref
-                className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Call Marker 99"
               >
                 <FaPhone size={30} />
               </Link>
@@ -97,7 +106,13 @@ const Header = () => {
           </>
         )}
         <div className="lg:hidden flex items-center">
-          <button onClick={handleMenuToggle} className="focus:outline-none">
+          <button
+            onClick={handleMenuToggle}
+            className="focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          >
             {isMenuOpen ? (
               <XIcon className="h-8 w-8 text-white" />
             ) : (
@@ -107,7 +122,11 @@ const Header = () => {
         </div>
       </div>
       {isMenuOpen && (
-        <nav className="lg:hidden bg-customDark text-white p-4 text-center">
+        <nav
+          id="mobile-menu"
+          className="lg:hidden bg-customDark text-white p-4 text-center"
+          aria-label="Mobile navigation"
+        >
           <Link href="#home" className="block py-2 hover:text-green-500">
             HOME
           </Link>
@@ -126,7 +145,8 @@ const Header = () => {
               passHref
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Marker 99 on Facebook"
             >
               <FaFacebook size={30} />
             </Link>
@@ -135,7 +155,8 @@ const Header = () => {
               passHref
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Marker 99 on Instagram"
             >
               <FaInstagram size={30} />
             </Link>
@@ -144,7 +165,8 @@ const Header = () => {
               passHref
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Marker 99 on Yelp"
             >
               <FaYelp size={30} />
             </Link>
@@ -153,7 +175,8 @@ const Header = () => {
               passHref
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Marker 99 on Tripadvisor"
             >
               <FaTripadvisor size={30} />
             </Link>
@@ -162,14 +185,16 @@ const Header = () => {
               passHref
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Marker 99 on Google"
             >
               <FaGoogle size={30} />
             </Link>
             <Link
               href="tel:3212531369"
               passHref
-              className="text-3xl hover:opacity-75"
+                className="text-3xl hover:opacity-75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                aria-label="Call Marker 99"
             >
               <FaPhone size={30} />
             </Link>

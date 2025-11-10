@@ -1,17 +1,29 @@
 import React from 'react';
+import { toastConfig } from '../lib/siteConfig';
 
 function OnlineOrder({ item }) {
-  const toastOnlineOrderingUrl =
-    'https://www.toasttab.com/your-restaurant-name';
+  const toastOrderingUrl =
+    toastConfig.locationAlias && toastConfig.menuId
+      ? `${toastConfig.baseUrl}/${toastConfig.locationAlias}`
+      : null;
 
   const handleOrderNow = () => {
-    window.location.href = `${toastOnlineOrderingUrl}/order?item=${item.name}`;
+    if (!toastOrderingUrl) {
+      console.warn('Toast ordering configuration missing.');
+      return;
+    }
+
+    const normalizedItem = encodeURIComponent(item.name);
+    window.open(`${toastOrderingUrl}/order?menuItem=${normalizedItem}`, '_blank');
   };
 
   return (
     <button
+      type="button"
       onClick={handleOrderNow}
-      className="bg-customGreen text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition"
+      disabled={!toastOrderingUrl}
+      className="bg-customGreen text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+      aria-label={`Order ${item.name} on Toast`}
     >
       Order Now
     </button>

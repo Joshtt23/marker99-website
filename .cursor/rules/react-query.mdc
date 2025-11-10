@@ -1,0 +1,170 @@
+---
+description: State managment controller
+alwaysApply: false
+---
+# React Query Standards
+
+## Package
+
+`@tanstack/react-query` - Server state management
+
+## Setup
+
+Wrap app with QueryClientProvider (when implementing):
+
+```typescript
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+```
+
+## Usage Patterns
+
+### Basic Query
+
+```typescript
+import { useQuery } from "@tanstack/react-query";
+
+function useAnalysisData(dateRange: DateRange) {
+  return useQuery({
+    queryKey: ["analysis", dateRange.from, dateRange.to],
+    queryFn: () => fetchAnalysis(dateRange),
+    enabled: !!dateRange.from && !!dateRange.to,
+  });
+}
+```
+
+### Mutations
+
+```typescript
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+function useSaveTimeEntry() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (entry: TimeEntry) => saveTimeEntry(entry),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["timesheet"] });
+      toast.success("Time entry saved");
+    },
+    onError: (error) => {
+      toast.error("Failed to save entry");
+      logger.error("Save failed", { error });
+    },
+  });
+}
+```
+
+## Best Practices
+
+1. **Query Keys**: Use arrays with descriptive names and dependencies
+2. **Caching**: Set appropriate staleTime based on data freshness needs
+3. **Invalidation**: Invalidate related queries after mutations
+4. **Error Handling**: Handle in onError callbacks, show toast notifications
+5. **Loading States**: Use isLoading, isFetching appropriately
+
+## When to Use React Query
+
+✅ Use for:
+
+- API data fetching
+- Server state
+- Data that needs caching
+- Background synchronization
+
+❌ Don't use for:
+
+- Simple local component state
+- UI-only state
+- Non-API data
+# React Query Standards
+
+## Package
+
+`@tanstack/react-query` - Server state management
+
+## Setup
+
+Wrap app with QueryClientProvider (when implementing):
+
+```typescript
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+```
+
+## Usage Patterns
+
+### Basic Query
+
+```typescript
+import { useQuery } from "@tanstack/react-query";
+
+function useAnalysisData(dateRange: DateRange) {
+  return useQuery({
+    queryKey: ["analysis", dateRange.from, dateRange.to],
+    queryFn: () => fetchAnalysis(dateRange),
+    enabled: !!dateRange.from && !!dateRange.to,
+  });
+}
+```
+
+### Mutations
+
+```typescript
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+function useSaveTimeEntry() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (entry: TimeEntry) => saveTimeEntry(entry),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["timesheet"] });
+      toast.success("Time entry saved");
+    },
+    onError: (error) => {
+      toast.error("Failed to save entry");
+      logger.error("Save failed", { error });
+    },
+  });
+}
+```
+
+## Best Practices
+
+1. **Query Keys**: Use arrays with descriptive names and dependencies
+2. **Caching**: Set appropriate staleTime based on data freshness needs
+3. **Invalidation**: Invalidate related queries after mutations
+4. **Error Handling**: Handle in onError callbacks, show toast notifications
+5. **Loading States**: Use isLoading, isFetching appropriately
+
+## When to Use React Query
+
+✅ Use for:
+
+- API data fetching
+- Server state
+- Data that needs caching
+- Background synchronization
+
+❌ Don't use for:
+
+- Simple local component state
+- UI-only state
+- Non-API data

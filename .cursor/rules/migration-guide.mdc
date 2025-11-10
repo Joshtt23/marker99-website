@@ -1,0 +1,270 @@
+---
+alwaysApply: false
+---
+
+# Migration Guide - Standardizing Codebase
+
+This guide helps migrate existing code to use standardized patterns and packages.
+
+## Phase 1: Logging (Priority: High)
+
+### Replace console.log/error
+
+**Find:** `console.log(`, `console.error(`, `console.warn(`
+
+**Replace with:**
+
+```typescript
+// After
+import { logger } from "@/lib/logger";
+
+// Before
+console.log("Message");
+console.error("Error:", error);
+
+logger.info("Message");
+logger.error("Error occurred", { error });
+```
+
+### Files to Update
+
+- All API routes in `src/app/api/`
+- All components using console.log
+
+## Phase 2: Replace Alert with Toast (Priority: High)
+
+### Replace alert()
+
+**Find:** `alert(`
+
+**Replace with:**
+
+```typescript
+// After
+import { toast } from "sonner";
+
+// Before
+alert("Error occurred");
+
+toast.error("Error occurred");
+```
+
+### Files to Update
+
+- `src/app/page.tsx`
+- Any component using alert()
+
+## Phase 3: Forms Migration (Priority: Medium)
+
+### Migrate Forms to React Hook Form + Zod
+
+Identify forms:
+
+- Manual Time Entry Modal
+- Timer Entry Modal
+- Edit Entry Modal
+
+**Steps:**
+
+1. Create Zod schema for form data
+2. Replace useState with useForm
+3. Add validation
+4. Update submit handlers
+
+## Phase 4: API Calls with React Query (Priority: Medium)
+
+### Migrate API Calls
+
+**Current:** Direct fetch calls in components
+
+```typescript
+// Before
+const [data, setData] = useState(null);
+useEffect(() => {
+  fetch("/api/endpoint")
+    .then((r) => r.json())
+    .then(setData);
+}, []);
+```
+
+**After:** React Query hooks
+
+```typescript
+// After
+import { useQuery } from "@tanstack/react-query";
+
+const { data, isLoading, error } = useQuery({
+  queryKey: ["endpoint", params],
+  queryFn: () => fetchEndpoint(params),
+});
+```
+
+### Files to Update
+
+- Developer Section (analysis fetching)
+- Timesheet Section (data loading)
+- All API-consuming components
+
+## Phase 5: State Management (Priority: Low)
+
+### Consider Zustand for Complex State
+
+- If state is shared across many components
+- If React state becomes unwieldy
+- Evaluate on case-by-case basis
+
+## Checklist
+
+- [ ] Replace all console.log with logger
+- [ ] Replace all alert() with toast
+- [ ] Set up React Query Provider
+- [ ] Migrate forms to React Hook Form
+- [ ] Migrate API calls to React Query
+- [ ] Update documentation
+
+## Migration Order
+
+1. **Week 1**: Logging + Notifications (quick wins)
+2. **Week 2**: Forms migration
+3. **Week 3**: React Query integration
+4. **Week 4**: Polish and cleanup
+
+## Testing After Migration
+
+- Verify all functionality still works
+- Check error handling
+- Test form validations
+- Verify API caching works correctly
+# Migration Guide - Standardizing Codebase
+
+This guide helps migrate existing code to use standardized patterns and packages.
+
+## Phase 1: Logging (Priority: High)
+
+### Replace console.log/error
+
+**Find:** `console.log(`, `console.error(`, `console.warn(`
+
+**Replace with:**
+
+```typescript
+// After
+import { logger } from "@/lib/logger";
+
+// Before
+console.log("Message");
+console.error("Error:", error);
+
+logger.info("Message");
+logger.error("Error occurred", { error });
+```
+
+### Files to Update
+
+- All API routes in `src/app/api/`
+- All components using console.log
+
+## Phase 2: Replace Alert with Toast (Priority: High)
+
+### Replace alert()
+
+**Find:** `alert(`
+
+**Replace with:**
+
+```typescript
+// After
+import { toast } from "sonner";
+
+// Before
+alert("Error occurred");
+
+toast.error("Error occurred");
+```
+
+### Files to Update
+
+- `src/app/page.tsx`
+- Any component using alert()
+
+## Phase 3: Forms Migration (Priority: Medium)
+
+### Migrate Forms to React Hook Form + Zod
+
+Identify forms:
+
+- Manual Time Entry Modal
+- Timer Entry Modal
+- Edit Entry Modal
+
+**Steps:**
+
+1. Create Zod schema for form data
+2. Replace useState with useForm
+3. Add validation
+4. Update submit handlers
+
+## Phase 4: API Calls with React Query (Priority: Medium)
+
+### Migrate API Calls
+
+**Current:** Direct fetch calls in components
+
+```typescript
+// Before
+const [data, setData] = useState(null);
+useEffect(() => {
+  fetch("/api/endpoint")
+    .then((r) => r.json())
+    .then(setData);
+}, []);
+```
+
+**After:** React Query hooks
+
+```typescript
+// After
+import { useQuery } from "@tanstack/react-query";
+
+const { data, isLoading, error } = useQuery({
+  queryKey: ["endpoint", params],
+  queryFn: () => fetchEndpoint(params),
+});
+```
+
+### Files to Update
+
+- Developer Section (analysis fetching)
+- Timesheet Section (data loading)
+- All API-consuming components
+
+## Phase 5: State Management (Priority: Low)
+
+### Consider Zustand for Complex State
+
+- If state is shared across many components
+- If React state becomes unwieldy
+- Evaluate on case-by-case basis
+
+## Checklist
+
+- [ ] Replace all console.log with logger
+- [ ] Replace all alert() with toast
+- [ ] Set up React Query Provider
+- [ ] Migrate forms to React Hook Form
+- [ ] Migrate API calls to React Query
+- [ ] Update documentation
+
+## Migration Order
+
+1. **Week 1**: Logging + Notifications (quick wins)
+2. **Week 2**: Forms migration
+3. **Week 3**: React Query integration
+4. **Week 4**: Polish and cleanup
+
+## Testing After Migration
+
+- Verify all functionality still works
+- Check error handling
+- Test form validations
+- Verify API caching works correctly

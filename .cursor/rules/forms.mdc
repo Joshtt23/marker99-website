@@ -1,0 +1,92 @@
+---
+description: Form creation and validation
+alwaysApply: false
+---
+  notes: z.string().optional(),
+});
+```
+
+### Form Component
+
+```typescript
+'use client';
+
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { timeEntrySchema } from './schemas';
+import { toast } from 'sonner';
+import type { z } from 'zod';
+
+type TimeEntryForm = z.infer<typeof timeEntrySchema>;
+
+export function TimeEntryForm() {
+  const form = useForm<TimeEntryForm>({
+    resolver: zodResolver(timeEntrySchema),
+    defaultValues: {
+      date: new Date().toISOString().split('T')[0],
+      taskName: '',
+    },
+  });
+
+  const onSubmit = async (data: TimeEntryForm) => {
+    try {
+      await saveTimeEntry(data);
+      toast.success('Time entry saved');
+      form.reset();
+    } catch (error) {
+      toast.error('Failed to save entry');
+    }
+  };
+
+  return (
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      {/* Form fields */}
+    </form>
+  );
+}
+```
+
+## Form Field Integration with shadcn/ui
+
+```typescript
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+
+// Use shadcn's Form component (if available) or wrap inputs
+<FormField
+  control={form.control}
+  name="taskName"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Task Name</FormLabel>
+      <FormControl>
+        <Input {...field} />
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+/>
+```
+
+## Validation Best Practices
+
+1. **Define schemas separately** - Easy to reuse and test
+2. **Use descriptive error messages** - User-friendly
+3. **Validate on submit** - Better UX than on blur
+4. **Show errors clearly** - Use FormMessage components
+5. **Handle async validation** - For checking duplicates, etc.
+
+## When NOT to Use React Hook Form
+
+- Single input fields with simple validation
+- Non-form inputs (like toggles, checkboxes for UI state)
+- When form state is better managed elsewhere

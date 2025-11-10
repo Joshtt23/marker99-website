@@ -3,16 +3,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const AboutUs = () => (
-  <div
+  <section
     id="about"
-    className="container relative mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between"
+    aria-labelledby="about-heading"
+    className="container relative mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between scroll-mt-32"
   >
     {/* Left Column with Text and Button */}
     <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start text-center lg:text-left p-10">
       <h4 className="text-lg font-semibold text-green-500 mb-2">
         Marker 99, Melbourne FL
       </h4>
-      <h2 className="text-4xl font-bold mb-4">
+      <h2 id="about-heading" className="text-4xl font-bold mb-4">
         Chef-prepared seafood dishes, on the waterfront!
       </h2>
       <p className="text-lg mb-6">
@@ -39,9 +40,11 @@ const AboutUs = () => (
         width={705}
         height={717}
         className="object-cover rounded-lg shadow-lg"
+        loading="lazy"
+        sizes="(max-width: 1024px) 80vw, 35vw"
       />
     </div>
-  </div>
+  </section>
 );
 
 export default AboutUs;

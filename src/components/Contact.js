@@ -12,11 +12,17 @@ import {
 
 const Contact = () => {
   return (
-    <section className="bg-customDark text-white  p-28" id="contact">
+    <section
+      id="contact"
+      aria-labelledby="contact-heading"
+      className="bg-customDark text-white p-28 scroll-mt-32"
+    >
       <div className="flex flex-col md:flex-row md:space-x-8">
         {/* Left Column */}
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
-          <h3 className="text-4xl font-bold mb-4">About Marker 99</h3>
+          <h3 id="contact-heading" className="text-4xl font-bold mb-4">
+            About Marker 99
+          </h3>
           <p className="mb-8 text-lg">
             Marker 99 is located right on the Indian River in Melbourne, FL and
             offers stunning waterfront views. Our staff provide excellent

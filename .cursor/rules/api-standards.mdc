@@ -1,0 +1,166 @@
+---
+description: Creating updating api routes
+alwaysApply: false
+---
+# API Standards
+
+## API Response Format
+
+All API routes must return the `ApiResponse<T>` format:
+
+```typescript
+interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  timestamp: string;
+}
+```
+
+## Authentication
+
+- All protected routes MUST use `requireAuth()` middleware
+- Place auth check at the top of the handler
+- Return early if authentication fails
+
+## Error Handling
+
+- Always use try-catch blocks
+- Return appropriate HTTP status codes:
+  - 400: Bad Request (validation errors)
+  - 401: Unauthorized (auth failures)
+  - 403: Forbidden (permission denied)
+  - 404: Not Found
+  - 500: Internal Server Error
+- Use logger for errors, not console.error
+
+## Request Validation
+
+- Validate all inputs
+- Return clear error messages
+- Use Zod schemas for complex validation (when implemented)
+
+## Example API Route
+
+```typescript
+import { NextRequest, NextResponse } from "next/server";
+
+import { requireAuth } from "@/lib/auth";
+import { logger } from "@/lib/logger";
+
+import { ApiResponse } from "@/types";
+
+export async function POST(request: NextRequest) {
+  // 1. Authentication
+  const authError = requireAuth(request);
+  if (authError) return authError;
+
+  try {
+    // 2. Parse and validate input
+    const body = await request.json();
+    // ... validation ...
+
+    // 3. Business logic
+    const result = await performOperation(body);
+
+    // 4. Success response
+    return NextResponse.json({
+      success: true,
+      data: result,
+      timestamp: new Date().toISOString(),
+    } as ApiResponse<ResultType>);
+  } catch (error) {
+    // 5. Error handling
+    logger.error("POST /api/endpoint failed", { error });
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Operation failed",
+        timestamp: new Date().toISOString(),
+      } as ApiResponse<null>,
+      { status: 500 }
+    );
+  }
+}
+```
+# API Standards
+
+## API Response Format
+
+All API routes must return the `ApiResponse<T>` format:
+
+```typescript
+interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  error?: string;
+  timestamp: string;
+}
+```
+
+## Authentication
+
+- All protected routes MUST use `requireAuth()` middleware
+- Place auth check at the top of the handler
+- Return early if authentication fails
+
+## Error Handling
+
+- Always use try-catch blocks
+- Return appropriate HTTP status codes:
+  - 400: Bad Request (validation errors)
+  - 401: Unauthorized (auth failures)
+  - 403: Forbidden (permission denied)
+  - 404: Not Found
+  - 500: Internal Server Error
+- Use logger for errors, not console.error
+
+## Request Validation
+
+- Validate all inputs
+- Return clear error messages
+- Use Zod schemas for complex validation (when implemented)
+
+## Example API Route
+
+```typescript
+import { NextRequest, NextResponse } from "next/server";
+
+import { requireAuth } from "@/lib/auth";
+import { logger } from "@/lib/logger";
+
+import { ApiResponse } from "@/types";
+
+export async function POST(request: NextRequest) {
+  // 1. Authentication
+  const authError = requireAuth(request);
+  if (authError) return authError;
+
+  try {
+    // 2. Parse and validate input
+    const body = await request.json();
+    // ... validation ...
+
+    // 3. Business logic
+    const result = await performOperation(body);
+
+    // 4. Success response
+    return NextResponse.json({
+      success: true,
+      data: result,
+      timestamp: new Date().toISOString(),
+    } as ApiResponse<ResultType>);
+  } catch (error) {
+    // 5. Error handling
+    logger.error("POST /api/endpoint failed", { error });
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Operation failed",
+        timestamp: new Date().toISOString(),
+      } as ApiResponse<null>,
+      { status: 500 }
+    );
+  }
+}
+```

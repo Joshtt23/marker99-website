@@ -28,6 +28,7 @@ const ImageCarousel = () => {
                 fill
                 style={{ objectFit: 'cover' }}
                 className="rounded-lg shadow-lg"
+                sizes="(max-width: 768px) 80vw, (max-width: 1024px) 40vw, 25vw"
               />
             </div>
           </div>
@@ -46,6 +47,11 @@ const ImageCarousel = () => {
         }
         .animate-scroll {
           animation: scroll 20s linear infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-scroll {
+            animation: none;
+          }
         }
       `}</style>
     </div>

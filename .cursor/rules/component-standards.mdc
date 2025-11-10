@@ -1,0 +1,178 @@
+---
+description: Creating components
+alwaysApply: false
+---
+# Component Standards
+
+## Component Structure
+
+All components should follow this structure:
+
+```typescript
+'use client'; // Only if needed
+
+import { useState, useEffect } from 'react';
+// External libraries
+// Internal components
+// Internal utilities
+import type { ComponentTypes } from '@/types';
+
+interface ComponentProps {
+  // All props defined here
+  prop1: string;
+  prop2?: number;
+  onAction?: (value: string) => void;
+}
+
+/**
+ * Component description
+ * What this component does and when to use it
+ */
+export function Component({ prop1, prop2, onAction }: ComponentProps) {
+  // 1. Hooks (useState, useEffect, custom hooks)
+  const [state, setState] = useState<string>('');
+
+  // 2. Effects
+  useEffect(() => {
+    // Effect logic
+  }, [dependencies]);
+
+  // 3. Event handlers
+  const handleClick = () => {
+    // Handler logic
+  };
+
+  // 4. Early returns (if needed)
+  if (!prop1) return null;
+
+  // 5. Render
+  return (
+    <div>
+      {/* JSX */}
+    </div>
+  );
+}
+```
+
+## Component Guidelines
+
+1. **Single Responsibility**: Each component should do one thing well
+2. **Keep Small**: Aim for under 200 lines
+3. **Extract Logic**: Move complex logic to utilities or hooks
+4. **Type Safety**: Always define props interface
+5. **Documentation**: Add JSDoc comments for complex components
+
+## Component Naming
+
+- Use PascalCase: `UserProfile.tsx`
+- Descriptive names: `TimeTrackingControls` not `Controls`
+- Group by feature: Place in appropriate folder (`layout/`, `sections/`, etc.)
+
+## Props Naming
+
+- Use descriptive names: `onUserClick` not `onClick`
+- Prefix callbacks with `on`: `onSave`, `onCancel`
+- Use optional for non-required props: `onAction?`
+
+## State Management in Components
+
+- Local state: `useState`
+- Persistent state: `useLocalStorageString` hook
+- Auth state: `useAuthState` hook
+- Server state: React Query (when implemented)
+
+## Component Composition
+
+- Break large components into smaller ones
+- Create reusable UI components in `components/ui/`
+- Extract business logic to hooks or utilities
+
+## Section Anchors & Landmarks
+
+- Page-level sections (hero, menu, events, reservations, contact) must expose stable `id` attributes that match navigation links.
+- Wrap significant content blocks in semantic elements (`<section>`, `<aside>`, `<nav>`) and pair them with `aria-labelledby` referencing visible headings.
+- Keep anchor targets above sticky headers by applying scroll margin (`scroll-mt-24`) when necessary.
+# Component Standards
+
+## Component Structure
+
+All components should follow this structure:
+
+```typescript
+'use client'; // Only if needed
+
+import { useState, useEffect } from 'react';
+// External libraries
+// Internal components
+// Internal utilities
+import type { ComponentTypes } from '@/types';
+
+interface ComponentProps {
+  // All props defined here
+  prop1: string;
+  prop2?: number;
+  onAction?: (value: string) => void;
+}
+
+/**
+ * Component description
+ * What this component does and when to use it
+ */
+export function Component({ prop1, prop2, onAction }: ComponentProps) {
+  // 1. Hooks (useState, useEffect, custom hooks)
+  const [state, setState] = useState<string>('');
+
+  // 2. Effects
+  useEffect(() => {
+    // Effect logic
+  }, [dependencies]);
+
+  // 3. Event handlers
+  const handleClick = () => {
+    // Handler logic
+  };
+
+  // 4. Early returns (if needed)
+  if (!prop1) return null;
+
+  // 5. Render
+  return (
+    <div>
+      {/* JSX */}
+    </div>
+  );
+}
+```
+
+## Component Guidelines
+
+1. **Single Responsibility**: Each component should do one thing well
+2. **Keep Small**: Aim for under 200 lines
+3. **Extract Logic**: Move complex logic to utilities or hooks
+4. **Type Safety**: Always define props interface
+5. **Documentation**: Add JSDoc comments for complex components
+
+## Component Naming
+
+- Use PascalCase: `UserProfile.tsx`
+- Descriptive names: `TimeTrackingControls` not `Controls`
+- Group by feature: Place in appropriate folder (`layout/`, `sections/`, etc.)
+
+## Props Naming
+
+- Use descriptive names: `onUserClick` not `onClick`
+- Prefix callbacks with `on`: `onSave`, `onCancel`
+- Use optional for non-required props: `onAction?`
+
+## State Management in Components
+
+- Local state: `useState`
+- Persistent state: `useLocalStorageString` hook
+- Auth state: `useAuthState` hook
+- Server state: React Query (when implemented)
+
+## Component Composition
+
+- Break large components into smaller ones
+- Create reusable UI components in `components/ui/`
+- Extract business logic to hooks or utilities

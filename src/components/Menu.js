@@ -1,45 +1,64 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import OnlineOrder from './OnlineOrder';
 import MenuItems from './data/MenuItems';
 import Image from 'next/image';
 
 const Menu = ({ onlineOrder }) => {
-  const [activeCategory, setActiveCategory] = useState('starters');
-
-  const handleToggleCategory = (category) => {
-    if (activeCategory === category) {
-      setActiveCategory(null);
-    } else {
-      setActiveCategory(category);
-    }
-  };
+  const categories = Object.keys(MenuItems);
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
 
   return (
-    <div
+    <section
       id="menu"
-      className="container mx-auto p-6 text-white bg-customDark rounded-xl"
+      aria-labelledby="menu-heading"
+      className="container mx-auto p-6 text-white bg-customDark rounded-xl scroll-mt-32"
     >
-      <div className="flex flex-wrap justify-center space-x-6 mb-8">
-        {Object.keys(MenuItems).map((category) => (
-          <h2
-            key={category}
-            className={`text-xl md:text-2xl font-bold capitalize cursor-pointer px-4 py-2 ${
-              activeCategory === category
-                ? 'text-customGreen border-b-2 border-customGreen'
-                : ''
-            }`}
-            onClick={() => handleToggleCategory(category)}
-          >
-            {category.replace(/([A-Z])/g, ' $1').trim()}
-          </h2>
-        ))}
+      <h2
+        id="menu-heading"
+        className="text-3xl md:text-4xl font-bold text-center mb-8"
+      >
+        Explore the Marker 99 Menu
+      </h2>
+      <div
+        className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8"
+        role="tablist"
+        aria-label="Menu categories"
+      >
+        {categories.map((category) => {
+          const isActive = activeCategory === category;
+          return (
+            <button
+              key={category}
+              type="button"
+              role="tab"
+              id={`${category}-tab`}
+              aria-selected={isActive}
+              aria-controls={`${category}-panel`}
+              onClick={() => setActiveCategory(category)}
+              className={`text-xl md:text-2xl font-bold capitalize px-4 py-2 transition-colors border-b-2 ${
+                isActive
+                  ? 'text-customGreen border-customGreen'
+                  : 'border-transparent text-white/70 hover:text-white'
+              } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen`}
+            >
+              {category.replace(/([A-Z])/g, ' $1').trim()}
+            </button>
+          );
+        })}
       </div>
-      {MenuItems &&
-        Object.keys(MenuItems).map((category) =>
-          activeCategory === category ? (
-            <div key={category} className="mb-12">
+      <div>
+        {categories.map((category) => {
+          const isActive = activeCategory === category;
+          return (
+            <div
+            key={category}
+              role="tabpanel"
+              id={`${category}-panel`}
+              aria-labelledby={`${category}-tab`}
+              className={`${isActive ? 'block' : 'hidden'} mb-12`}
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {MenuItems[category].map((item, index) => (
                   <div key={index} className="flex">
@@ -50,7 +69,9 @@ const Menu = ({ onlineOrder }) => {
                           alt={item.name}
                           width={500}
                           height={500}
-                          className="w-full h-auto rounded-lg"
+                          className="w-full h-auto rounded-lg object-cover"
+                          loading="lazy"
+                          sizes="(max-width: 768px) 40vw, 200px"
                         />
                       </div>
                     ) : null}
@@ -70,9 +91,10 @@ const Menu = ({ onlineOrder }) => {
                 ))}
               </div>
             </div>
-          ) : null,
-        )}
-    </div>
+          );
+        })}
+      </div>
+    </section>
   );
 };
 

@@ -2,11 +2,18 @@ import React from 'react';
 import Image from 'next/image';
 
 const Hero = () => (
-  <section className="bg-customDark relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+  <section
+    id="home"
+    aria-labelledby="hero-heading"
+    className="bg-customDark relative w-full min-h-screen flex items-center justify-center overflow-hidden scroll-mt-32"
+  >
     <div className="container mx-auto flex flex-col md:flex-row items-center justify-between h-full p-6">
       {/* Left Column */}
       <div className="relative z-10 flex flex-col justify-center text-white md:w-1/2 text-center md:text-left space-y-6">
-        <h1 className="text-4xl md:text-6xl font-bold mb-2 md:mb-4">
+        <h1
+          id="hero-heading"
+          className="text-4xl md:text-6xl font-bold mb-2 md:mb-4"
+        >
           Riverfront Restaurant & Lounge
         </h1>
         <p className="text-xl md:text-2xl mb-2 md:mb-4">
@@ -39,10 +46,11 @@ const Hero = () => (
         >
           <Image
             src="/copyright/night-deck.webp"
-            alt="Hero Image"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-2xl"
+            alt="Marker 99 waterfront deck at sunset"
+            fill
+            className="rounded-2xl object-cover"
+            priority
+            sizes="(max-width: 768px) 90vw, 32rem"
           />
         </div>
       </div>

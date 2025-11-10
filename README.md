@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Marker 99 Restaurant & Lounge
+
+Marker 99 is a Next.js site that highlights waterfront dining, live music, and cocktail experiences in Melbourne, Florida. The project follows team-specific rules captured in `.cursor/rules/*.md` for components, SEO, logging, and more.
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies (project uses Yarn):
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   yarn install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Launch the dev server:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+   ```bash
+   yarn dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Visit [http://localhost:3000](http://localhost:3000) to view the site.
 
-## Learn More
+## Feature Flags & Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Set the following optional variables to enable future integrations:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_ONLINE_ORDERING_ENABLED` (`true`/`false`) | Toggles Toast online ordering UI |
+| `NEXT_PUBLIC_ONLINE_RESERVATION_ENABLED` (`true`/`false`) | Enables reservation iframe embed |
+| `NEXT_PUBLIC_TOAST_LOCATION_ALIAS` | Toast location alias (`marker99-restaurant-...`) |
+| `NEXT_PUBLIC_TOAST_MENU_ID` | Toast menu identifier used for order links |
+| `NEXT_PUBLIC_RESERVATION_PROVIDER` | `toast`, `opentable`, etc. for analytics labelling |
+| `NEXT_PUBLIC_RESERVATION_EMBED_URL` | Reservation widget URL when provider is active |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Feature defaults are defined in `src/lib/siteConfig.js`. Keep production secrets out of version control; manage them through the chosen deployment platform.
 
-## Deploy on Vercel
+## Quality Checklist
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Follow the latest guidance in `.cursor/rules/restaurant-experience.mdc` for SEO, accessibility, and mobile standards.
+- Validate Lighthouse scores ≥ 90 (Performance, Accessibility, SEO) in both mobile and desktop modes before releasing.
+- Re-run Google Rich Results tests after metadata or structured data changes.
+- Update `plans/001_Implementation_Plan.md` as milestones are completed or scope shifts.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Testing
+
+Use Lighthouse, axe, or similar accessibility tools to verify regressions. Automated testing setup can be expanded as needed; see `.cursor/rules/testing.mdc` for expectations.
+
+## Deployment
+
+Deployments run best on Vercel. Ensure `public/robots.txt` and `public/sitemap.xml` remain accurate for the production domain (`https://marker99restaurant.com/`).

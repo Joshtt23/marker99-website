@@ -1,0 +1,214 @@
+# Tooling Standards
+
+## Core Development Stack
+
+### **Required Tools (Must Have)**
+
+#### **Framework & Build**
+- **Next.js 16+**: App Router, SSR/SSG, API routes
+- **TypeScript 5+**: Strict mode, type safety
+- **Tailwind CSS 4+**: Utility-first CSS with OKLCH colors
+- **Yarn**: Package manager (faster, deterministic)
+
+#### **Code Quality**
+- **ESLint 9+**: Code linting with Next.js config
+- **Prettier 3+**: Code formatting with import sorting
+- **TypeScript Compiler**: Type checking
+
+#### **UI & Styling**
+- **shadcn/ui**: Component library (new-york style)
+- **Radix UI**: Headless components
+- **Lucide React**: Icon library
+- **class-variance-authority**: Component variants
+- **tailwind-merge**: Class merging utility
+
+#### **State & Data**
+- **React Query (@tanstack/react-query)**: Server state management
+- **Zustand**: Client state management
+- **React Hook Form**: Form handling
+- **Zod**: Schema validation
+
+#### **Theming & Design**
+- **next-themes**: Theme switching and persistence
+- **color2k**: Color manipulation utilities
+- **framer-motion**: Animations and transitions
+
+#### **Data Visualization**
+- **Recharts**: Primary charting library
+- ~~**@nivo/core, @nivo/bar, @nivo/line, @nivo/pie**: Enhanced charting~~ (removed)
+- **Chart.js** (optional): Alternative for complex charts
+
+#### **Development Experience**
+- **Storybook**: Component documentation and theming showcase
+- **React DevTools**: Component debugging
+- **Next.js DevTools**: Performance monitoring
+
+### **Prohibited Tools (Do Not Use)**
+
+❌ **CSS-in-JS libraries** (styled-components, emotion) - Use Tailwind
+❌ **Alternative state managers** (Redux, MobX) - Use React Query + Zustand
+❌ **Alternative form libraries** (Formik) - Use React Hook Form
+❌ **Alternative chart libraries** (D3 directly, Victory, Nivo) - Use Recharts
+❌ **Alternative animation libraries** (@react-spring) - Use Framer Motion
+❌ **Alternative theme libraries** (use-dark-mode) - Use next-themes
+❌ **Alternative color libraries** (chroma-js) - Use color2k
+❌ **npm** - Use Yarn for consistency
+
+### **Package Management Rules**
+
+#### **Installation Commands**
+```bash
+# Add production dependency
+yarn add <package>
+
+# Add development dependency  
+yarn add -D <package>
+
+# Remove package
+yarn remove <package>
+```
+
+#### **Version Management**
+- Use exact versions (^) for major.minor, lock patch versions
+- Never use `latest` or `*` in package.json
+- Update dependencies monthly with `yarn upgrade-interactive`
+
+### **Script Standards**
+
+All scripts must be in `package.json`:
+
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build", 
+    "start": "next start",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "type-check": "tsc --noEmit",
+    "check": "yarn type-check && yarn lint && yarn format:check",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  }
+}
+```
+
+### **File Organization**
+
+#### **Required Config Files**
+```
+├── .eslintrc.js          # ESLint configuration
+├── .prettierrc           # Prettier configuration  
+├── tailwind.config.ts    # Tailwind configuration
+├── next.config.ts        # Next.js configuration
+├── tsconfig.json         # TypeScript configuration
+├── components.json       # shadcn/ui configuration
+├── .storybook/           # Storybook configuration
+└── package.json          # Dependencies and scripts
+```
+
+#### **Environment Variables**
+- Store in `.env.local` (gitignored)
+- Document in `.env.example`
+- Use `process.env` with proper typing
+- Never commit secrets
+
+### **Development Workflow**
+
+#### **Pre-commit Checks**
+1. Type checking: `yarn type-check`
+2. Linting: `yarn lint`
+3. Formatting: `yarn format:check`
+4. All checks: `yarn check`
+
+#### **IDE Setup**
+- **Primary**: Cursor or VS Code
+- **Required Extensions**:
+  - ESLint
+  - Prettier
+  - TypeScript
+  - Tailwind CSS IntelliSense
+  - Auto Rename Tag
+  - Bracket Pair Colorizer
+
+#### **Code Quality Standards**
+- Format on save enabled
+- ESLint errors block commits
+- TypeScript strict mode enforced
+- No `console.log` in production (use logger utility)
+- No `any` types without justification
+
+### **Adding New Tools**
+
+#### **Approval Process**
+1. **Justify necessity**: Why is this tool needed?
+2. **Check conflicts**: Does it conflict with existing tools?
+3. **Bundle impact**: What's the size impact?
+4. **Maintenance**: Can we maintain it long-term?
+5. **Update rules**: Update this file if approved
+
+#### **Required Justification**
+- **Problem**: What specific problem does it solve?
+- **Alternatives**: Why not use existing tools?
+- **Integration**: How does it fit with current stack?
+- **Maintenance**: Who will maintain it?
+
+### **Tool Categories**
+
+#### **Core (Never Remove)**
+- Next.js, TypeScript, Tailwind, ESLint, Prettier
+
+#### **UI (Rarely Change)**
+- shadcn/ui, Radix UI, Lucide React
+
+#### **State (Stable)**
+- React Query, Zustand, React Hook Form
+
+#### **Theming (Evolving)**
+- next-themes, color2k, framer-motion
+
+#### **Charts (Flexible)**
+- Recharts (primary)
+
+#### **Dev Tools (Optional)**
+- Storybook, additional debugging tools
+
+### **Performance Standards**
+
+#### **Bundle Size Limits**
+- **Total bundle**: < 500KB gzipped
+- **Individual packages**: < 50KB gzipped
+- **Tree-shakeable**: All packages must support tree-shaking
+
+#### **Loading Performance**
+- **First Contentful Paint**: < 1.5s
+- **Largest Contentful Paint**: < 2.5s
+- **Cumulative Layout Shift**: < 0.1
+
+### **Security Standards**
+
+#### **Dependency Security**
+- Run `yarn audit` before commits
+- Use `yarn audit --fix` for vulnerabilities
+- Pin critical dependencies to exact versions
+
+#### **Environment Security**
+- Never commit `.env.local`
+- Use environment variable validation
+- Sanitize all user inputs
+
+### **Documentation Requirements**
+
+#### **New Tool Documentation**
+- **Purpose**: What does it do?
+- **Usage**: How to use it?
+- **Configuration**: How to configure it?
+- **Examples**: Code examples
+- **Troubleshooting**: Common issues
+
+#### **Update Process**
+- Update this file when adding/removing tools
+- Update README.md with new setup instructions
+- Update component documentation in Storybook

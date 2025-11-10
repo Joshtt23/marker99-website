@@ -1,0 +1,53 @@
+---
+description: SEO, mobile experience, and third-party integrations for Marker 99
+alwaysApply: false
+---
+# Restaurant Experience Standards
+
+## SEO Baseline
+
+- Re-enable either `<DefaultSeo>`/`<NextSeo>` or migrate to Next 13 `generateMetadata`; every page must have a unique title, meta description, canonical URL, and share image that exists in `public/`.
+- Maintain a single `<h1>` per page and follow heading hierarchy (`h2`, then `h3`, etc.); keep navigation anchors (`#home`, `#menu`, `#events`, `#reserve`, `#contact`) in sync with matching `id` attributes on sections.
+- Every user-facing image requires descriptive `alt` text; hero backgrounds using `next/image` must include `priority` only when above the fold.
+- Add `Restaurant` JSON-LD with business name, address, geo coordinates, hours, and contact info; include `Menu` structured data once menu copy is finalized.
+- Create and keep `sitemap.xml` and `robots.txt` up to date when URLs change; ensure the sitemap includes event, menu, and booking pages when/if separated from the home page.
+
+## Technical SEO
+
+- Avoid adding `'use client'` to root layout unless strictly necessary; prefer server components for metadata control.
+- Preload core fonts through `next/font` (already using `Inter`) and only add additional fonts with `display: swap`.
+- Defer or dynamically import any third-party widgets (Facebook, Google Reviews, Toast) and wrap them with `noscript` fallbacks linking to the same content.
+- Monitor the Core Web Vitals (LCP, CLS, INP) using Lighthouse before releases; regressions above Google’s “good” thresholds must be addressed prior to launch.
+
+## Mobile & Responsive
+
+- Treat Tailwind’s `sm` breakpoint (640px) as the minimum target; validate layouts on 320px, 768px, 1024px, and 1440px widths.
+- Navigation must remain accessible on touch devices: keep the mobile menu button focusable, ensure it traps focus when open, and restore focus on close.
+- Provide tap-friendly targets (min 44px) for CTA buttons (`View Menu`, `Make a Reservation`, `Order Now`) and confirm they pass contrast guidelines on dark backgrounds.
+- Keep carousels and marquee sections keyboard navigable; offer pause controls for auto-scrolling elements on touch and keyboard.
+
+## Content Integrity
+
+- Keep menu copy, pricing, and availability synchronized with the in-house menu; if thin content is unavoidable, provide expandable descriptions so the data remains in the DOM for crawlers.
+- Highlight local intent keywords (“Melbourne FL waterfront restaurant”, “live music”, “seafood”) naturally within hero, about, and event sections; avoid keyword stuffing.
+- Update event schedules weekly; if the Facebook feed fails to load, show a fallback block that links directly to the events calendar.
+
+## Third-Party Integrations
+
+- Facebook Events: load SDK lazily, initialize once, and provide ARIA labels; surface the three most recent events in plain HTML as a fallback.
+- Google Reviews: keep expandable drawer but ensure a static testimonial snippet is rendered server-side for SEO.
+- Toast Online Ordering: URLs remain commented out until the client account is ready; document required environment variables (`TOAST_LOCATION_ID`, `TOAST_MENU_ID`) and expose a single helper to generate item URLs.
+- Reservations: plan for either Toast Tables or OpenTable; encapsulate the embed iframe behind a feature flag (`onlineReservationEnabled`) and provide a tel/email fallback.
+
+## Accessibility & Performance Checkpoints
+
+- Every release candidate must pass Lighthouse scores ≥ 90 for Performance, Accessibility, and SEO on both desktop and mobile modes.
+- Use semantic landmarks (`<header>`, `<main>`, `<footer>`, `<section aria-labelledby>`); confirm the `Skip to content` link in the header once implemented.
+- Optimize media: compress hero/video assets under 200KB where possible, serve WebP/AVIF fallbacks, and lazy load everything below the fold with `loading="lazy"`.
+- Use descriptive copy for buttons and links instead of generic “Click here”; ensure phone/email links include `aria-label` describing the action.
+
+## Documentation & Review
+
+- Before merging, update `plans/001_Implementation_Plan.md` with completed milestones and next steps.
+- Record decisions about SEO, menu updates, or integration toggles in PR descriptions for traceability.
+- Re-run Lighthouse and structured data validation (Google Rich Results) after any change to metadata, menu copy, or third-party embeds.

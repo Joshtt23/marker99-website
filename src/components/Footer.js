@@ -12,6 +12,7 @@ const Footer = () => {
             width={100}
             height={100}
             className="mx-auto"
+            loading="lazy"
           />
         </div>
         <div className="mb-4">

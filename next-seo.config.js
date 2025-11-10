@@ -1,20 +1,26 @@
-const metaData = {
-  title: 'Marker 99 Restaurant & Lounge',
-  description: 'The best food and drinks in town',
-  canonical: 'https://marker99restaurant.com/',
+const siteUrl = 'https://marker99restaurant.com';
+const shareImagePath = `${siteUrl}/copyright/night-deck.webp`;
+
+export const defaultSeo = {
+  titleTemplate: '%s | Marker 99 Restaurant & Lounge',
+  defaultTitle: 'Marker 99 Restaurant & Lounge',
+  description:
+    'Waterfront dining, craft cocktails, and live music in Melbourne, Florida.',
+  canonical: siteUrl,
   openGraph: {
     type: 'website',
-    locale: 'en_IE',
-    url: 'https://marker99restaurant.com/',
-    site_name: 'Marker 99 Restaurant',
+    locale: 'en_US',
+    url: siteUrl,
+    site_name: 'Marker 99 Restaurant & Lounge',
     title: 'Marker 99 Restaurant & Lounge',
-    description: 'The best food and drinks in town',
+    description:
+      'Waterfront dining, craft cocktails, and live music in Melbourne, Florida.',
     images: [
       {
-        url: 'https://marker99restaurant.com/og-image.jpg',
-        width: 800,
-        height: 600,
-        alt: 'Marker 99 Restaurant & Lounge',
+        url: shareImagePath,
+        width: 1200,
+        height: 630,
+        alt: 'Marker 99 Restaurant & Lounge riverfront deck at sunset',
       },
     ],
   },
@@ -25,7 +31,7 @@ const metaData = {
   },
   additionalMetaTags: [
     {
-      property: 'viewport',
+      name: 'viewport',
       content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
     },
     {
@@ -50,4 +56,23 @@ const metaData = {
   ],
 };
 
-export default metaData;
+export const homeSeo = {
+  title: 'Waterfront Dining in Melbourne, FL',
+  description:
+    'Marker 99 Restaurant & Lounge pairs chef-driven seafood, craft cocktails, and live music with sweeping Indian River views.',
+  canonical: siteUrl,
+  openGraph: {
+    url: siteUrl,
+    title: 'Waterfront Dining in Melbourne, FL | Marker 99 Restaurant & Lounge',
+    description:
+      'Experience Marker 99 on the Indian River — fresh seafood, craft cocktails, and nightly music in Melbourne, Florida.',
+    images: [
+      {
+        url: shareImagePath,
+        width: 1200,
+        height: 630,
+        alt: 'Marker 99 riverfront deck prepared for evening guests',
+      },
+    ],
+  },
+};
