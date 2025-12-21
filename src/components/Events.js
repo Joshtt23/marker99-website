@@ -16,6 +16,21 @@ const Events = () => {
       return;
     }
 
+    // Suppress Facebook SDK console errors (they're non-fatal and expected)
+    const originalError = console.error;
+    const suppressFacebookErrors = (...args) => {
+      const errorString = args[0]?.toString() || '';
+      if (
+        errorString.includes('ErrorUtils caught an error') ||
+        errorString.includes('Could not find element') ||
+        errorString.includes('DataStore.get: namespace is required')
+      ) {
+        // Suppress Facebook SDK internal errors
+        return;
+      }
+      originalError.apply(console, args);
+    };
+
     const updateWidth = () => {
       if (!widgetContainerRef.current) {
         return;
@@ -40,8 +55,14 @@ const Events = () => {
     ) {
       setSdkLoaded(true);
       return () => {
+        console.error = originalError;
         window.removeEventListener('resize', updateWidth);
       };
+    }
+
+    // Temporarily suppress Facebook SDK errors
+    if (process.env.NODE_ENV === 'development') {
+      console.error = suppressFacebookErrors;
     }
 
     const script = document.createElement('script');
@@ -50,11 +71,23 @@ const Events = () => {
     script.async = true;
     script.defer = true;
     script.crossOrigin = 'anonymous';
-    script.onload = () => setSdkLoaded(true);
-    script.onerror = () => setSdkLoaded(false);
+    script.onload = () => {
+      setSdkLoaded(true);
+      // Restore console.error after SDK loads
+      if (process.env.NODE_ENV === 'development') {
+        setTimeout(() => {
+          console.error = originalError;
+        }, 2000);
+      }
+    };
+    script.onerror = () => {
+      setSdkLoaded(false);
+      console.error = originalError;
+    };
     document.body.appendChild(script);
 
     return () => {
+      console.error = originalError;
       script.onload = null;
       script.onerror = null;
       window.removeEventListener('resize', updateWidth);
@@ -68,10 +101,41 @@ const Events = () => {
     if (typeof window === 'undefined') {
       return;
     }
-    const FB = window.FB;
-    if (FB?.XFBML?.parse && widgetContainerRef.current) {
-      FB.XFBML.parse(widgetContainerRef.current);
-    }
+    
+    // Wait for FB to be available and initialized
+    const checkAndInitFB = () => {
+      if (!window.FB) {
+        setTimeout(checkAndInitFB, 100);
+        return;
+      }
+      
+      const FB = window.FB;
+      
+      // Initialize Facebook SDK if not already initialized
+      try {
+        if (FB && typeof FB.init === 'function') {
+          // Check if already initialized by trying to access a property
+          if (!FB._initialized) {
+            FB.init({
+              xfbml: true,
+              version: 'v14.0',
+            });
+          }
+        }
+        
+        // Wait a bit for initialization, then parse
+        setTimeout(() => {
+          if (FB?.XFBML?.parse && widgetContainerRef.current) {
+            FB.XFBML.parse(widgetContainerRef.current);
+          }
+        }, 100);
+      } catch (error) {
+        // Silently handle initialization errors
+        console.warn('Facebook SDK initialization error:', error);
+      }
+    };
+    
+    checkAndInitFB();
   }, [facebookEventsWidgetEnabled, sdkLoaded, widgetWidth]);
 
   const upcomingEvents = useMemo(() => getUpcomingEvents(3), []);

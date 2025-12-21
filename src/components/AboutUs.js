@@ -12,19 +12,23 @@ const AboutUs = () => (
     <div className="container mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-12">
       <div className="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
         <p className="text-sm uppercase tracking-[0.3em] text-customGreen">
-          Marker 99, Melbourne FL
+          Meet Chef Andres Raffaelli
         </p>
         <h2
           id="about-heading"
           className="text-3xl md:text-4xl font-semibold text-foreground"
         >
-          Chef-prepared seafood, served right on the waterfront
+          A culinary journey from Venezuela to your table
         </h2>
         <p className="text-lg text-foreground/80">
-          Our dining room overlooks the Indian River, pairing panoramic views
-          with chef-driven dishes built on fresh, local ingredients. Warm
-          hospitality and coastal flavors make Marker 99 perfect for date night,
-          celebrations, and relaxed family gatherings alike.
+          Chef Andres Raffaelli brings a world of flavor to Marker 99. Born in
+          Venezuela and trained in the culinary traditions of Spain, Costa
+          Rica, and Italy, Chef Raffaelli crafts a Latin-Mediterranean menu that
+          reflects his international journey. Each dish tells a story—from the
+          bold spices of Latin America to the refined techniques of European
+          kitchens, all brought together with fresh coastal ingredients. His
+          passion for blending these diverse culinary heritages creates the
+          unique flavors that define Marker 99's waterfront dining experience.
         </p>
         <div className="flex justify-center lg:justify-start">
           <Link
@@ -36,7 +40,7 @@ const AboutUs = () => (
         </div>
       </div>
       <div className="w-full lg:w-1/2">
-        <div className="relative overflow-hidden rounded-3xl border border-foreground/10 shadow-lg shadow-black/30">
+        <div className="relative overflow-hidden rounded-3xl max-w-sm mx-auto">
           <Image
             src="/copyright/chef.jpg"
             alt="Chef preparing a dish at Marker 99"
@@ -45,8 +49,12 @@ const AboutUs = () => (
             className="h-full w-full object-cover"
             loading="lazy"
             sizes="(max-width: 1024px) 80vw, 35vw"
+            style={{ outline: 'none', border: 'none' }}
           />
         </div>
+        <p className="mt-4 text-xs text-foreground/50 text-center max-w-sm mx-auto">
+          Photo © Marker 99 Restaurant & Lounge
+        </p>
       </div>
     </div>
   </section>

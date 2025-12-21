@@ -30,8 +30,26 @@ Set the following optional variables to enable future integrations:
 | `NEXT_PUBLIC_TOAST_MENU_ID`                               | Toast menu identifier used for order links         |
 | `NEXT_PUBLIC_RESERVATION_PROVIDER`                        | `toast`, `opentable`, etc. for analytics labelling |
 | `NEXT_PUBLIC_RESERVATION_EMBED_URL`                       | Reservation widget URL when provider is active     |
+| `RESEND_API_KEY`                                          | Resend API key for sending contact form emails     |
 
 Feature defaults are defined in `src/lib/siteConfig.js`. Keep production secrets out of version control; manage them through the chosen deployment platform.
+
+## Email Setup (Resend)
+
+Contact forms and large party inquiries are sent via Resend. To enable email sending:
+
+1. **Create a Resend account** at [resend.com](https://resend.com)
+2. **Get your API key** from the Resend dashboard
+3. **Verify your email address** (or domain) in Resend:
+   - Go to Resend Dashboard → Domains
+   - Add and verify `irmarker99@gmail.com` (or your domain)
+   - This is required for the "from" address
+4. **Add the API key** to your environment variables:
+   ```bash
+   RESEND_API_KEY=re_xxxxxxxxxxxxx
+   ```
+
+**Note:** Without `RESEND_API_KEY`, forms will still work but emails won't be sent. The API will log email content to the console in development mode.
 
 ## Quality Checklist
 

@@ -7,7 +7,7 @@
 #### **Framework & Build**
 - **Next.js 16+**: App Router, SSR/SSG, API routes
 - **TypeScript 5+**: Strict mode, type safety
-- **Tailwind CSS 4+**: Utility-first CSS with OKLCH colors
+- **Tailwind CSS 4+**: Utility-first CSS with CSS-first configuration, OKLCH colors
 - **Yarn**: Package manager (faster, deterministic)
 
 #### **Code Quality**
@@ -101,7 +101,7 @@ All scripts must be in `package.json`:
 ```
 ├── .eslintrc.js          # ESLint configuration
 ├── .prettierrc           # Prettier configuration  
-├── tailwind.config.ts    # Tailwind configuration
+├── src/styles/globals.css # Tailwind CSS v4 configuration (using @theme)
 ├── next.config.ts        # Next.js configuration
 ├── tsconfig.json         # TypeScript configuration
 ├── components.json       # shadcn/ui configuration

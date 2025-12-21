@@ -1,0 +1,174 @@
+{
+  "label": "Cocktails",
+  "sections": [
+    {
+      "id": "signature-cocktails",
+      "title": "Signature Cocktails",
+      "items": [
+        {
+          "name": "The Markerita",
+          "image": "",
+          "description": "Coconut tequila, fresh lime, agave, triple sec, coconut cream. Our signature margarita with a tropical twist.",
+          "price": "$14"
+        },
+        {
+          "name": "Venezuelan Old Fashioned",
+          "image": "",
+          "description": "Aged rum, demerara sugar, angostura bitters, orange twist. A nod to the Caribbean with aged rum and rich sweetness.",
+          "price": "$15"
+        },
+        {
+          "name": "Mediterranean Martini",
+          "image": "",
+          "description": "Gin, dry vermouth, olive brine, lemon twist, served with olives. The classic, elevated with Mediterranean flavors.",
+          "price": "$14"
+        },
+        {
+          "name": "Spanish Gin & Tonic",
+          "image": "",
+          "description": "Premium gin, Mediterranean tonic, fresh herbs, citrus wheel. Inspired by Spain's beloved G&T tradition.",
+          "price": "$15"
+        },
+        {
+          "name": "Italian Negroni",
+          "image": "",
+          "description": "Gin, Campari, sweet vermouth, orange twist. The classic Italian aperitivo, perfectly balanced.",
+          "price": "$14"
+        },
+        {
+          "name": "Pisco Sour",
+          "image": "",
+          "description": "Pisco, fresh lime, simple syrup, egg white, angostura bitters. Peru's national cocktail, crafted with care.",
+          "price": "$14"
+        }
+      ]
+    },
+    {
+      "id": "latin-classics",
+      "title": "Latin Classics",
+      "items": [
+        {
+          "name": "Classic Margarita",
+          "image": "",
+          "description": "Reposado tequila, fresh lime, agave, triple sec, salt rim.",
+          "price": "$13"
+        },
+        {
+          "name": "Paloma",
+          "image": "",
+          "description": "Tequila blanco, fresh grapefruit, lime, club soda.",
+          "price": "$13"
+        },
+        {
+          "name": "Caipirinha",
+          "image": "",
+          "description": "Cachaça, fresh lime, sugar, muddled. Brazil's national cocktail.",
+          "price": "$13"
+        },
+        {
+          "name": "Mojito",
+          "image": "",
+          "description": "White rum, fresh mint, lime, simple syrup, club soda.",
+          "price": "$12"
+        },
+        {
+          "name": "Daiquiri",
+          "image": "",
+          "description": "White rum, fresh lime, simple syrup. The classic Cuban cocktail.",
+          "price": "$12"
+        }
+      ],
+      "note": "Add a flavor to any classic: Mango, Passion Fruit, Pineapple, or Guava (+$1)"
+    },
+    {
+      "id": "mediterranean-european",
+      "title": "Mediterranean & European",
+      "items": [
+        {
+          "name": "Classic Martini",
+          "image": "",
+          "description": "Gin or vodka, dry vermouth, olive or lemon twist.",
+          "price": "$13"
+        },
+        {
+          "name": "Aperol Spritz",
+          "image": "",
+          "description": "Aperol, prosecco, club soda, orange slice. Italy's beloved aperitivo.",
+          "price": "$13"
+        },
+        {
+          "name": "French 75",
+          "image": "",
+          "description": "Gin, fresh lemon, simple syrup, champagne. Elegant and effervescent.",
+          "price": "$14"
+        },
+        {
+          "name": "Espresso Martini",
+          "image": "",
+          "description": "Vodka, fresh espresso, coffee liqueur. Italian-inspired, perfectly balanced.",
+          "price": "$14"
+        }
+      ]
+    },
+    {
+      "id": "coastal-refreshers",
+      "title": "Coastal Refreshers",
+      "items": [
+        {
+          "name": "Tropical Spritz",
+          "image": "",
+          "description": "Aperol, prosecco, passion fruit purée, fresh grapefruit, club soda.",
+          "price": "$13"
+        },
+        {
+          "name": "Watermelon Smash",
+          "image": "",
+          "description": "Tito's vodka, house watermelon syrup, fresh mint, fresh lime. Seasonal and refreshing.",
+          "price": "$14"
+        },
+        {
+          "name": "Paco Mojito",
+          "image": "",
+          "description": "White rum, fresh mint, lime, passion fruit simple syrup, coconut water. Our tropical take on the classic.",
+          "price": "$13"
+        }
+      ]
+    },
+    {
+      "id": "wine-beer",
+      "title": "Wine & Beer",
+      "items": [
+        {
+          "name": "House Wine Selection",
+          "image": "",
+          "description": "Rotating selection of red, white, and rosé wines by the glass.",
+          "price": "$9-14"
+        },
+        {
+          "name": "Craft Beer Selection",
+          "image": "",
+          "description": "Local and regional craft beers on tap and in bottles.",
+          "price": "$7-9"
+        },
+        {
+          "name": "Wine Flights",
+          "image": "",
+          "description": "Three 2-ounce pours of featured wines with tasting notes.",
+          "price": "$18"
+        },
+        {
+          "name": "House Sangria",
+          "image": "",
+          "description": "Red or white wine, brandy, fresh fruit, house-made syrup. Spanish-style, made fresh daily.",
+          "price": "$12"
+        },
+        {
+          "name": "Michelada",
+          "image": "",
+          "description": "Beer, fresh lime, hot sauce, Worcestershire, tajín rim. Latin-style beer cocktail.",
+          "price": "$10"
+        }
+      ]
+    }
+  ]
+}

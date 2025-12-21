@@ -19,6 +19,7 @@ export default function AxeDevtools() {
         return;
       }
 
+      // Initialize axe with default configuration
       axe(React, ReactDOM, 1000);
     }
 

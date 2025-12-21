@@ -25,7 +25,7 @@ function OnlineOrder({ item }) {
       type="button"
       onClick={handleOrderNow}
       disabled={!toastOrderingUrl}
-      className="bg-customGreen text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="bg-customGreen text-white px-4 py-2 rounded-lg shadow-md hover:bg-customGreen/90 transition transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
       aria-label={`Order ${item.name} on Toast`}
     >
       Order Now

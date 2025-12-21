@@ -6,32 +6,31 @@ import Image from 'next/image';
 
 import ImageCarousel from './ImageCarousel';
 import OnlineOrder from './OnlineOrder';
-import brunchMenu from '../data/menu-brunch.json';
+import cocktailsMenu from '../data/menu-cocktails.json';
 import lunchDinnerMenu from '../data/menu-lunch-dinner.json';
 
 const MENU_CONFIG = {
+  cocktails: cocktailsMenu,
   main: lunchDinnerMenu,
-  brunch: brunchMenu,
 };
 
 const MENU_OPTIONS = [
+  {
+    id: 'cocktails',
+    label: cocktailsMenu.label,
+    availability: cocktailsMenu.availability,
+  },
   {
     id: 'main',
     label: lunchDinnerMenu.label,
     availability: lunchDinnerMenu.availability,
   },
-  {
-    id: 'brunch',
-    label: brunchMenu.label,
-    availability: brunchMenu.availability,
-    note: brunchMenu.note ?? null,
-  },
 ];
 
 const Menu = ({ onlineOrder }) => {
-  const [activeMenuId, setActiveMenuId] = useState('main');
+  const [activeMenuId, setActiveMenuId] = useState('cocktails');
   const [activeCategoryId, setActiveCategoryId] = useState(
-    MENU_CONFIG.main.sections[0]?.id ?? '',
+    MENU_CONFIG.cocktails.sections[0]?.id ?? '',
   );
 
   useEffect(() => {
@@ -51,14 +50,16 @@ const Menu = ({ onlineOrder }) => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <p className="uppercase tracking-[0.3em] text-sm text-customGreen">
-              Taste the favorites
+              Waterfront dining
             </p>
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-              Signature dishes from the kitchen
+              Experience Marker 99 on the Indian River
             </h2>
             <p className="text-lg text-foreground/75">
-              A rotating selection of guest favorites, crafted by our chefs to
-              showcase the best of Marker 99.
+              Dine on our expansive waterfront deck overlooking the Indian
+              River, where panoramic views meet exceptional cuisine. From our
+              outdoor dining spaces to the extended pier, Marker 99 offers a
+              unique waterfront experience in Melbourne, Florida.
             </p>
           </div>
           <div className="mt-10 rounded-3xl border border-foreground/10 bg-black/20 backdrop-blur p-6 md:p-8 shadow-[0_25px_45px_-20px_rgba(0,0,0,0.6)]">
@@ -100,9 +101,11 @@ const Menu = ({ onlineOrder }) => {
               <p className="text-sm uppercase tracking-[0.3em] text-customGreen">
                 {activeMenu.label}
               </p>
-              <p className="text-base text-foreground/80">
-                {activeMenu.availability}
-              </p>
+              {activeMenu.availability ? (
+                <p className="text-base text-foreground/80">
+                  {activeMenu.availability}
+                </p>
+              ) : null}
               {activeMenu.note ? (
                 <p className="text-sm text-customGreen/80">{activeMenu.note}</p>
               ) : null}
@@ -151,9 +154,16 @@ const Menu = ({ onlineOrder }) => {
                     className={isActive ? 'block' : 'hidden'}
                   >
                     <header className="flex items-baseline justify-between mb-6">
-                      <h3 className="text-2xl font-semibold text-foreground">
-                        {section.title}
-                      </h3>
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-semibold text-foreground">
+                          {section.title}
+                        </h3>
+                        {section.note && (
+                          <p className="text-sm text-foreground/70 mt-2 italic">
+                            {section.note}
+                          </p>
+                        )}
+                      </div>
                       <span className="hidden md:inline text-sm uppercase tracking-widest text-customGreen">
                         {section.items.length} items
                       </span>
@@ -190,7 +200,7 @@ const Menu = ({ onlineOrder }) => {
                               <div className="text-lg font-bold text-customGreen">
                                 {item.price}
                               </div>
-                              {onlineOrder && activeMenuId === 'main' && (
+                              {onlineOrder && activeMenuId === 'main' && item.image && (
                                 <OnlineOrder item={item} />
                               )}
                             </div>

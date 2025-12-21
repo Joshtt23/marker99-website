@@ -1,6 +1,5 @@
 {
   "label": "Lunch & Dinner",
-  "availability": "Served Monday – Saturday from 11:30 AM until close · Sundays 3:00 PM – close after brunch service",
   "sections": [
     {
       "id": "starters",
@@ -8,7 +7,7 @@
       "items": [
         {
           "name": "Ceviche",
-          "image": "",
+          "image": "/menu/ceviche1.webp",
           "description": "Citrus-marinated local catch tossed with red onion, sweet peppers, cilantro, and crisp plantain chips.",
           "price": "$18"
         },
@@ -20,13 +19,13 @@
         },
         {
           "name": "Coconut Calamari Basket",
-          "image": "",
+          "image": "/menu/coconutCalamari1.webp",
           "description": "Coconut-breaded calamari fried golden and paired with mango-chile aioli.",
           "price": "$17"
         },
         {
           "name": "Steak Truffle Fries",
-          "image": "",
+          "image": "/menu/steakTruffleFries1.webp",
           "description": "Garlic-truffle fries layered with sliced skirt steak, queso fresco, and chimichurri.",
           "price": "$18"
         },
@@ -38,19 +37,19 @@
         },
         {
           "name": "Shrimp & Avo",
-          "image": "",
+          "image": "/menu/shrimpAvo1.webp",
           "description": "Poached gulf shrimp arranged over ripe avocado, tomato, and citrus pico de gallo.",
           "price": "$18"
         },
         {
           "name": "Arancini Balls",
-          "image": "",
+          "image": "/menu/arancini1.webp",
           "description": "Parmesan risotto croquettes stuffed with mozzarella and basil pesto.",
           "price": "$18"
         },
         {
           "name": "Patacones",
-          "image": "",
+          "image": "/menu/patacones1.webp",
           "description": "Twice-fried plantain cups filled with black beans, cotija cheese, and pickled onions.",
           "price": "$16"
         },
@@ -92,7 +91,7 @@
         },
         {
           "name": "Mediterranean Bowl",
-          "image": "",
+          "image": "/menu/medBowl1.webp",
           "description": "Herbed quinoa, roasted vegetables, cucumber, olives, feta, and lemon tahini.",
           "price": "$16"
         },
@@ -146,7 +145,7 @@
       "items": [
         {
           "name": "Caribbean Fish Tacos",
-          "image": "",
+          "image": "/menu/fishTacosCrispy1.webp",
           "description": "Blackened catch of the day with pineapple-cabbage slaw and cilantro crema on warm tortillas.",
           "price": "$18"
         },
@@ -176,7 +175,7 @@
         },
         {
           "name": "Marker 99 Burger",
-          "image": "",
+          "image": "/menu/m99Burger1.webp",
           "description": "Half-pound Angus patty with caramelized onions, aged cheddar, and house signature sauce.",
           "price": "$20"
         },
@@ -206,7 +205,7 @@
         },
         {
           "name": "Stracciatella & Prosciutto",
-          "image": "",
+          "image": "/menu/proscuttoFlatbread1.webp",
           "description": "Whipped stracciatella, prosciutto di Parma, arugula, and aged balsamic.",
           "price": "$19"
         },
@@ -260,7 +259,7 @@
         },
         {
           "name": "Grilled Ribeye",
-          "image": "",
+          "image": "/menu/ribeye1.webp",
           "description": "14-ounce ribeye finished with herb butter alongside garlic mashed potatoes and seasonal vegetables.",
           "price": "$40"
         },
@@ -296,19 +295,19 @@
         },
         {
           "name": "Swordfish Schnitzel",
-          "image": "",
+          "image": "/menu/swordfishSchnitzel1.webp",
           "description": "Crispy breaded swordfish cutlet with lemon caper butter and arugula salad.",
           "price": "$25"
         },
         {
           "name": "Prosciutto Scallop Tagliatelle",
-          "image": "",
+          "image": "/menu/lemonScallopTag1.webp",
           "description": "Pan-seared scallops and prosciutto in saffron cream sauce over fresh tagliatelle.",
           "price": "$32"
         },
         {
           "name": "Fish Cartoccio",
-          "image": "",
+          "image": "/menu/crispyWholeFish1.webp",
           "description": "Market fish baked in parchment with citrus, herbs, and seasonal vegetables.",
           "price": "$MP"
         }

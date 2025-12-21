@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import { Toaster } from 'sonner';
 
 import '../styles/globals.css';
 import AxeDevtools from '../components/AxeDevtools';
@@ -93,6 +94,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
           <Footer />
+          <Toaster position="top-center" richColors />
         </ThemeProvider>
       </body>
     </html>

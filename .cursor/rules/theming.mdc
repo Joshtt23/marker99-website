@@ -7,7 +7,7 @@
 #### **Theme Provider Stack**
 - **next-themes**: Theme switching and persistence
 - **CSS Variables**: OKLCH color space for better color management
-- **Tailwind CSS**: Utility classes with theme integration
+- **Tailwind CSS v4**: CSS-first configuration with `@theme` directive, utility classes with theme integration
 - **Framer Motion**: Smooth theme transitions
 
 #### **Color System**
@@ -263,19 +263,29 @@ const themeConfig = {
 };
 ```
 
-#### **CSS Variables Setup**
+#### **CSS Variables Setup (Tailwind v4)**
 ```css
-/* Theme variables in globals.css */
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  /* ... other variables */
+/* Tailwind v4 uses @import and @theme directive */
+@import "tailwindcss";
+
+@theme {
+  /* Custom theme values */
+  --color-custom: #ff0000;
+  /* ... other theme variables */
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  /* ... other variables */
+@layer base {
+  :root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    /* ... other CSS variables */
+  }
+
+  .dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    /* ... other CSS variables */
+  }
 }
 ```
 

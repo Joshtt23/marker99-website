@@ -7,18 +7,14 @@ import dynamic from 'next/dynamic';
 
 import MobileActionBar from './MobileActionBar';
 
-const Hero = dynamic(() => import('./Hero'), { ssr: true });
-const AboutUs = dynamic(() => import('./AboutUs'), { ssr: true });
-const Contact = dynamic(() => import('./Contact'), { ssr: true });
-const Events = dynamic(() => import('./Events'), { ssr: false });
-const JobApplication = dynamic(() => import('./JobApplication'), {
-  ssr: false,
-});
-const Reservation = dynamic(() => import('./Reservation'), { ssr: true });
-const Menu = dynamic(() => import('./Menu'), { ssr: false });
-const GoogleReviewWidget = dynamic(() => import('./GoogleReviewWidget'), {
-  ssr: false,
-});
+import Hero from './Hero';
+import AboutUs from './AboutUs';
+import Contact from './Contact';
+import Events from './Events';
+import Reservation from './Reservation';
+import Menu from './Menu';
+import GoogleReviewWidget from './GoogleReviewWidget';
+import JobApplication from './JobApplication';
 
 export default function HomePageClient({ featureFlags }) {
   const [showTopButton, setShowTopButton] = useState(false);

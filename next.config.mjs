@@ -2,7 +2,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     remotePatterns: [
       {
@@ -12,11 +11,8 @@ const nextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
-  i18n: {
-    locales: ['en'],
-    defaultLocale: 'en',
-  },
-  webpack: (config) => config,
+  // Turbopack configuration (Next.js 16+ uses Turbopack by default)
+  turbopack: {},
   async headers() {
     return [
       {
@@ -26,7 +22,7 @@ const nextConfig = {
           {
             key: 'Content-Security-Policy',
             value:
-              "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-src 'none';",
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://connect.facebook.net https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; frame-src 'self' https://www.facebook.com https://www.google.com; connect-src 'self' https://connect.facebook.net https://www.facebook.com;",
           },
           {
             key: 'X-Frame-Options',
@@ -47,9 +43,6 @@ const nextConfig = {
         ],
       },
     ];
-  },
-  eslint: {
-    dirs: ['src'], // Only run ESLint on the 'src' directory during production builds (next build)
   },
 };
 

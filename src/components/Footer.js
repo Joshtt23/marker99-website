@@ -47,21 +47,34 @@ const Footer = () => {
         </nav>
 
         <div className="space-y-2 text-sm text-foreground/70">
-          <p>4263 US-1, Melbourne, FL 32935</p>
-          <a href="tel:3212531369" className="block hover:text-customGreen">
+          <a
+            href="https://maps.google.com/?q=4263+US-1,+Melbourne,+FL+32935"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block hover:text-customGreen transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+            aria-label="Get directions to Marker 99 Restaurant at 4263 US-1, Melbourne, FL 32935"
+          >
+            4263 US-1, Melbourne, FL 32935
+          </a>
+          <a
+            href="tel:3212531369"
+            className="block hover:text-customGreen transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+            aria-label="Call Marker 99 Restaurant at (321) 253-1369"
+          >
             (321) 253-1369
           </a>
           <a
             href="mailto:info@marker99restaurant.com"
-            className="block hover:text-customGreen"
+            className="block hover:text-customGreen transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+            aria-label="Email Marker 99 Restaurant at info@marker99restaurant.com"
           >
             info@marker99restaurant.com
           </a>
         </div>
 
         <div className="text-xs text-foreground/50">
-          © {new Date().getFullYear()} Marker 99 Hospitality · Designed by
-          Joshua Traver
+          © {new Date().getFullYear()} Marker 99 Restaurant & Lounge · Website
+          designed by Joshua Traver
         </div>
       </div>
     </footer>

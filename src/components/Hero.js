@@ -1,4 +1,5 @@
 import React from 'react';
+
 const Hero = () => (
   <section
     id="home"
@@ -8,7 +9,7 @@ const Hero = () => (
     <div className="container mx-auto px-6">
       <div className="max-w-3xl mx-auto text-center space-y-6">
         <p className="uppercase tracking-[0.3em] text-sm text-customGreen">
-          Casual waterfront dining
+          Latin Mediterranean waterfront dining
         </p>
         <h1
           id="hero-heading"
@@ -17,8 +18,9 @@ const Hero = () => (
           Marker 99 Restaurant & Lounge
         </h1>
         <p className="text-lg md:text-xl text-foreground/85">
-          Gather with friends and family for chef-crafted seafood, craft
-          cocktails, and live music overlooking the Indian River.
+          Gather with friends and family for Latin-Mediterranean inspired plates,
+          fresh Florida seafood, and craft cocktails overlooking the Indian
+          River.
         </p>
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
           <a
@@ -54,9 +56,8 @@ const Hero = () => (
             Hours
           </p>
           <ul className="text-sm sm:text-base space-y-1 leading-relaxed">
-            <li>Mon – Thu: 11:30am – 9:00pm</li>
+            <li>Sun – Thu: 11:30am – 9:00pm</li>
             <li>Fri – Sat: 11:30am – 10:00pm</li>
-            <li>Sun: 10:30am – 8:00pm</li>
           </ul>
         </div>
         <div className="rounded-2xl border border-foreground/10 bg-black/20 p-6 backdrop-blur space-y-2">
