@@ -11,7 +11,7 @@ Align the site experience with the January relaunch concept: dual dining/tiki of
 
 ## Phase 2 – Menu & Content Assets
 - [ ] Replace menu JSON data with new dishes/pricing (Dining & Lounge small plates).
-- [ ] Add featured cocktail carousel or gallery for lounge offerings.
+- [x] Add featured cocktail carousel or gallery for lounge offerings.
 - [ ] Integrate January theme-night schedule into Events section (extend `events.js` or add static data block).
 - [ ] Ensure imagery reflects updated spaces (new lounge photos, chef action shots).
 
@@ -30,8 +30,8 @@ Align the site experience with the January relaunch concept: dual dining/tiki of
 ## Phase 5 – Performance & Accessibility
 - [ ] Retest Lighthouse performance after new sections.
 - [ ] Verify responsive layout for all new blocks (hero, lounge section, forms).
-- [ ] Double-check alt text/captions for new imagery.
-- [ ] Confirm keyboard navigation and focus states for forms/CTAs.
+- [x] Double-check alt text/captions for new imagery.
+- [x] Confirm keyboard navigation and focus states for forms/CTAs.
 
 ## Phase 6 – Launch Support
 - [ ] Create dedicated landing page or modal for January “Relaunch Week” schedule.
@@ -39,7 +39,7 @@ Align the site experience with the January relaunch concept: dual dining/tiki of
 - [ ] Schedule content deployment timeline (copy freeze, QA, go-live).
 
 ## Documentation & Handoff
-- [ ] Update README with instructions for updating menus, events, and forms.
+- [x] Update README with instructions for updating menus, events, and forms.
 - [ ] Provide simple SOP for exporting GA4/Looker Studio weekly report.
 - [ ] Outline process for swapping hero/event images post-launch.
 
