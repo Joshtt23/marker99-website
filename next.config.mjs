@@ -21,7 +21,7 @@ const nextConfig = {
   // Target modern browsers to avoid unnecessary polyfills
   // This reduces bundle size by ~14 KiB by not transpiling ES2021+ features
   compiler: {
-    // SWC will target modern browsers based on browserslist
+    // SWC will target modern browsers - polyfills come from dependencies, not Next.js
   },
   // Turbopack configuration (Next.js 16+ uses Turbopack by default)
   turbopack: {},
@@ -33,6 +33,8 @@ const nextConfig = {
         ...config.optimization,
         usedExports: true,
       };
+      // Note: Polyfills in chunk 8629ed7518514ab9.js are likely from dependencies
+      // (react-hook-form, zod, etc.) and can't be easily removed without breaking functionality
     }
     return config;
   },
