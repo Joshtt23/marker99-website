@@ -93,7 +93,11 @@ export const SelectInput = ({
 }) => {
   // Use undefined instead of empty string for unselected state
   // This prevents React error #418 (text content issue)
-  const selectValue = value && value.trim() !== '' ? value : undefined;
+  // Radix UI SelectValue doesn't accept empty strings - only valid values or undefined
+  const selectValue =
+    value && typeof value === 'string' && value.trim() !== ''
+      ? value
+      : undefined;
 
   return (
     <Select value={selectValue} onValueChange={onValueChange}>

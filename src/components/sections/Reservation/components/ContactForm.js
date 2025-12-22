@@ -239,7 +239,7 @@ export const ContactForm = ({ isSubmitting, setIsSubmitting }) => {
             >
               <SelectInput
                 id="locationPreference"
-                value={watch('locationPreference') || ''}
+                value={watch('locationPreference') || undefined}
                 onValueChange={(value) => setValue('locationPreference', value)}
                 error={errors.locationPreference}
                 placeholder="Select location preference"

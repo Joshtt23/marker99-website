@@ -18,6 +18,11 @@ const nextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
+  // Target modern browsers to avoid unnecessary polyfills
+  // This reduces bundle size by ~14 KiB by not transpiling ES2021+ features
+  compiler: {
+    // SWC will target modern browsers based on browserslist
+  },
   // Turbopack configuration (Next.js 16+ uses Turbopack by default)
   turbopack: {},
   // Webpack configuration for better tree-shaking (only when using --webpack flag)
