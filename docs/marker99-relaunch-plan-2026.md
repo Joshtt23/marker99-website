@@ -215,7 +215,7 @@ Successfully launch Tiki Lounge concept and establish ongoing maintenance proces
 #### Tasks
 - [ ] **Pre-Launch Checklist**
   - Final content review and approval
-  - Staff training on new website features
+  - Staff training
   - Marketing campaign coordination
   - Analytics baseline established
 
