@@ -98,7 +98,7 @@ const Carousel = React.forwardRef(
       <CarouselContext.Provider
         value={{
           carouselRef,
-          api: api,
+          api,
           opts,
           orientation:
             orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
@@ -113,7 +113,7 @@ const Carousel = React.forwardRef(
           onKeyDownCapture={handleKeyDown}
           className={cn('relative', className)}
           role="region"
-          aria-roledescription="carousel"
+          aria-label="Image carousel"
           {...props}
         >
           {children}
@@ -150,7 +150,7 @@ const CarouselItem = React.forwardRef(({ className, ...props }, ref) => {
     <div
       ref={ref}
       role="group"
-      aria-roledescription="slide"
+      aria-label="Carousel slide"
       className={cn(
         'min-w-0 shrink-0 grow-0 basis-full',
         orientation === 'horizontal' ? 'pl-4' : 'pt-4',

@@ -1,4 +1,8 @@
+'use client';
+
 import React from 'react';
+
+import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
 
 const Hero = () => (
   <section
@@ -18,19 +22,25 @@ const Hero = () => (
           Marker 99 Restaurant & Lounge
         </h1>
         <p className="text-lg md:text-xl text-foreground/85">
-          Gather with friends and family for Latin-Mediterranean inspired plates,
-          fresh Florida seafood, and craft cocktails overlooking the Indian
-          River.
+          Gather with friends and family for Latin-Mediterranean inspired
+          plates, fresh Florida seafood, and craft cocktails overlooking the
+          Indian River.
         </p>
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
           <a
             href="#reserve"
-            className="inline-flex items-center justify-center rounded-full bg-customGreen px-9 py-3 text-sm font-semibold text-brand-primary-foreground shadow-lg shadow-customGreen/30 transition hover:bg-customGreen/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen active:scale-95"
+            onClick={() =>
+              trackEvent(AnalyticsEvent.RESERVATION_CLICK, { source: 'hero' })
+            }
+            className="inline-flex items-center justify-center rounded-full bg-customGreen px-9 py-3 text-sm font-semibold text-white shadow-lg shadow-customGreen/30 transition hover:bg-customGreen/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen active:scale-95"
           >
             Book a Table
           </a>
           <a
             href="#menu"
+            onClick={() =>
+              trackEvent(AnalyticsEvent.MENU_VIEW, { source: 'hero' })
+            }
             className="inline-flex items-center justify-center rounded-full border border-foreground/25 px-9 py-3 text-sm font-semibold text-foreground transition hover:border-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen active:scale-95"
           >
             View Menu
@@ -46,6 +56,9 @@ const Hero = () => (
             href="https://maps.google.com/?q=Marker+99+Restaurant+%26+Lounge"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent(AnalyticsEvent.DIRECTIONS_CLICK, { source: 'hero' })
+            }
             className="block text-base sm:text-lg text-customGreen hover:text-customGreen/80 underline underline-offset-4"
           >
             4263 US-1, Melbourne, FL 32935
@@ -69,6 +82,9 @@ const Hero = () => (
               Call{' '}
               <a
                 href="tel:3212531369"
+                onClick={() =>
+                  trackEvent(AnalyticsEvent.PHONE_CLICK, { source: 'hero' })
+                }
                 className="underline hover:text-customGreen whitespace-nowrap"
               >
                 (321) 253-1369
@@ -78,6 +94,11 @@ const Hero = () => (
               Event inquiries:{' '}
               <a
                 href="#reserve"
+                onClick={() =>
+                  trackEvent(AnalyticsEvent.RESERVATION_CLICK, {
+                    source: 'hero-inquiry',
+                  })
+                }
                 className="underline hover:text-customGreen break-words"
               >
                 View details below

@@ -3,10 +3,22 @@ import React from 'react';
 import Image from 'next/image';
 
 const images = [
-  { src: '/copyright/overhead-shot-1.jpg', alt: 'Aerial view of Marker 99 waterfront restaurant' },
-  { src: '/copyright/overhead-shot-2.jpg', alt: 'Aerial view of Marker 99 dock extending over the river' },
-  { src: '/copyright/night-deck.webp', alt: 'Night deck with guests dining over the Indian River at Marker 99' },
-  { src: '/copyright/entry.webp', alt: 'Marker 99 restaurant entrance and exterior' },
+  {
+    src: '/copyright/overhead-shot-1.jpg',
+    alt: 'Aerial view of Marker 99 waterfront restaurant',
+  },
+  {
+    src: '/copyright/overhead-shot-2.jpg',
+    alt: 'Aerial view of Marker 99 dock extending over the river',
+  },
+  {
+    src: '/copyright/night-deck.webp',
+    alt: 'Night deck with guests dining over the Indian River at Marker 99',
+  },
+  {
+    src: '/copyright/entry.webp',
+    alt: 'Marker 99 restaurant entrance and exterior',
+  },
 ];
 
 const ImageCarousel = () => {

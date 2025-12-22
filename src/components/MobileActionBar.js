@@ -1,29 +1,36 @@
 'use client';
 
-import { Phone, MapPin, Calendar, Utensils } from 'lucide-react';
 import Link from 'next/link';
+
+import { Phone, MapPin, Calendar, Utensils } from 'lucide-react';
+
+import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
 
 const actions = [
   {
     href: 'tel:3212531369',
     label: 'Call',
     icon: Phone,
+    event: AnalyticsEvent.PHONE_CLICK,
   },
   {
     href: '#menu',
     label: 'Menu',
     icon: Utensils,
+    event: AnalyticsEvent.MENU_VIEW,
   },
   {
     href: '#reserve',
     label: 'Reserve',
     icon: Calendar,
+    event: AnalyticsEvent.RESERVATION_CLICK,
   },
   {
     href: 'https://maps.google.com/?q=Marker+99+Restaurant+%26+Lounge',
     label: 'Directions',
     icon: MapPin,
     external: true,
+    event: AnalyticsEvent.DIRECTIONS_CLICK,
   },
 ];
 
@@ -34,12 +41,15 @@ export default function MobileActionBar() {
       aria-label="Quick actions"
     >
       <ul className="flex justify-around items-center py-3">
-        {actions.map(({ href, label, icon: Icon, external }) => (
+        {actions.map(({ href, label, icon: Icon, external, event }) => (
           <li key={label}>
             <Link
               href={href}
               target={external ? '_blank' : undefined}
               rel={external ? 'noopener noreferrer' : undefined}
+              onClick={() =>
+                event && trackEvent(event, { source: 'mobile-action-bar' })
+              }
               className="flex flex-col items-center gap-1 text-xs font-medium text-white/80 hover:text-white transition-transform transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-95"
             >
               <Icon className="h-5 w-5" aria-hidden="true" />

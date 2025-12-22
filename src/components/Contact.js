@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 
 import LocationDiagram from './LocationDiagram';
+import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
 
 const Contact = () => {
   return (
@@ -31,6 +34,11 @@ const Contact = () => {
               href="https://maps.google.com/?q=Marker+99+Restaurant+%26+Lounge"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent(AnalyticsEvent.DIRECTIONS_CLICK, {
+                  source: 'contact',
+                })
+              }
               className="text-customGreen hover:text-customGreen/80 underline underline-offset-4"
             >
               4263 US-1, Melbourne, FL 32935
@@ -42,6 +50,9 @@ const Contact = () => {
             </p>
             <a
               href="tel:3212531369"
+              onClick={() =>
+                trackEvent(AnalyticsEvent.PHONE_CLICK, { source: 'contact' })
+              }
               className="hover:text-customGreen transition"
             >
               (321) 253-1369

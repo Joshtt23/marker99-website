@@ -1,5 +1,6 @@
 'use client';
 
+import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
 import { toastConfig } from '../lib/siteConfig';
 
 function OnlineOrder({ item }) {
@@ -12,6 +13,13 @@ function OnlineOrder({ item }) {
     if (!toastOrderingUrl) {
       return;
     }
+
+    // Track online order click
+    trackEvent(AnalyticsEvent.ONLINE_ORDER_CLICK, {
+      source: 'menu',
+      itemName: item.name,
+      itemPrice: item.price,
+    });
 
     const normalizedItem = encodeURIComponent(item.name);
     window.open(

@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { getUpcomingEvents } from './data/events';
+import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
 import { siteFeatureFlags } from '../lib/siteConfig';
 
 const Events = () => {
@@ -20,10 +21,13 @@ const Events = () => {
     const originalError = console.error;
     const suppressFacebookErrors = (...args) => {
       const errorString = args[0]?.toString() || '';
+      const fullMessage = args.map((arg) => String(arg)).join(' ');
       if (
         errorString.includes('ErrorUtils caught an error') ||
         errorString.includes('Could not find element') ||
-        errorString.includes('DataStore.get: namespace is required')
+        errorString.includes('DataStore.get: namespace is required') ||
+        fullMessage.includes('Could not find element') ||
+        fullMessage.includes('u_1_')
       ) {
         // Suppress Facebook SDK internal errors
         return;
@@ -60,10 +64,8 @@ const Events = () => {
       };
     }
 
-    // Temporarily suppress Facebook SDK errors
-    if (process.env.NODE_ENV === 'development') {
-      console.error = suppressFacebookErrors;
-    }
+    // Suppress Facebook SDK errors (always, not just in dev)
+    console.error = suppressFacebookErrors;
 
     const script = document.createElement('script');
     script.src =
@@ -73,12 +75,7 @@ const Events = () => {
     script.crossOrigin = 'anonymous';
     script.onload = () => {
       setSdkLoaded(true);
-      // Restore console.error after SDK loads
-      if (process.env.NODE_ENV === 'development') {
-        setTimeout(() => {
-          console.error = originalError;
-        }, 2000);
-      }
+      // Keep error suppression active (Facebook SDK continues to throw non-fatal errors)
     };
     script.onerror = () => {
       setSdkLoaded(false);
@@ -101,16 +98,16 @@ const Events = () => {
     if (typeof window === 'undefined') {
       return;
     }
-    
+
     // Wait for FB to be available and initialized
     const checkAndInitFB = () => {
       if (!window.FB) {
         setTimeout(checkAndInitFB, 100);
         return;
       }
-      
+
       const FB = window.FB;
-      
+
       // Initialize Facebook SDK if not already initialized
       try {
         if (FB && typeof FB.init === 'function') {
@@ -122,7 +119,7 @@ const Events = () => {
             });
           }
         }
-        
+
         // Wait a bit for initialization, then parse
         setTimeout(() => {
           if (FB?.XFBML?.parse && widgetContainerRef.current) {
@@ -134,7 +131,7 @@ const Events = () => {
         console.warn('Facebook SDK initialization error:', error);
       }
     };
-    
+
     checkAndInitFB();
   }, [facebookEventsWidgetEnabled, sdkLoaded, widgetWidth]);
 
@@ -176,6 +173,7 @@ const Events = () => {
                 data-adapt-container-width="true"
                 data-hide-cover="false"
                 data-show-facepile="true"
+                role="region"
                 aria-label="Facebook updates and events feed for Marker 99"
               >
                 <blockquote
@@ -211,6 +209,12 @@ const Events = () => {
                     href={event.link}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() =>
+                      trackEvent(AnalyticsEvent.EVENT_CLICK, {
+                        source: 'event-card',
+                        eventTitle: event.title,
+                      })
+                    }
                     className="mt-6 inline-flex items-center text-customGreen hover:text-customGreen/80 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
                     aria-label={`View details for ${event.title} on Facebook`}
                   >
@@ -220,13 +224,13 @@ const Events = () => {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-foreground/60">
+            <p className="text-sm text-foreground/75">
               New events are being planned. Check back soon or follow us on
               Facebook for the latest schedule.
             </p>
           )}
           {!sdkLoaded && facebookEventsWidgetEnabled && (
-            <p className="mt-8 text-sm text-foreground/60">
+            <p className="mt-8 text-sm text-foreground/75">
               Trouble loading Facebook? Use the event cards above or{' '}
               <a
                 href="https://www.facebook.com/marker99restaurant/events"

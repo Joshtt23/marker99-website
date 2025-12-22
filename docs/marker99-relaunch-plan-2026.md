@@ -1,9 +1,11 @@
 # Marker 99 Website Relaunch Plan 2026
 
 ## Overview
+
 Comprehensive relaunch plan for Marker 99 Restaurant & Lounge, focusing on foundation building (January–March) followed by Tiki Lounge concept launch (April 2026).
 
 ## Timeline Summary
+
 - **January 2026**: Start Phase 3 & 4 (Conversion & Analytics)
 - **January–March 2026**: Iteration, testing, and marketing foundation
 - **March–April 2026**: Tiki concept ideation and planning
@@ -14,13 +16,16 @@ Comprehensive relaunch plan for Marker 99 Restaurant & Lounge, focusing on found
 ## Phase A: Foundation & Marketing Setup (January–March 2026)
 
 ### Goal
+
 Establish conversion paths, analytics tracking, and marketing infrastructure to support the relaunch and future Tiki Lounge launch.
 
 ### Phase A.1: Conversion Paths & Forms (January 2026)
+
 **Status**: Starting January 2026  
 **Dependencies**: Access to email platform, form requirements finalized
 
 #### Tasks
+
 - [ ] **Email Signup Form**
   - Build email signup component for homepage
   - Add email signup to footer
@@ -47,6 +52,7 @@ Establish conversion paths, analytics tracking, and marketing infrastructure to 
   - Place CTAs strategically throughout site (hero, menu, footer)
 
 #### Deliverables
+
 - Email signup form component (homepage + footer)
 - Certificate redemption form with QR landing page
 - Updated reservation section with clear guidance
@@ -55,10 +61,12 @@ Establish conversion paths, analytics tracking, and marketing infrastructure to 
 ---
 
 ### Phase A.2: Analytics & Tracking (January–February 2026)
+
 **Status**: Starting January 2026 (pending Google/Meta access)  
 **Dependencies**: Google Analytics 4 account, Meta Business account, access credentials
 
 #### Tasks
+
 - [ ] **Google Analytics 4 (GA4) Setup**
   - Embed GA4 global script in `src/app/layout.js`
   - Configure key events:
@@ -96,6 +104,7 @@ Establish conversion paths, analytics tracking, and marketing infrastructure to 
   - Ensure production secrets are managed securely
 
 #### Deliverables
+
 - GA4 fully configured with custom events
 - Meta Pixel installed with custom conversions
 - UTM tagging documentation
@@ -104,9 +113,11 @@ Establish conversion paths, analytics tracking, and marketing infrastructure to 
 ---
 
 ### Phase A.3: Testing & Iteration (February–March 2026)
+
 **Status**: Ongoing after Phase A.1 & A.2 completion
 
 #### Tasks
+
 - [ ] **Form Testing**
   - Test email signup flow end-to-end
   - Test certificate redemption with various scenarios
@@ -132,6 +143,7 @@ Establish conversion paths, analytics tracking, and marketing infrastructure to 
   - Gather feedback from staff/internal testing
 
 #### Deliverables
+
 - All forms tested and validated
 - Analytics tracking verified and reporting correctly
 - Performance benchmarks met
@@ -142,13 +154,16 @@ Establish conversion paths, analytics tracking, and marketing infrastructure to 
 ## Phase B: Tiki Lounge Concept Development (March–April 2026)
 
 ### Goal
+
 Design, plan, and implement the Tiki Lounge concept separation, creating distinct experiences for Dining Room and Tiki Lounge.
 
 ### Phase B.1: Ideation & Planning (March 2026)
+
 **Status**: Planning phase  
 **Dependencies**: Operational decisions on lounge concept, hours, menu, staffing
 
 #### Tasks
+
 - [ ] **Concept Definition**
   - Finalize Tiki Lounge concept and positioning
   - Define distinct menu offerings (small plates, cocktails)
@@ -168,6 +183,7 @@ Design, plan, and implement the Tiki Lounge concept separation, creating distinc
   - Plan announcement banner for launch
 
 #### Deliverables
+
 - Concept brief document
 - Content plan for lounge section
 - Design mockups/wireframes
@@ -176,10 +192,12 @@ Design, plan, and implement the Tiki Lounge concept separation, creating distinc
 ---
 
 ### Phase B.2: Implementation (March–April 2026)
+
 **Status**: Development phase  
 **Dependencies**: Phase B.1 complete, content assets ready
 
 #### Tasks
+
 - [ ] **Messaging & Structure Updates**
   - Update global metadata to emphasize dual concept
   - Refresh hero CTA with "Reserve Dining" and "Explore Tiki Lounge"
@@ -200,6 +218,7 @@ Design, plan, and implement the Tiki Lounge concept separation, creating distinc
   - Plan launch day activities
 
 #### Deliverables
+
 - Updated website with dual concept messaging
 - New menu structure with lounge offerings
 - Launch page/banner for April launch
@@ -210,9 +229,11 @@ Design, plan, and implement the Tiki Lounge concept separation, creating distinc
 ## Phase C: Launch & Post-Launch (April 2026+)
 
 ### Goal
+
 Successfully launch Tiki Lounge concept and establish ongoing maintenance processes.
 
 #### Tasks
+
 - [ ] **Pre-Launch Checklist**
   - Final content review and approval
   - Staff training
@@ -236,6 +257,7 @@ Successfully launch Tiki Lounge concept and establish ongoing maintenance proces
 ## Documentation & Handoff
 
 ### Ongoing Tasks
+
 - [ ] **Analytics Reporting SOP**
   - Create simple guide for exporting GA4 reports
   - Document Looker Studio dashboard setup (if applicable)
@@ -258,6 +280,7 @@ Successfully launch Tiki Lounge concept and establish ongoing maintenance proces
 ## Success Metrics
 
 ### Phase A (Foundation)
+
 - Email signup form live and collecting subscribers
 - Certificate redemption form functional
 - GA4 tracking all key events
@@ -265,6 +288,7 @@ Successfully launch Tiki Lounge concept and establish ongoing maintenance proces
 - UTM tagging system documented
 
 ### Phase B (Tiki Launch)
+
 - Dual concept clearly communicated on site
 - Lounge section live with distinct offerings
 - Menu toggle working for Dining vs Lounge
@@ -272,6 +296,7 @@ Successfully launch Tiki Lounge concept and establish ongoing maintenance proces
 - All content assets updated
 
 ### Phase C (Post-Launch)
+
 - Analytics showing conversion improvements
 - User feedback collected and reviewed
 - Staff trained on new features
@@ -333,4 +358,3 @@ April 2026
    - Complete Tiki Lounge implementation
    - Launch and monitor
    - Establish ongoing processes
-

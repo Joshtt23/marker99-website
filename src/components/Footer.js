@@ -1,7 +1,11 @@
+'use client';
+
 import React from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
 
 const Footer = () => {
   return (
@@ -25,7 +29,7 @@ const Footer = () => {
           </p>
         </div>
 
-        <nav className="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-[0.25em] text-foreground/60">
+        <nav className="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-[0.25em] text-foreground/75">
           <Link href="#home" className="hover:text-foreground">
             Home
           </Link>
@@ -51,6 +55,9 @@ const Footer = () => {
             href="https://maps.google.com/?q=4263+US-1,+Melbourne,+FL+32935"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              trackEvent(AnalyticsEvent.DIRECTIONS_CLICK, { source: 'footer' })
+            }
             className="block hover:text-customGreen transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
             aria-label="Get directions to Marker 99 Restaurant at 4263 US-1, Melbourne, FL 32935"
           >
@@ -58,6 +65,9 @@ const Footer = () => {
           </a>
           <a
             href="tel:3212531369"
+            onClick={() =>
+              trackEvent(AnalyticsEvent.PHONE_CLICK, { source: 'footer' })
+            }
             className="block hover:text-customGreen transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
             aria-label="Call Marker 99 Restaurant at (321) 253-1369"
           >
@@ -72,7 +82,7 @@ const Footer = () => {
           </a>
         </div>
 
-        <div className="text-xs text-foreground/50">
+        <div className="text-xs text-foreground/70">
           © {new Date().getFullYear()} Marker 99 Restaurant & Lounge · Website
           designed by Joshua Traver
         </div>

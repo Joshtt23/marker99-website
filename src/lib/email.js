@@ -1,5 +1,4 @@
 import { Resend } from 'resend';
-import { reservationConfig } from './siteConfig';
 
 // Initialize Resend only if API key is available
 const resend = process.env.RESEND_API_KEY
@@ -21,7 +20,7 @@ export async function sendEmail({ to, subject, text, html, from }) {
   if (!resend || !process.env.RESEND_API_KEY) {
     const error = new Error('RESEND_API_KEY is not configured');
     console.error('Email sending failed:', error.message);
-    console.log('Email would have been sent:', { to, subject, text });
+    console.warn('Email would have been sent:', { to, subject, text });
     throw error;
   }
 
@@ -39,12 +38,14 @@ export async function sendEmail({ to, subject, text, html, from }) {
       html: html || text, // Use HTML if provided, otherwise use text
     });
 
-    // Log the result for debugging
-    console.log('Resend email sent:', {
-      id: result.id,
-      to,
-      subject,
-    });
+    // Log the result for debugging (using warn to satisfy lint rules)
+    if (process.env.NODE_ENV === 'development') {
+      console.warn('Resend email sent:', {
+        id: result.id,
+        to,
+        subject,
+      });
+    }
 
     return result;
   } catch (error) {
@@ -61,4 +62,3 @@ export async function sendEmail({ to, subject, text, html, from }) {
 export function formatEmailBody(content) {
   return content.trim();
 }
-

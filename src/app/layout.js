@@ -1,7 +1,9 @@
 import { Inter } from 'next/font/google';
+
 import { Toaster } from 'sonner';
 
 import '../styles/globals.css';
+import Analytics from '../components/Analytics';
 import AxeDevtools from '../components/AxeDevtools';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -88,6 +90,7 @@ export default function RootLayout({ children }) {
           Skip to main content
         </a>
         <ThemeProvider>
+          <Analytics />
           <AxeDevtools />
           <Header />
           <main id="main-content" className="flex-grow">

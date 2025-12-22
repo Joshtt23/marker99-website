@@ -22,8 +22,8 @@ const AboutUs = () => (
         </h2>
         <p className="text-lg text-foreground/80">
           Chef Andres Raffaelli brings a world of flavor to Marker 99. Born in
-          Venezuela and trained in the culinary traditions of Spain, Costa
-          Rica, and Italy, Chef Raffaelli crafts a Latin-Mediterranean menu that
+          Venezuela and trained in the culinary traditions of Spain, Costa Rica,
+          and Italy, Chef Raffaelli crafts a Latin-Mediterranean menu that
           reflects his international journey. Each dish tells a story—from the
           bold spices of Latin America to the refined techniques of European
           kitchens, all brought together with fresh coastal ingredients. His
@@ -52,7 +52,7 @@ const AboutUs = () => (
             style={{ outline: 'none', border: 'none' }}
           />
         </div>
-        <p className="mt-4 text-xs text-foreground/50 text-center max-w-sm mx-auto">
+        <p className="mt-4 text-xs text-foreground/70 text-center max-w-sm mx-auto">
           Photo © Marker 99 Restaurant & Lounge
         </p>
       </div>

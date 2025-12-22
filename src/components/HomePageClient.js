@@ -3,18 +3,16 @@
 import { useState, useEffect } from 'react';
 
 import { ArrowUp } from 'lucide-react';
-import dynamic from 'next/dynamic';
 
-import MobileActionBar from './MobileActionBar';
-
-import Hero from './Hero';
 import AboutUs from './AboutUs';
 import Contact from './Contact';
 import Events from './Events';
-import Reservation from './Reservation';
-import Menu from './Menu';
 import GoogleReviewWidget from './GoogleReviewWidget';
+import Hero from './Hero';
 import JobApplication from './JobApplication';
+import Menu from './Menu';
+import MobileActionBar from './MobileActionBar';
+import Reservation from './Reservation';
 
 export default function HomePageClient({ featureFlags }) {
   const [showTopButton, setShowTopButton] = useState(false);

@@ -10,7 +10,19 @@ export default [
   js.configs.recommended,
   prettier,
   {
-    ignores: ['node_modules/*', '.next/*'],
+    ignores: [
+      'node_modules/**',
+      '.next/**',
+      'out/**',
+      'dist/**',
+      'build/**',
+      '*.min.js',
+      '*.min.css',
+      '.env*',
+      'public/**',
+      'coverage/**',
+      '.vercel/**',
+    ],
   },
   {
     files: ['**/*.{js,jsx}'],
@@ -23,8 +35,12 @@ export default [
         },
       },
       globals: {
-        ...globals.browser,
-        ...globals.node,
+        ...Object.fromEntries(
+          Object.entries(globals.browser).filter(([key]) => key.trim() === key),
+        ),
+        ...Object.fromEntries(
+          Object.entries(globals.node).filter(([key]) => key.trim() === key),
+        ),
       },
     },
     plugins: {
@@ -34,11 +50,15 @@ export default [
       'jsx-a11y': pluginJsxA11y,
     },
     rules: {
-      'no-console': 'warn',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-debugger': 'warn',
       curly: ['error', 'all'],
-      eqeqeq: ['error', 'always'],
+      eqeqeq: ['error', 'always', { null: 'ignore' }],
       'no-multi-spaces': 'error',
+      'no-trailing-spaces': 'error',
+      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
+      'object-shorthand': 'error',
+      'prefer-arrow-callback': 'error',
       'no-unused-vars': [
         'warn',
         {
@@ -55,15 +75,38 @@ export default [
       'import/order': [
         'error',
         {
-          groups: [['builtin', 'external', 'internal']],
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            ['parent', 'sibling', 'index'],
+            'type',
+          ],
           pathGroups: [
             {
               pattern: 'react',
-              group: 'builtin',
+              group: 'external',
               position: 'before',
             },
+            {
+              pattern: 'next/**',
+              group: 'external',
+              position: 'before',
+            },
+            {
+              pattern: '@/**',
+              group: 'internal',
+            },
+            {
+              pattern: '../**',
+              group: 'parent',
+            },
+            {
+              pattern: './**',
+              group: 'sibling',
+            },
           ],
-          pathGroupsExcludedImportTypes: ['builtin'],
+          pathGroupsExcludedImportTypes: ['react', 'next'],
           'newlines-between': 'always',
           alphabetize: {
             order: 'asc',
@@ -71,8 +114,10 @@ export default [
           },
         },
       ],
-      'import/newline-after-import': 'off',
+      'import/newline-after-import': 'error',
       'import/no-named-as-default': 'off',
+      'import/no-duplicates': 'error',
+      'import/no-unresolved': 'off', // TypeScript/Next.js handles this
       'jsx-a11y/anchor-is-valid': [
         'error',
         {

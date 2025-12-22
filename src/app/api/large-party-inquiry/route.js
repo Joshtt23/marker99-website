@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
+
 import { z } from 'zod';
 
 import { sendEmail, formatEmailBody } from '@/lib/email';
-import { reservationConfig } from '@/lib/siteConfig';
 
 const SUBJECT_LABELS = {
   'event-inquiry': 'Event Inquiry',
@@ -93,7 +93,7 @@ export async function POST(request) {
     // Format email content
     const subjectLabel = SUBJECT_LABELS[data.subject] || data.subject;
     const emailSubject = `${subjectLabel} - ${data.name}`;
-    
+
     let emailBody = `
 New ${subjectLabel}
 
@@ -141,7 +141,7 @@ Phone: ${data.phone}
       console.error('Failed to send large party inquiry email:', emailError);
       // Log in development even if email fails
       if (process.env.NODE_ENV === 'development') {
-        console.log('Large Party Inquiry (email failed):', {
+        console.warn('Large Party Inquiry (email failed):', {
           subject: emailSubject,
           body: formattedEmailBody,
         });
@@ -163,12 +163,11 @@ Phone: ${data.phone}
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to process inquiry. Please try again or call us directly.',
+        error:
+          'Failed to process inquiry. Please try again or call us directly.',
         timestamp: new Date().toISOString(),
       },
       { status: 500 },
     );
   }
 }
-
-

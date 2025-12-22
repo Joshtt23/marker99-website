@@ -29,7 +29,7 @@ const GoogleReviewWidget = () => {
       aria-label="Guest reviews from Google"
     >
       <div className="relative w-80 h-64 bg-white shadow-lg rounded-r-lg overflow-hidden">
-        {/* 
+        {/*
           The reviews are always rendered so they stay loaded.
           We add left padding to avoid being hidden behind the collapse button.
         */}

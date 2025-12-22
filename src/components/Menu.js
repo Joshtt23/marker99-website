@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import Image from 'next/image';
 
@@ -8,6 +8,7 @@ import ImageCarousel from './ImageCarousel';
 import OnlineOrder from './OnlineOrder';
 import cocktailsMenu from '../data/menu-cocktails.json';
 import lunchDinnerMenu from '../data/menu-lunch-dinner.json';
+import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
 
 const MENU_CONFIG = {
   cocktails: cocktailsMenu,
@@ -32,11 +33,34 @@ const Menu = ({ onlineOrder }) => {
   const [activeCategoryId, setActiveCategoryId] = useState(
     MENU_CONFIG.cocktails.sections[0]?.id ?? '',
   );
+  const menuSectionRef = useRef(null);
+  const hasTrackedMenuView = useRef(false);
 
   useEffect(() => {
     const firstSection = MENU_CONFIG[activeMenuId].sections[0];
     setActiveCategoryId(firstSection?.id ?? '');
   }, [activeMenuId]);
+
+  // Track menu view when section scrolls into view
+  useEffect(() => {
+    if (hasTrackedMenuView.current || !menuSectionRef.current) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasTrackedMenuView.current) {
+          trackEvent(AnalyticsEvent.MENU_VIEW, { source: 'scroll' });
+          hasTrackedMenuView.current = true;
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(menuSectionRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   const activeMenu = MENU_CONFIG[activeMenuId];
   const sections = activeMenu.sections;
@@ -67,7 +91,11 @@ const Menu = ({ onlineOrder }) => {
           </div>
         </div>
       </div>
-      <div id="menu" className="bg-surface-alt py-20 md:py-24 text-foreground">
+      <div
+        id="menu"
+        ref={menuSectionRef}
+        className="bg-surface-alt py-20 md:py-24 text-foreground"
+      >
         <div className="max-w-6xl mx-auto px-6">
           <div className="rounded-3xl border border-foreground/10 bg-black/20 backdrop-blur p-10 md:p-14 shadow-[0_25px_45px_-20px_rgba(0,0,0,0.6)]">
             <h2
@@ -131,7 +159,7 @@ const Menu = ({ onlineOrder }) => {
                       className={`snap-start shrink-0 text-base md:text-xl font-semibold capitalize px-4 py-2 rounded-full border transition-colors ${
                         isActive
                           ? 'border-customGreen text-customGreen bg-black/10'
-                          : 'border-foreground/15 text-foreground/60 hover:text-foreground'
+                          : 'border-foreground/15 text-foreground/75 hover:text-foreground'
                       } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen`}
                     >
                       {section.title}
@@ -200,9 +228,9 @@ const Menu = ({ onlineOrder }) => {
                               <div className="text-lg font-bold text-customGreen">
                                 {item.price}
                               </div>
-                              {onlineOrder && activeMenuId === 'main' && item.image && (
-                                <OnlineOrder item={item} />
-                              )}
+                              {onlineOrder &&
+                                activeMenuId === 'main' &&
+                                item.image && <OnlineOrder item={item} />}
                             </div>
                           </div>
                         </div>

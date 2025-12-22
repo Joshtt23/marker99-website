@@ -2,9 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { Menu as MenuIcon, X as XIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { Menu as MenuIcon, X as XIcon } from 'lucide-react';
+
+import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
 
 const sections = ['home', 'about', 'menu', 'events', 'reserve', 'contact'];
 
@@ -110,13 +113,19 @@ const Header = () => {
         <div className="hidden lg:flex items-center gap-4">
           <a
             href="tel:3212531369"
+            onClick={() =>
+              trackEvent(AnalyticsEvent.PHONE_CLICK, { source: 'header' })
+            }
             className="text-sm font-semibold text-foreground/70 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
           >
             (321) 253-1369
           </a>
           <a
             href="#reserve"
-            className="inline-flex items-center justify-center rounded-full bg-customGreen px-6 py-2 text-sm font-semibold text-brand-primary-foreground shadow-sm transition hover:bg-customGreen/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen active:scale-95"
+            onClick={() =>
+              trackEvent(AnalyticsEvent.RESERVATION_CLICK, { source: 'header' })
+            }
+            className="inline-flex items-center justify-center rounded-full bg-customGreen px-6 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-customGreen/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen active:scale-95"
           >
             Book a Table
           </a>
@@ -188,12 +197,25 @@ const Header = () => {
             CONTACT
           </Link>
           <div className="pt-4 space-y-3 text-foreground/70">
-            <a href="tel:3212531369" className="block text-sm font-semibold">
+            <a
+              href="tel:3212531369"
+              onClick={() =>
+                trackEvent(AnalyticsEvent.PHONE_CLICK, {
+                  source: 'mobile-menu',
+                })
+              }
+              className="block text-sm font-semibold"
+            >
               (321) 253-1369
             </a>
             <a
               href="#reserve"
-              className="inline-flex items-center justify-center rounded-full bg-customGreen px-6 py-2 text-sm font-semibold text-brand-primary-foreground shadow-sm transition hover:bg-customGreen/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen active:scale-95"
+              onClick={() =>
+                trackEvent(AnalyticsEvent.RESERVATION_CLICK, {
+                  source: 'mobile-menu',
+                })
+              }
+              className="inline-flex items-center justify-center rounded-full bg-customGreen px-6 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-customGreen/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen active:scale-95"
             >
               Book a Table
             </a>

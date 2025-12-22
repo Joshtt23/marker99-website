@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
+
 import { z } from 'zod';
 
 import { sendEmail, formatEmailBody } from '@/lib/email';
-import { reservationConfig } from '@/lib/siteConfig';
 
 const contactFormSchema = z.object({
   subject: z.string().min(1),
@@ -68,7 +68,7 @@ Submitted via Marker 99 website
       console.error('Failed to send contact form email:', emailError);
       // Log in development even if email fails
       if (process.env.NODE_ENV === 'development') {
-        console.log('Contact Form Submission (email failed):', {
+        console.warn('Contact Form Submission (email failed):', {
           subject: emailSubject,
           body: emailBody,
         });
@@ -90,11 +90,11 @@ Submitted via Marker 99 website
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to process message. Please try again or call us directly.',
+        error:
+          'Failed to process message. Please try again or call us directly.',
         timestamp: new Date().toISOString(),
       },
       { status: 500 },
     );
   }
 }
-

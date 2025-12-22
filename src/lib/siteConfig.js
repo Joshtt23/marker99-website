@@ -1,8 +1,8 @@
 export const siteFeatureFlags = {
   onlineOrderingEnabled:
-    process.env.NEXT_PUBLIC_ONLINE_ORDERING_ENABLED === 'true',
+    process.env.NEXT_PUBLIC_ONLINE_ORDERING_ENABLED === 'false',
   onlineReservationEnabled:
-    process.env.NEXT_PUBLIC_ONLINE_RESERVATION_ENABLED === 'true',
+    process.env.NEXT_PUBLIC_ONLINE_RESERVATION_ENABLED === 'false',
   facebookEventsWidgetEnabled: true,
   googleReviewsWidgetEnabled: false,
 };

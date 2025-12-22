@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 
 import { Inter } from 'next/font/google';
+
 import { useDropzone } from 'react-dropzone';
 
 import '../styles/globals.css';
