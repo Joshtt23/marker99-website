@@ -2,7 +2,18 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
+import Image from 'next/image';
+
+import { Calendar } from 'lucide-react';
+import {
+  FaFacebook,
+  FaInstagram,
+  FaSoundcloud,
+  FaTiktok,
+} from 'react-icons/fa';
+
 import { getUpcomingEvents } from './data/events';
+import EventsCalendar from './EventsCalendar';
 import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
 import { siteFeatureFlags } from '../lib/siteConfig';
 
@@ -10,6 +21,7 @@ const Events = () => {
   const { facebookEventsWidgetEnabled } = siteFeatureFlags;
   const [sdkLoaded, setSdkLoaded] = useState(false);
   const [widgetWidth, setWidgetWidth] = useState(500);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const widgetContainerRef = useRef(null);
 
   useEffect(() => {
@@ -152,11 +164,23 @@ const Events = () => {
           >
             Live Music & Events
           </h3>
-          <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-12">
+          <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-6">
             Catch nightly entertainment, chef pop-ups, and seasonal
             celebrations. Follow our Facebook page for the latest waterfront
             happenings at Marker 99.
           </p>
+          <button
+            onClick={() => {
+              setIsCalendarOpen(true);
+              trackEvent(AnalyticsEvent.EVENT_CLICK, {
+                source: 'calendar-button',
+              });
+            }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-customGreen/10 border border-customGreen text-customGreen hover:bg-customGreen/20 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen mb-12"
+          >
+            <Calendar className="h-5 w-5" />
+            <span className="font-semibold">View Full Calendar</span>
+          </button>
           {facebookEventsWidgetEnabled && (
             <div
               ref={widgetContainerRef}
@@ -193,33 +217,114 @@ const Events = () => {
               {upcomingEvents.map((event) => (
                 <article
                   key={`${event.title}-${event.startDate}`}
-                  className="rounded-3xl border border-foreground/10 bg-black/25 p-6 flex flex-col justify-between text-left"
+                  className="rounded-3xl border border-foreground/10 bg-black/25 overflow-hidden flex flex-col text-left"
                   aria-label={`Event: ${event.title}`}
                 >
-                  <div>
-                    <h4 className="text-xl font-semibold mb-2 text-foreground">
-                      {event.title}
-                    </h4>
-                    <p className="text-sm uppercase tracking-wide text-customGreen mb-4">
-                      {event.formattedDate}
-                    </p>
-                    <p className="text-foreground/75">{event.description}</p>
+                  {/* Artist Image */}
+                  {event.image && (
+                    <div className="relative w-full h-48 bg-foreground/5">
+                      <Image
+                        src={event.image}
+                        alt={event.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                  )}
+                  <div className="p-6 flex flex-col justify-between flex-1">
+                    <div>
+                      <h4 className="text-xl font-semibold mb-2 text-foreground">
+                        {event.title}
+                      </h4>
+                      <p className="text-sm uppercase tracking-wide text-customGreen mb-4">
+                        {event.formattedDate}
+                      </p>
+                      <p className="text-foreground/75 mb-4">
+                        {event.description}
+                      </p>
+                    </div>
+                    {/* Social Links */}
+                    {event.socialLinks && (
+                      <div className="flex items-center gap-3 mb-4 flex-wrap">
+                        {event.socialLinks.facebook && (
+                          <a
+                            href={event.socialLinks.facebook}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() =>
+                              trackEvent(AnalyticsEvent.EVENT_CLICK, {
+                                source: 'social-link',
+                                platform: 'facebook',
+                                eventTitle: event.title,
+                              })
+                            }
+                            className="p-2 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                            aria-label={`${event.title} on Facebook`}
+                          >
+                            <FaFacebook className="h-5 w-5 text-customGreen" />
+                          </a>
+                        )}
+                        {event.socialLinks.instagram && (
+                          <a
+                            href={event.socialLinks.instagram}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() =>
+                              trackEvent(AnalyticsEvent.EVENT_CLICK, {
+                                source: 'social-link',
+                                platform: 'instagram',
+                                eventTitle: event.title,
+                              })
+                            }
+                            className="p-2 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                            aria-label={`${event.title} on Instagram`}
+                          >
+                            <FaInstagram className="h-5 w-5 text-customGreen" />
+                          </a>
+                        )}
+                        {event.socialLinks.soundcloud && (
+                          <a
+                            href={event.socialLinks.soundcloud}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() =>
+                              trackEvent(AnalyticsEvent.EVENT_CLICK, {
+                                source: 'social-link',
+                                platform: 'soundcloud',
+                                eventTitle: event.title,
+                              })
+                            }
+                            className="p-2 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                            aria-label={`${event.title} on SoundCloud`}
+                          >
+                            <FaSoundcloud className="h-5 w-5 text-customGreen" />
+                          </a>
+                        )}
+                        {event.socialLinks.tiktok && (
+                          <a
+                            href={event.socialLinks.tiktok}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() =>
+                              trackEvent(AnalyticsEvent.EVENT_CLICK, {
+                                source: 'social-link',
+                                platform: 'tiktok',
+                                eventTitle: event.title,
+                              })
+                            }
+                            className="p-2 rounded-full bg-foreground/5 hover:bg-foreground/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
+                            aria-label={`${event.title} on TikTok`}
+                          >
+                            <FaTiktok className="h-5 w-5 text-customGreen" />
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
-                  <a
-                    href={event.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() =>
-                      trackEvent(AnalyticsEvent.EVENT_CLICK, {
-                        source: 'event-card',
-                        eventTitle: event.title,
-                      })
-                    }
-                    className="mt-6 inline-flex items-center text-customGreen hover:text-customGreen/80 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-customGreen"
-                    aria-label={`View details for ${event.title} on Facebook`}
-                  >
-                    View on Facebook
-                  </a>
                 </article>
               ))}
             </div>
@@ -243,6 +348,10 @@ const Events = () => {
           )}
         </div>
       </div>
+      <EventsCalendar
+        isOpen={isCalendarOpen}
+        onClose={() => setIsCalendarOpen(false)}
+      />
     </section>
   );
 };
