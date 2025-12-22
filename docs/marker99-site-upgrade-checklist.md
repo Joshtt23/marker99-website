@@ -27,8 +27,8 @@ Align the site experience with the January relaunch concept: dual dining/tiki of
 
 ## Phase 4 – Analytics & Tracking
 
-- [ ] Embed GA4 (global script) and configure key events (page_view, reservation_click, email_signup, certificate_submit).
-- [ ] Install Meta Pixel with custom conversions for reservations & lounge offers.
+- [x] Embed GA4 (global script) and configure key events (page_view, reservation_click, email_signup, certificate_submit).
+- [x] Install Meta Pixel with custom conversions for reservations & lounge offers.
 - [ ] Add UTM tagging guidelines to README for promo campaigns.
 - [ ] Document GA4 + Pixel IDs in `.env.example`.
 
@@ -45,10 +45,33 @@ Align the site experience with the January relaunch concept: dual dining/tiki of
 - [ ] Set up announcement banner (e.g., `next/dynamic` banner component) for limited-time offers.
 - [ ] Schedule content deployment timeline (copy freeze, QA, go-live).
 
+## Phase 7 – Admin Panel & Content Management
+
+**Prerequisites**: Google account access for OAuth authentication, Sanity CMS account, Email platform account (ConvertKit/Brevo)
+
+- [ ] Set up Google OAuth credentials for NextAuth.js authentication.
+- [ ] Install and configure NextAuth.js with Google provider.
+- [ ] Create protected admin route structure (`/admin/*`).
+- [ ] Set up Sanity CMS project and configure content schemas (Events, Specials, Promotions).
+- [ ] Build admin dashboard UI with navigation (Events, Specials, Subscribers, Analytics).
+- [ ] Create Events management interface (CRUD operations via Sanity API).
+- [ ] Create Specials/Promotions management interface (CRUD operations via Sanity API).
+- [ ] Migrate existing events from `events.json` to Sanity CMS.
+- [ ] Update frontend Events component to fetch from Sanity API instead of JSON.
+- [ ] Set up email list integration (ConvertKit/Brevo API).
+- [ ] Build subscriber management view (read-only, export functionality).
+- [ ] Create analytics dashboard (fetch metrics from GA4 Reporting API and Meta Pixel API).
+- [ ] Add image upload functionality for events/specials (Sanity asset handling).
+- [ ] Document admin panel access and usage in README.
+- [ ] Set up environment variables for all API keys (Sanity, ConvertKit/Brevo, Google OAuth, GA4 API).
+
+**Note**: This phase uses external APIs (Sanity, ConvertKit/Brevo, GA4) as the data layer—no database required. All content and subscriber data lives in these services.
+
 ## Documentation & Handoff
 
 - [x] Update README with instructions for updating menus, events, and forms.
 - [ ] Provide simple SOP for exporting GA4/Looker Studio weekly report.
 - [ ] Outline process for swapping hero/event images post-launch.
+- [ ] Document admin panel setup and API key requirements in README.
 
 Use this checklist to track development work alongside the operational rollout plan. Mark items complete as they ship so the relaunch stays aligned across marketing, operations, and the website.

@@ -4,15 +4,15 @@ import { useState, useEffect } from 'react';
 
 import { ArrowUp } from 'lucide-react';
 
-import AboutUs from './AboutUs';
-import Contact from './Contact';
-import Events from './Events';
-import GoogleReviewWidget from './GoogleReviewWidget';
-import Hero from './Hero';
-import JobApplication from './JobApplication';
-import Menu from './Menu';
-import MobileActionBar from './MobileActionBar';
-import Reservation from './Reservation';
+import GoogleReviewWidget from './features/GoogleReviewWidget';
+import JobApplication from './features/JobApplication';
+import MobileActionBar from './layout/MobileActionBar';
+import AboutUs from './sections/AboutUs';
+import Contact from './sections/Contact';
+import Events from './sections/Events';
+import Hero from './sections/Hero';
+import Menu from './sections/Menu';
+import Reservation from './sections/Reservation';
 
 export default function HomePageClient({ featureFlags }) {
   const [showTopButton, setShowTopButton] = useState(false);
@@ -52,7 +52,6 @@ export default function HomePageClient({ featureFlags }) {
       <Events />
       <Reservation onlineReservation={onlineReservationEnabled} />
       <Contact />
-      {/* Testimonials temporarily disabled pending updated content */}
       {isHiring && <JobApplication />}
 
       {showTopButton && (

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { Phone, MapPin, Calendar, Utensils } from 'lucide-react';
 
-import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
+import { trackEvent, AnalyticsEvent } from '../../lib/analytics/events';
 
 const actions = [
   {

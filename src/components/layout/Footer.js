@@ -5,7 +5,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
+import { trackEvent, AnalyticsEvent } from '../../lib/analytics/events';
 
 const Footer = () => {
   return (

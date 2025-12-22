@@ -4,8 +4,11 @@ import { useEffect } from 'react';
 
 import Script from 'next/script';
 
-import { analyticsConfig, isAnalyticsEnabled } from '../lib/analytics/config';
-import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
+import {
+  analyticsConfig,
+  isAnalyticsEnabled,
+} from '../../lib/analytics/config';
+import { trackEvent, AnalyticsEvent } from '../../lib/analytics/events';
 
 /**
  * Analytics scripts component

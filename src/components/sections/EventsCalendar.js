@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
-import { getEventsForMonth } from './data/events';
+import { getEventsForMonth } from '../../lib/helpers/events';
 
 const MONTHS = [
   'January',

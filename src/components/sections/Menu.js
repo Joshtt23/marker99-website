@@ -4,11 +4,11 @@ import React, { useEffect, useState, useRef } from 'react';
 
 import Image from 'next/image';
 
-import ImageCarousel from './ImageCarousel';
-import OnlineOrder from './OnlineOrder';
-import cocktailsMenu from '../data/menu-cocktails.json';
-import lunchDinnerMenu from '../data/menu-lunch-dinner.json';
-import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
+import cocktailsMenu from '../../data/menu-cocktails.json';
+import lunchDinnerMenu from '../../data/menu-lunch-dinner.json';
+import { trackEvent, AnalyticsEvent } from '../../lib/analytics/events';
+import OnlineOrder from '../features/OnlineOrder';
+import ImageCarousel from '../shared/ImageCarousel';
 
 const MENU_CONFIG = {
   cocktails: cocktailsMenu,

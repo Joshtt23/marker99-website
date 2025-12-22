@@ -1,5 +1,7 @@
 import { Resend } from 'resend';
 
+import { logger } from './logger';
+
 // Initialize Resend only if API key is available
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
@@ -19,8 +21,11 @@ export async function sendEmail({ to, subject, text, html, from }) {
   // If Resend is not configured, log and throw error
   if (!resend || !process.env.RESEND_API_KEY) {
     const error = new Error('RESEND_API_KEY is not configured');
-    console.error('Email sending failed:', error.message);
-    console.warn('Email would have been sent:', { to, subject, text });
+    logger.error('Email sending failed', error, {
+      to,
+      subject,
+    });
+    logger.warn('Email would have been sent', { to, subject, text });
     throw error;
   }
 
@@ -38,9 +43,9 @@ export async function sendEmail({ to, subject, text, html, from }) {
       html: html || text, // Use HTML if provided, otherwise use text
     });
 
-    // Log the result for debugging (using warn to satisfy lint rules)
+    // Log the result for debugging
     if (process.env.NODE_ENV === 'development') {
-      console.warn('Resend email sent:', {
+      logger.info('Resend email sent', {
         id: result.id,
         to,
         subject,
@@ -49,7 +54,10 @@ export async function sendEmail({ to, subject, text, html, from }) {
 
     return result;
   } catch (error) {
-    console.error('Resend email error:', error);
+    logger.error('Resend email error', error, {
+      to,
+      subject,
+    });
     throw error;
   }
 }

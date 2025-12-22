@@ -1,7 +1,7 @@
 'use client';
 
-import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
-import { toastConfig } from '../lib/siteConfig';
+import { trackEvent, AnalyticsEvent } from '../../lib/analytics/events';
+import { toastConfig } from '../../lib/siteConfig';
 
 function OnlineOrder({ item }) {
   const toastOrderingUrl =

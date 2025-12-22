@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
+import { trackEvent, AnalyticsEvent } from '../../lib/analytics/events';
 
 const Hero = () => (
   <section

@@ -3,11 +3,11 @@ import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
 
 import '../styles/globals.css';
-import Analytics from '../components/Analytics';
-import AxeDevtools from '../components/AxeDevtools';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
-import ThemeProvider from '../components/ThemeProvider';
+import Analytics from '../components/analytics/Analytics';
+import AxeDevtools from '../components/dev/AxeDevtools';
+import Footer from '../components/layout/Footer';
+import Header from '../components/layout/Header';
+import ThemeProvider from '../components/providers/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 

@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import LocationDiagram from './LocationDiagram';
-import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
+import { trackEvent, AnalyticsEvent } from '../../lib/analytics/events';
+import LocationDiagram from '../shared/LocationDiagram';
 
 const Contact = () => {
   return (

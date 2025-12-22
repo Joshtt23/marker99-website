@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { Menu as MenuIcon, X as XIcon } from 'lucide-react';
 
-import { trackEvent, AnalyticsEvent } from '../lib/analytics/events';
+import { trackEvent, AnalyticsEvent } from '../../lib/analytics/events';
 
 const sections = ['home', 'about', 'menu', 'events', 'reserve', 'contact'];
 
