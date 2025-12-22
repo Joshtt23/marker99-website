@@ -1,4 +1,11 @@
 // next.config.mjs
+import bundleAnalyzer from '@next/bundle-analyzer';
+
+const withBundleAnalyzer = bundleAnalyzer({
+  // eslint-disable-next-line no-undef
+  enabled: process.env.ANALYZE === 'true',
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -13,6 +20,17 @@ const nextConfig = {
   },
   // Turbopack configuration (Next.js 16+ uses Turbopack by default)
   turbopack: {},
+  // Webpack configuration for better tree-shaking (only when using --webpack flag)
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Enable better tree-shaking for unused exports
+      config.optimization = {
+        ...config.optimization,
+        usedExports: true,
+      };
+    }
+    return config;
+  },
   async headers() {
     return [
       {
@@ -46,4 +64,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

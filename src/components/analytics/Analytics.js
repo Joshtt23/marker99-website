@@ -28,7 +28,7 @@ export default function Analytics() {
 
   return (
     <>
-      {/* Meta Pixel (Facebook/Instagram) */}
+      {/* Meta Pixel (Facebook/Instagram) - Keep afterInteractive for conversion tracking */}
       {analyticsConfig.meta.enabled && (
         <Script
           id="meta-pixel"
@@ -50,11 +50,11 @@ export default function Analytics() {
         />
       )}
 
-      {/* TikTok Pixel */}
+      {/* TikTok Pixel - Defer to lazyOnload to reduce main-thread blocking */}
       {analyticsConfig.tiktok.enabled && (
         <Script
           id="tiktok-pixel"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               !function (w, d, t) {
@@ -67,11 +67,11 @@ export default function Analytics() {
         />
       )}
 
-      {/* Pinterest Tag */}
+      {/* Pinterest Tag - Defer to lazyOnload to reduce main-thread blocking */}
       {analyticsConfig.pinterest.enabled && (
         <Script
           id="pinterest-tag"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               !function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
@@ -82,7 +82,7 @@ export default function Analytics() {
         />
       )}
 
-      {/* Google Analytics 4 */}
+      {/* Google Analytics 4 - Keep afterInteractive for accurate page tracking */}
       {analyticsConfig.ga4.enabled && (
         <>
           <Script

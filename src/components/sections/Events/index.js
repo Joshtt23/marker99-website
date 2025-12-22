@@ -2,11 +2,25 @@
 
 import React, { useMemo, useState } from 'react';
 
-import { getUpcomingEvents } from '../../../lib/helpers/events';
-import EventsCalendar from '../EventsCalendar';
+import dynamic from 'next/dynamic';
+
+// Lazy-load EventsCalendar - only load when calendar is opened
+const EventsCalendar = dynamic(() => import('../EventsCalendar'), {
+  ssr: false,
+});
+// Lazy-load FacebookWidget - reduce initial bundle size
+const FacebookWidget = dynamic(
+  () =>
+    import('./components/FacebookWidget').then((mod) => ({
+      default: mod.FacebookWidget,
+    })),
+  {
+    ssr: false,
+  },
+);
 import { EventCard } from './components/EventCard';
 import { EventsHeader } from './components/EventsHeader';
-import { FacebookWidget } from './components/FacebookWidget';
+import { getUpcomingEvents } from '../../../lib/helpers/events';
 
 const Events = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);

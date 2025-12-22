@@ -4,7 +4,7 @@ import { Toaster } from 'sonner';
 
 import '../styles/globals.css';
 import Analytics from '../components/analytics/Analytics';
-import AxeDevtools from '../components/dev/AxeDevtools';
+import AxeDevtoolsWrapper from '../components/dev/AxeDevtoolsWrapper';
 import Footer from '../components/layout/Footer';
 import Header from '../components/layout/Header';
 import ThemeProvider from '../components/providers/ThemeProvider';
@@ -91,7 +91,7 @@ export default function RootLayout({ children }) {
         </a>
         <ThemeProvider>
           <Analytics />
-          <AxeDevtools />
+          <AxeDevtoolsWrapper />
           <Header />
           <main id="main-content" className="flex-grow">
             {children}

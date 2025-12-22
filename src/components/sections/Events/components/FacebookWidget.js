@@ -5,11 +5,37 @@ import { siteFeatureFlags } from '../../../../lib/siteConfig';
 export const FacebookWidget = () => {
   const { facebookEventsWidgetEnabled } = siteFeatureFlags;
   const [sdkLoaded, setSdkLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [widgetWidth, setWidgetWidth] = useState(500);
   const widgetContainerRef = useRef(null);
 
+  // Use IntersectionObserver to only load SDK when widget is visible
   useEffect(() => {
-    if (!facebookEventsWidgetEnabled) {
+    if (!facebookEventsWidgetEnabled || !widgetContainerRef.current) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '100px' }, // Start loading 100px before it's visible
+    );
+
+    observer.observe(widgetContainerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [facebookEventsWidgetEnabled]);
+
+  useEffect(() => {
+    if (!facebookEventsWidgetEnabled || !isVisible) {
       return;
     }
 
@@ -85,7 +111,7 @@ export const FacebookWidget = () => {
       script.onerror = null;
       window.removeEventListener('resize', updateWidth);
     };
-  }, [facebookEventsWidgetEnabled]);
+  }, [facebookEventsWidgetEnabled, isVisible]);
 
   useEffect(() => {
     if (!facebookEventsWidgetEnabled || !sdkLoaded) {

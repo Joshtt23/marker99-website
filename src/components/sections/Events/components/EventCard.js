@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import Image from 'next/image';
 
@@ -11,7 +11,7 @@ import {
 
 import { trackEvent, AnalyticsEvent } from '../../../../lib/analytics/events';
 
-export const EventCard = ({ event }) => {
+export const EventCard = memo(({ event }) => {
   return (
     <article
       key={`${event.title}-${event.startDate}`}
@@ -123,4 +123,6 @@ export const EventCard = ({ event }) => {
       </div>
     </article>
   );
-};
+});
+
+EventCard.displayName = 'EventCard';

@@ -91,26 +91,28 @@ export const SelectInput = ({
   className = '',
   ...props
 }) => {
+  // Use undefined instead of empty string for unselected state
+  // This prevents React error #418 (text content issue)
+  const selectValue = value && value.trim() !== '' ? value : undefined;
+
   return (
-    <>
-      <Select value={value || ''} onValueChange={onValueChange}>
-        <SelectTrigger
-          id={id}
-          className={`bg-background/50 border-foreground/20 ${className}`}
-          aria-invalid={error ? 'true' : 'false'}
-          aria-describedby={error ? `${id}-error` : undefined}
-          {...props}
-        >
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
-              {option.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </>
+    <Select value={selectValue} onValueChange={onValueChange}>
+      <SelectTrigger
+        id={id}
+        className={`bg-background/50 border-foreground/20 ${className}`}
+        aria-invalid={error ? 'true' : 'false'}
+        aria-describedby={error ? `${id}-error` : undefined}
+        {...props}
+      >
+        <SelectValue placeholder={placeholder || 'Select an option'} />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map((option) => (
+          <SelectItem key={option.value} value={option.value}>
+            {option.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 };

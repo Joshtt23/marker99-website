@@ -2,10 +2,23 @@
 
 import { useState, useEffect } from 'react';
 
+import dynamic from 'next/dynamic';
+
 import { ArrowUp } from 'lucide-react';
 
-import GoogleReviewWidget from './features/GoogleReviewWidget';
-import JobApplication from './features/JobApplication';
+// Lazy-load heavy components to reduce initial bundle size
+const GoogleReviewWidget = dynamic(
+  () => import('./features/GoogleReviewWidget'),
+  {
+    ssr: false,
+  },
+);
+// Lazy-load JobApplication since it's conditionally rendered (isHiring = false)
+// This prevents react-dropzone from being bundled when not needed
+const JobApplication = dynamic(() => import('./features/JobApplication'), {
+  ssr: false,
+});
+
 import MobileActionBar from './layout/MobileActionBar';
 import AboutUs from './sections/AboutUs';
 import Contact from './sections/Contact';
@@ -24,15 +37,20 @@ export default function HomePageClient({ featureFlags }) {
   const isHiring = false;
 
   useEffect(() => {
+    // Throttle scroll handler to reduce main-thread work
+    let ticking = false;
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight) {
-        setShowTopButton(true);
-      } else {
-        setShowTopButton(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const shouldShow = window.scrollY > window.innerHeight;
+          setShowTopButton(shouldShow);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 
 import Image from 'next/image';
 
@@ -62,8 +62,9 @@ const Menu = ({ onlineOrder }) => {
     return () => observer.disconnect();
   }, []);
 
-  const activeMenu = MENU_CONFIG[activeMenuId];
-  const sections = activeMenu.sections;
+  // Memoize active menu and sections to prevent unnecessary recalculations
+  const activeMenu = useMemo(() => MENU_CONFIG[activeMenuId], [activeMenuId]);
+  const sections = useMemo(() => activeMenu.sections, [activeMenu]);
 
   return (
     <section className="scroll-mt-8 md:scroll-mt-16">
@@ -180,6 +181,7 @@ const Menu = ({ onlineOrder }) => {
                     aria-labelledby={`${section.id}-tab`}
                     aria-hidden={!isActive}
                     className={isActive ? 'block' : 'hidden'}
+                    style={{ contain: 'layout style paint' }}
                   >
                     <header className="flex items-baseline justify-between mb-6">
                       <div className="flex-1">
