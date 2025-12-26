@@ -41,7 +41,9 @@ export const EventCard = memo(({ event }) => {
           <p className="text-sm uppercase tracking-wide text-customGreen mb-4">
             {event.formattedDate}
           </p>
-          <p className="text-foreground/75 mb-4">{event.description}</p>
+          {event.description && (
+            <p className="text-foreground/75 mb-4">{event.description}</p>
+          )}
         </div>
         {/* Social Links */}
         {event.socialLinks && (

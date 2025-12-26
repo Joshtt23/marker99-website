@@ -1,132 +1,42 @@
 [
   {
     "title": "TA Williams",
-    "startDate": "2026-01-02T20:00:00-05:00",
-    "description": "Acoustic singer-songwriter performing classic covers and original compositions. Perfect for a relaxed waterfront evening.",
-    "image": "/artists/ta-williams.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/tawilliamsmusic",
-      "instagram": "https://www.instagram.com/tawilliamsmusic",
-      "soundcloud": "https://soundcloud.com/tawilliams",
-      "tiktok": null
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-02T17:00:00-05:00"
   },
   {
     "title": "Mondo Tiki Duo",
-    "startDate": "2026-01-03T20:00:00-05:00",
-    "description": "Tropical island vibes with ukulele and steel drums. Bringing the beach to Marker 99 with Polynesian-inspired melodies.",
-    "image": "/artists/mondo-tiki-duo.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/mondotikiduo",
-      "instagram": "https://www.instagram.com/mondotikiduo",
-      "soundcloud": null,
-      "tiktok": null
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-03T17:00:00-05:00"
   },
   {
     "title": "Tom Llinas",
-    "startDate": "2026-01-09T20:00:00-05:00",
-    "description": "Smooth jazz and Latin fusion guitarist. Experience sophisticated melodies perfect for dining and cocktails.",
-    "image": "/artists/tom-llinas.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/tomllinasmusic",
-      "instagram": "https://www.instagram.com/tomllinas",
-      "soundcloud": "https://soundcloud.com/tomllinas",
-      "tiktok": null
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-09T17:00:00-05:00"
   },
   {
     "title": "Vintage Sound",
-    "startDate": "2026-01-10T20:00:00-05:00",
-    "description": "Classic rock and blues covers from the 60s, 70s, and 80s. High-energy performance that gets the crowd moving.",
-    "image": "/artists/vintage-sound.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/vintagesoundband",
-      "instagram": "https://www.instagram.com/vintagesound",
-      "soundcloud": null,
-      "tiktok": "https://www.tiktok.com/@vintagesound"
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-10T17:00:00-05:00"
   },
   {
     "title": "Acoustic Live",
-    "startDate": "2026-01-16T20:00:00-05:00",
-    "description": "Intimate acoustic performances featuring local singer-songwriters. Discover new music in a relaxed waterfront setting.",
-    "image": "/artists/acoustic-live.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/acousticlivefl",
-      "instagram": "https://www.instagram.com/acousticlive",
-      "soundcloud": "https://soundcloud.com/acousticlive",
-      "tiktok": null
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-16T17:00:00-05:00"
   },
   {
     "title": "Hunnitap",
-    "startDate": "2026-01-17T20:00:00-05:00",
-    "description": "Modern R&B and hip-hop with smooth vocals and infectious beats. Perfect for a night out with friends.",
-    "image": "/artists/hunnitap.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/hunnitap",
-      "instagram": "https://www.instagram.com/hunnitap",
-      "soundcloud": "https://soundcloud.com/hunnitap",
-      "tiktok": "https://www.tiktok.com/@hunnitap"
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-17T17:00:00-05:00"
   },
   {
     "title": "Rick Cupoli",
-    "startDate": "2026-01-23T20:00:00-05:00",
-    "description": "Classic rock and country covers with a modern twist. Engaging performer who knows how to work a crowd.",
-    "image": "/artists/rick-cupoli.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/rickcupolimusic",
-      "instagram": "https://www.instagram.com/rickcupoli",
-      "soundcloud": null,
-      "tiktok": null
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-23T17:00:00-05:00"
   },
   {
     "title": "Michele Wood",
-    "startDate": "2026-01-24T20:00:00-05:00",
-    "description": "Soulful jazz and blues vocalist with a powerful voice. Experience timeless classics and contemporary favorites.",
-    "image": "/artists/michele-wood.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/michelewoodmusic",
-      "instagram": "https://www.instagram.com/michelewood",
-      "soundcloud": "https://soundcloud.com/michelewood",
-      "tiktok": null
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-24T17:00:00-05:00"
   },
   {
     "title": "Jimmy Mazz",
-    "startDate": "2026-01-30T20:00:00-05:00",
-    "description": "High-energy party band covering hits from every era. Get ready to dance the night away on the waterfront.",
-    "image": "/artists/jimmy-mazz.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/jimmymazzband",
-      "instagram": "https://www.instagram.com/jimmymazz",
-      "soundcloud": null,
-      "tiktok": "https://www.tiktok.com/@jimmymazz"
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-30T17:00:00-05:00"
   },
   {
     "title": "A Trace of Suspense",
-    "startDate": "2026-01-31T20:00:00-05:00",
-    "description": "Alternative rock with powerful vocals and dynamic instrumentation. Perfect for fans of modern rock and indie music.",
-    "image": "/artists/a-trace-of-suspense.jpg",
-    "socialLinks": {
-      "facebook": "https://www.facebook.com/atraceofsuspense",
-      "instagram": "https://www.instagram.com/atraceofsuspense",
-      "soundcloud": "https://soundcloud.com/atraceofsuspense",
-      "tiktok": "https://www.tiktok.com/@atraceofsuspense"
-    },
-    "link": "https://www.facebook.com/marker99restaurant/events"
+    "startDate": "2026-01-31T17:00:00-05:00"
   }
 ]

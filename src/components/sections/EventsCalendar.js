@@ -231,9 +231,11 @@ function EventsCalendar({ isOpen, onClose }) {
                       <p className="text-sm text-customGreen mb-2">
                         {event.formattedDate}
                       </p>
-                      <p className="text-sm text-foreground/75">
-                        {event.description}
-                      </p>
+                      {event.description && (
+                        <p className="text-sm text-foreground/75">
+                          {event.description}
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -270,9 +272,11 @@ function EventsCalendar({ isOpen, onClose }) {
                       <p className="text-sm text-customGreen mb-2">
                         {event.formattedDate}
                       </p>
-                      <p className="text-sm text-foreground/75">
-                        {event.description}
-                      </p>
+                      {event.description && (
+                        <p className="text-sm text-foreground/75">
+                          {event.description}
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}

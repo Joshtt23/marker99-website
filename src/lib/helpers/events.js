@@ -101,3 +101,4 @@ export function getEventsForMonth(year, month) {
     .filter(Boolean)
     .sort((a, b) => a.start.getTime() - b.start.getTime());
 }
+

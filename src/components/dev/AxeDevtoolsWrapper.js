@@ -14,3 +14,4 @@ const AxeDevtools = dynamic(
 export default function AxeDevtoolsWrapper() {
   return <AxeDevtools />;
 }
+
