@@ -106,3 +106,4 @@ This plan covers content updates, new features, and admin functionality that wil
 - [ ] Outline process for swapping hero/event images post-launch.
 - [ ] Document admin panel setup and API key requirements in README.
 
+
