@@ -15,3 +15,5 @@ export const ReservationEmbed = ({ embedUrl, provider }) => {
     </div>
   );
 };
+
+

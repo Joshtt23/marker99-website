@@ -105,3 +105,5 @@ This plan covers content updates, new features, and admin functionality that wil
 - [ ] Provide simple SOP for exporting GA4/Looker Studio weekly report.
 - [ ] Outline process for swapping hero/event images post-launch.
 - [ ] Document admin panel setup and API key requirements in README.
+
+
